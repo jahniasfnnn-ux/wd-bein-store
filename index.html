@@ -52,7 +52,7 @@
 
         .nav-title {
             color: var(--text-cyan);
-            font-size: 28px; /* تكبير اسم المتجر */
+            font-size: 28px;
             font-weight: bold;
         }
 
@@ -65,7 +65,7 @@
             display: flex;
             align-items: center;
             gap: 22px;
-            font-size: 26px; /* تكبير الأيقونات في الهيدر */
+            font-size: 26px;
             color: #ffffff;
         }
 
@@ -80,7 +80,7 @@
             right: -12px;
             background-color: var(--danger-red);
             color: white;
-            font-size: 14px; /* تكبير عداد السلة */
+            font-size: 14px;
             padding: 2px 8px;
             border-radius: 50%;
             transition: transform 0.3s;
@@ -98,9 +98,259 @@
         }
 
         .hero-title {
-            font-size: 34px; /* تكبير العنوان الرئيسي ليصبح ضخماً وقريباً */
+            font-size: 34px;
             font-weight: 700;
             margin-bottom: 15px;
             line-height: 1.4;
             color: #ffffff;
         }
+
+        .hero-subtitle {
+            color: #e9d5ff;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* أزرار الفلترة للألعاب - تكبير الحجم والخط */
+        .filter-container {
+            display: flex;
+            gap: 14px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 30px;
+            scrollbar-width: none;
+        }
+        
+        .filter-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-btn {
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid #374151;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-purple);
+            border-color: var(--primary-purple);
+        }
+
+        /* شبكة المنتجات المفرودة تحت بعضها */
+        .products-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+        }
+
+        /* بطاقة المنتج - حجم مفرود وضخم */
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 18px;
+            border: 1px solid #1f2937;
+            padding: 25px;
+            position: relative;
+            text-align: right;
+            width: 100%;
+        }
+
+        .badge-premium {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--danger-red);
+            color: white;
+            font-size: 14px;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .product-title {
+            font-size: 26px;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            color: var(--text-cyan);
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-desc {
+            color: var(--text-muted);
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* حاوية الأزرار الكبيرة جداً داخل البطاقة */
+        .card-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* تكبير زر إضافة للسلة */
+        .btn-add-cart {
+            background-color: var(--primary-purple);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 18px;
+            border-radius: 14px;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        /* تكبير زر شراء عبر واتساب */
+        .btn-buy-whatsapp {
+            background-color: var(--whatsapp-green);
+            color: white;
+            text-decoration: none;
+            width: 100%;
+            padding: 18px;
+            border-radius: 14px;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="nav-right">
+            <i class="fa-solid fa-gamepad nav-brand-icon"></i>
+            <span class="nav-title">WD BEIN</span>
+        </div>
+        <div class="nav-left">
+            <div class="cart-icon">
+                <i class="fa-solid fa-shopping-cart"></i>
+                <span class="cart-badge" id="cartCount">0</span>
+            </div>
+            <i class="fa-solid fa-gear"></i>
+        </div>
+    </div>
+
+    <div class="hero-section">
+        <h1 class="hero-title">أقوى حسابات الألعاب<br>بين يديك</h1>
+        <p class="hero-subtitle">احصل على حسابات مشحونة وجاهزة للجلد في ببجي، فري فاير، بيس وفيفا بأفضل الأسعار!</p>
+    </div>
+
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterGame('الكل')">الكل</button>
+        <button class="filter-btn" onclick="filterGame('EA FC')">EA FC</button>
+        <button class="filter-btn" onclick="filterGame('PUBG')">PUBG</button>
+        <button class="filter-btn" onclick="filterGame('Siege')">Siege</button>
+        <button class="filter-btn" onclick="filterGame('COD')">COD</button>
+    </div>
+
+    <div class="products-grid">
+        
+        <div class="product-card" data-game="EA FC">
+            <span class="badge-premium">مميز</span>
+            <h2 class="product-title">حساب FC Mobile أسطوري</h2>
+            <div class="product-price">150 $</div>
+            <p class="product-desc">تشكيلة أسطورية بطاقات فوق الـ 100 مع سكنات وملاعب نادرة جاهزة فوراً.</p>
+            <div class="card-buttons">
+                <button class="btn-add-cart" onclick="addToCart()">
+                    <i class="fa-solid fa-cart-plus"></i> إضافة للسلة
+                </button>
+                <a href="https://wa.me/249XXXXXXXXX?text=أريد%20شراء%20حساب%20FC%20Mobile%20الأسطوري%20بسعر%20150$" target="_blank" class="btn-buy-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> شراء عبر واتساب
+                </a>
+            </div>
+        </div>
+
+        <div class="product-card" data-game="PUBG">
+            <h2 class="product-title">حساب ببجي موبايل مثك</h2>
+            <div class="product-price">80 $</div>
+            <p class="product-desc">يحتوي على الأسلحة المطورة الأكثر طلباً وبدلات مثك فاشن ممتازة.</p>
+            <div class="card-buttons">
+                <button class="btn-add-cart" onclick="addToCart()">
+                    <i class="fa-solid fa-cart-plus"></i> إضافة للسلة
+                </button>
+                <a href="https://wa.me/249XXXXXXXXX?text=أريد%20شراء%20حساب%20ببجي%20موبايل%20المثك%20بسعر%2080$" target="_blank" class="btn-buy-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> شراء عبر واتساب
+                </a>
+            </div>
+        </div>
+
+        <div class="product-card" data-game="Siege">
+            <h2 class="product-title">حساب R6 Siege نادر</h2>
+            <div class="product-price">120 $</div>
+            <p class="product-desc">رانك عالي جداً مع فتح أغلب السكنات والعملاء الأساسيين والتنافسيين.</p>
+            <div class="card-buttons">
+                <button class="btn-add-cart" onclick="addToCart()">
+                    <i class="fa-solid fa-cart-plus"></i> إضافة للسلة
+                </button>
+                <a href="https://wa.me/249XXXXXXXXX?text=أريد%20شراء%20حساب%20R6%20Siege%20النادر%20بسعر%20120$" target="_blank" class="btn-buy-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> شراء عبر واتساب
+                </a>
+            </div>
+        </div>
+
+        <div class="product-card" data-game="COD">
+            <h2 class="product-title">حساب Call of Duty</h2>
+            <div class="product-price">60 $</div>
+            <p class="product-desc">مشحون مواسم كاملة ومفتوح به أسلحة ليجندري جاهزة للجلد الفوري.</p>
+            <div class="card-buttons">
+                <button class="btn-add-cart" onclick="addToCart()">
+                    <i class="fa-solid fa-cart-plus"></i> إضافة للسلة
+                </button>
+                <a href="https://wa.me/249XXXXXXXXX?text=أريد%20شراء%20حساب%20Call%20of%20Duty%20بسعر%2060$" target="_blank" class="btn-buy-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> شراء عبر واتساب
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // نظام عداد السلة التفاعلي
+        let count = 0;
+        function addToCart() {
+            count++;
+            const badge = document.getElementById('cartCount');
+            badge.innerText = count;
+            badge.style.transform = 'scale(1.2)';
+            setTimeout(() => badge.style.transform = 'scale(1)', 200);
+        }
+
+        // نظام التنقل والفلترة المطور للألعاب
+        function filterGame(game) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                if (game === 'الكل' || card.getAttribute('data-game') === game) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
