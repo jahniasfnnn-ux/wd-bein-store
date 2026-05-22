@@ -5,22 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WD BEIN Store</title>
 <style>
-body {
-    background: #0f0f1a;
-    color: #fff;
-    text-align: center;
-    padding: 100px 20px;
-    font-family: Arial, sans-serif;
-}
-h1 { 
-    color: #00d9ff; 
-    font-size: 40px;
-    margin-bottom: 10px;
-}
-</style>
-</head>
-<body>
-    <h1>WD BEIN</h1>
-    <p>الموقع شغال 100%</p>
-</body>
-</html>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+        background: #0f0f1a;
+        color: #fff;
+        padding-bottom: 80px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 15px;
+    }
+
+    .logo {
+        font-size: 22px;
+        font-weight: 700;
+        color: #00d9ff;
+    }
+
+    .banner {
+        background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%);
+        margin: 0 15px;
+        padding: 20px;
+        border-radius: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .banner h2 {
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    .banner h2 span {
