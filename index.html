@@ -4,32 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WD BEIN STORE</title>
+    <!-- استدعاء ملف الستايل الخارجي -->
     <link rel="stylesheet" href="style.css">
+    <!-- الخطوط والأيقونات -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
+    <!-- الهيدر العلوي -->
     <div class="navbar">
-        <div class="nav-right"><span class="nav-title">WD BEIN</span></div>
+        <div class="nav-right"><span class="nav-title">WD BEIN 🌐</span></div>
+        <div class="nav-left"><i class="fa-solid fa-gear"></i></div>
     </div>
+
+    <!-- بنر ميزة التجهيز حسب الطلب -->
     <div class="hero-section">
         <h1 class="hero-title">تجهيز الحسابات حسب طلبك</h1>
+        <p class="hero-subtitle">حدد مواصفات حسابك وميزانيتك بالأسفل، ونحن نوفره لك في أسرع وقت وبأعلى أمان!</p>
     </div>
+
+    <!-- أزرار اختيار اللعبة (الفلترة) -->
     <div class="filter-container">
-        <button class="filter-btn active" onclick="filterGame('الكل', this)">الكل</button>
+        <button class="filter-btn active" onclick="filterGame('الكل', this)">جميع الألعاب</button>
         <button class="filter-btn" onclick="filterGame('Free Fire', this)">فري فاير</button>
         <button class="filter-btn" onclick="filterGame('eFootball', this)">eFootball</button>
+        <button class="filter-btn" onclick="filterGame('EA FC', this)">EA FC</button>
+        <button class="filter-btn" onclick="filterGame('PUBG', this)">PUBG</button>
     </div>
-    <div class="products-grid" id="grid">
+
+    <!-- كروت تقديم الطلبات المخصصة لجميع الألعاب -->
+    <div class="products-grid">
+        
+        <!-- طلب فري فاير -->
         <div class="product-card" data-game="Free Fire">
-            <h2 class="product-title">حساب فري فاير مخصص</h2>
-            <a href="https://t.me/A_G_T4" class="btn-buy-telegram">اطلب حسابك</a>
+            <span class="badge-premium">خدمة فورية</span>
+            <h2 class="product-title">طلب حساب فري فاير مخصص</h2>
+            <p class="product-desc">اطلب حسابك بمواصفاتك الخاصة (سكنات كريمنال، فاير باس قديم، حاضنة، أسلحة مطورة).</p>
+            
+            <div class="order-form">
+                <label>اكتب المواصفات المطلوبة:</label>
+                <textarea id="desc-freefire" placeholder="مثال: ليفل عالي، يحتوي على سكن الكريمنال الأزرق، وأسلحة مطورة..."></textarea>
+                
+                <label>ميزانيتك المتوقعة ($):</label>
+                <input type="number" id="price-freefire" placeholder="مثال: 90">
+            </div>
+
+            <div class="card-buttons">
+                <button onclick="sendOrder('فري فاير', 'desc-freefire', 'price-freefire')" class="btn-buy-telegram">
+                    <i class="fa-brands fa-telegram"></i> إرسال المواصفات عبر تلجرام
+                </button>
+            </div>
         </div>
+
+        <!-- طلب eFootball -->
         <div class="product-card" data-game="eFootball">
-            <h2 class="product-title">حساب eFootball مخصص</h2>
-            <a href="https://t.me/A_G_T4" class="btn-buy-telegram">اطلب حسابك</a>
+            <span class="badge-premium">خدمة فورية</span>
+            <h2 class="product-title">طلب حساب eFootball مخصص</h2>
+            <p class="product-desc">نوفر لك تشكيلات ليفل خارق (لاعبين Epic، كروت Big Time، حساب مشحون بكاش).</p>
+            
+            <div class="order-form">
+                <label>اكتب المواصفات المطلوبة:</label>
+                <textarea id="desc-efootball" placeholder="مثال: تشكيلة فوق 3100، تحتوي على ميسي الـ Big Time ولاعبين إبيك..."></textarea>
+                
+                <label>ميزانيتك المتوقعة ($):</label>
+                <input type="number" id="price-efootball" placeholder="مثال: 110">
+            </div>
+
+            <div class="card-buttons">
+                <button onclick="sendOrder('إيفوتبول', 'desc-efootball', 'price-efootball')" class="btn-buy-telegram">
+                    <i class="fa-brands fa-telegram"></i> إرسال المواصفات عبر تلجرام
+                </button>
+            </div>
         </div>
+
+        <!-- طلب EA FC -->
+        <div class="product-card" data-game="EA FC">
+            <span class="badge-premium">خدمة فورية</span>
+            <h2 class="product-title">طلب حساب FC Mobile مخصص</h2>
+            <p class="product-desc">حدد الأوفر (OVER) المطلوب، التشكيلة، أو حجم الكوينز والشحن وسنقوم بتجهيزه فوراً.</p>
+            
+            <div class="order-form">
+                <label>اكتب المواصفات المطلوبة:</label>
+                <textarea id="desc-eafc" placeholder="مثال: تشكيلة بأوفر فوق 100، تضمن وجود رونالدو أو ميسي..."></textarea>
+                
+                <label>ميزانيتك المتوقعة ($):</label>
+                <input type="number" id="price-eafc" placeholder="مثال: 130">
+            </div>
+
+            <div class="card-buttons">
+                <button onclick="sendOrder('FC Mobile', 'desc-eafc', 'price-eafc')" class="btn-buy-telegram">
+                    <i class="fa-brands fa-telegram"></i> إرسال المواصفات عبر تلجرام
+                </button>
+            </div>
+        </div>
+
+        <!-- طلب PUBG -->
+        <div class="product-card" data-game="PUBG">
+            <span class="badge-premium">خدمة فورية</span>
+            <h2 class="product-title">طلب حساب ببجي موبايل مخصص</h2>
+            <p class="product-desc">تبحث عن أسلحة مطورة معينة، بدلات مثك فاشن، أو رانك عالي؟ أرسل طلبك الآن.</p>
+            
+            <div class="order-form">
+                <label>اكتب المواصفات المطلوبة:</label>
+                <textarea id="desc-pubg" placeholder="مثال: بدلة مثك فاشن، سلاح إم فور ثلجي مطور لفل ماكس..."></textarea>
+                
+                <label>ميزانيتك المتوقعة ($):</label>
+                <input type="number" id="price-pubg" placeholder="مثال: 80">
+            </div>
+
+            <div class="card-buttons">
+                <button onclick="sendOrder('ببجي موبايل', 'desc-pubg', 'price-pubg')" class="btn-buy-telegram">
+                    <i class="fa-brands fa-telegram"></i> إرسال المواصفات عبر تلجرام
+                </button>
+            </div>
+        </div>
+        
     </div>
+
+    <!-- استدعاء ملف البرمجة الخارجي -->
     <script src="script.js"></script>
 </body>
 </html>
