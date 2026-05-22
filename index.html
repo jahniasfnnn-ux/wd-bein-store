@@ -26,7 +26,7 @@
         /* أزرار الألعاب (الفلترة) */
         .filter-container { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 30px; scrollbar-width: none; }
         .filter-container::-webkit-scrollbar { display: none; }
-        .filter-btn { background-color: transparent; color: #ffffff; border: 2px solid #374151; padding: 15px 35px; border-radius: 30px; font-size: 22px; font-weight: bold; white-space: nowrap; cursor: pointer; }
+        .filter-btn { background-color: transparent; color: #ffffff; border: 2px solid #374151; padding: 15px 35px; border-radius: 30px; font-size: 22px; font-weight: bold; white-space: nowrap; cursor: pointer; transition: background-color 0.2s; }
         .filter-btn.active { background-color: #7c3aed; border-color: #7c3aed; }
 
         /* بطاقات المنتجات المفرودة */
@@ -38,7 +38,7 @@
         .product-price { color: #06b6d4; font-size: 36px; font-weight: bold; margin-bottom: 15px; }
         .product-desc { color: #9ca3af; font-size: 20px; line-height: 1.6; margin-bottom: 25px; }
 
-        /* الأزرار الضخمة جداً والمفرودة للموبايل */
+        /* الأزرار الضخمة للموبايل */
         .card-buttons { display: flex; flex-direction: column; gap: 15px; width: 100%; }
         .btn-add-cart { background-color: #7c3aed; color: white; border: none; width: 100%; height: 75px; border-radius: 16px; font-size: 26px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 15px; cursor: pointer; }
         .btn-buy-whatsapp { background-color: #25d366; color: white; text-decoration: none; width: 100%; height: 75px; border-radius: 16px; font-size: 26px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 15px; }
@@ -62,19 +62,19 @@
         <p class="hero-subtitle">احصل على حسابات مشحونة وجاهزة بأفضل الأسعار!</p>
     </div>
 
-    <!-- أزرار الفلترة بعد إضافة فري فاير وإيفوتبول -->
+    <!-- أزرار الفلترة المعدلة بالكامل لتشتغل فوراً عند الضغط -->
     <div class="filter-container">
-        <button class="filter-btn active" onclick="filterGame('الكل')">الكل</button>
-        <button class="filter-btn" onclick="filterGame('Free Fire')">فري فاير</button>
-        <button class="filter-btn" onclick="filterGame('eFootball')">eFootball</button>
-        <button class="filter-btn" onclick="filterGame('EA FC')">EA FC</button>
-        <button class="filter-btn" onclick="filterGame('PUBG')">PUBG</button>
+        <button class="filter-btn active" onclick="filterGame('الكل', this)">الكل</button>
+        <button class="filter-btn" onclick="filterGame('Free Fire', this)">فري فاير</button>
+        <button class="filter-btn" onclick="filterGame('eFootball', this)">eFootball</button>
+        <button class="filter-btn" onclick="filterGame('EA FC', this)">EA FC</button>
+        <button class="filter-btn" onclick="filterGame('PUBG', this)">PUBG</button>
     </div>
 
     <!-- المنتجات -->
     <div class="products-grid">
         
-        <!-- حساب فري فاير جديد -->
+        <!-- حساب فري فاير -->
         <div class="product-card" data-game="Free Fire">
             <span class="badge-premium">نادر</span>
             <h2 class="product-title">حساب فري فاير كريمنال</h2>
@@ -86,7 +86,7 @@
             </div>
         </div>
 
-        <!-- حساب eFootball جديد -->
+        <!-- حساب eFootball -->
         <div class="product-card" data-game="eFootball">
             <span class="badge-premium">قوي</span>
             <h2 class="product-title">حساب eFootball ليفل خارق</h2>
@@ -98,7 +98,7 @@
             </div>
         </div>
 
-        <!-- حساب EA FC القديم -->
+        <!-- حساب EA FC -->
         <div class="product-card" data-game="EA FC">
             <h2 class="product-title">حساب FC Mobile أسطوري</h2>
             <div class="product-price">150 $</div>
@@ -109,7 +109,7 @@
             </div>
         </div>
 
-        <!-- حساب PUBG القديم -->
+        <!-- حساب PUBG -->
         <div class="product-card" data-game="PUBG">
             <h2 class="product-title">حساب ببجي موبايل مثك</h2>
             <div class="product-price">80 $</div>
@@ -128,10 +128,17 @@
             count++;
             document.getElementById('cartCount').innerText = count;
         }
-        function filterGame(game) {
+
+        // الكود المصلح لتشغيل الفلترة فوراً بدون أي تعليق
+        function filterGame(game, element) {
+            // إزالة اللون البنفسجي من كل الأزرار
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            
+            // إضافة اللون البنفسجي للزر الذي تم ضغطه حالياً
+            element.classList.add('active');
+            
+            // إخفاء وإظهار الكروت بناءً على اللعبة المحددة
             const cards = document.querySelectorAll('.product-card');
             cards.forEach(card => {
                 if (game === 'الكل' || card.getAttribute('data-game') === game) {
