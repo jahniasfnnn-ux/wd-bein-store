@@ -5,13 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WD BEIN Store</title>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-    
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: 'Cairo', sans-serif;
+        font-family: Arial, Tahoma, sans-serif;
     }
 
     body {
@@ -38,9 +36,6 @@
         margin: 0 15px;
         padding: 20px;
         border-radius: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
     }
 
     .banner h2 {
@@ -49,3 +44,86 @@
     }
 
     .banner h2 span {
+        color: #00d9ff;
+    }
+
+    .products {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        padding: 20px 15px;
+    }
+
+    .product-card {
+        background: #1e1e2d;
+        border-radius: 18px;
+        padding: 12px;
+    }
+
+    .product-img {
+        width: 100%;
+        height: 120px;
+        background: #2d1b4e;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+    }
+
+    .product-price {
+        color: #00d9ff;
+        font-weight: 700;
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 10px;
+        background: #7b2cbf;
+        border: none;
+        border-radius: 12px;
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #1e1e2d;
+        display: flex;
+        justify-content: space-around;
+        padding: 12px 0;
+    }
+
+    .nav-item.active {
+        color: #00d9ff;
+    }
+</style>
+</head>
+<body>
+
+    <div class="header">
+        <div>🔍</div>
+        <div class="logo">WD BEIN</div>
+        <div>☰</div>
+    </div>
+
+    <div class="banner">
+        <h2>أقوى حسابات الألعاب<br><span>بأفضل الأسعار</span></h2>
+    </div>
+
+    <div class="products">
+        <div class="product-card">
+            <div class="product-img">EA FC</div>
+            <div>حساب FC Mobile أسطوري</div>
+            <div class="product-price">$150</div>
+            <button class="btn">إضافة للسلة</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img
