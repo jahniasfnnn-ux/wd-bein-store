@@ -1,211 +1,326 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WD BEIN Store</title>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, Tahoma, sans-serif;
-    }
-
-    body {
-        background: #0f0f1a;
-        color: #fff;
-        padding-bottom: 80px;
-    }
-
-    .header, .banner, .products, .categories {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-
-    .logo {
-        font-size: 22px;
-        font-weight: 700;
-        color: #00d9ff;
-    }
-
-    .banner {
-        background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%);
-        padding: 25px;
-        border-radius: 20px;
-        margin-top: 10px;
-        margin-bottom: 20px;
-    }
-
-    .banner h2 {
-        font-size: 20px;
-        line-height: 1.6;
-    }
-
-    .banner h2 span {
-        color: #00d9ff;
-    }
-
-    .products {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        gap: 20px;
-        padding: 20px;
-    }
-
-    .product-card {
-        background: #1e1e2d;
-        border-radius: 18px;
-        padding: 15px;
-    }
-
-    .product-img {
-        width: 100%;
-        height: 150px;
-        background: #2d1b4e;
-        border-radius: 12px;
-        margin-bottom: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 18px;
-    }
-
-    .product-title {
-        font-size: 14px;
-        margin-bottom: 8px;
-    }
-
-    .product-price {
-        color: #00d9ff;
-        font-weight: 700;
-        font-size: 18px;
-        margin: 10px 0;
-    }
-
-    .btn {
-        width: 100%;
-        padding: 12px;
-        background: #7b2cbf;
-        border: none;
-        border-radius: 12px;
-        color: #fff;
-        font-weight: 600;
-        font-size: 15px;
-        cursor: pointer;
-    }
-
-    .btn:active {
-        opacity: 0.8;
-    }
-
-    .bottom-nav {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: #1e1e2d;
-        display: flex;
-        justify-content: space-around;
-        padding: 12px 0;
-        border-top: 1px solid #2d2d3d;
-    }
-
-    .nav-item {
-        text-align: center;
-        font-size: 12px;
-        color: #888;
-    }
-
-    .nav-item.active {
-        color: #00d9ff;
-    }
-
-    @media (min-width: 768px) {
-        .products {
-            grid-template-columns: repeat(4, 1fr);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WD BEIN STORE | متجر الحسابات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --primary-purple: #7c3aed;
+            --text-cyan: #06b6d4;
+            --text-muted: #9ca3af;
+            --danger-red: #ef4444;
+            --whatsapp-green: #25d366;
         }
-        
-        .banner h2 {
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #ffffff;
+            padding: 15px;
+            width: 100%;
+        }
+
+        /* الهيدر العلوي المفرود */
+        .navbar {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border: 1px solid #1f2937;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-title {
+            color: var(--text-cyan);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-brand-icon {
+            color: var(--text-cyan);
             font-size: 24px;
         }
-    }
-</style>
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 22px;
+            color: #ffffff;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--danger-red);
+            color: white;
+            font-size: 12px;
+            padding: 1px 6px;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        /* بنر العناوين الترحيبي القديم بنكهة بنفسجية */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%);
+            padding: 30px 15px;
+            border-radius: 16px;
+            border: 1px solid #3b0764;
+        }
+
+        .hero-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            color: #ffffff;
+        }
+
+        .hero-subtitle {
+            color: #e9d5ff;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* أزرار الفلترة للألعاب */
+        .filter-container {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            scrollbar-width: none;
+        }
+        
+        .filter-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-btn {
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid #374151;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-purple);
+            border-color: var(--primary-purple);
+        }
+
+        /* جعل المنتجات تفرش تحت بعضها بشكل عمودي وقريب جداً مثل القديم */
+        .products-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+        /* تصميم الكارت ليكون عريض وقريب وقابل للقراءة بوضوح */
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid #1f2937;
+            padding: 22px;
+            position: relative;
+            text-align: right;
+            width: 100%;
+        }
+
+        .badge-premium {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background-color: var(--danger-red);
+            color: white;
+            font-size: 12px;
+            padding: 4px 14px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .product-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            color: var(--text-cyan);
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-desc {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+
+        /* حاوية الأزرار المريحة لليد داخل الكارت */
+        .card-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-add-cart {
+            background-color: var(--primary-purple);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .btn-buy-whatsapp {
+            background-color: var(--whatsapp-green);
+            color: white;
+            text-decoration: none;
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="header">
-        <div>🔍</div>
-        <div class="logo">WD BEIN</div>
-        <div>☰</div>
-    </div>
-
-    <div class="banner">
-        <h2>أقوى حسابات الألعاب<br><span>بأفضل الأسعار</span></h2>
-    </div>
-
-    <div class="products">
-        <div class="product-card">
-            <div class="product-img">EA FC</div>
-            <div class="product-title">حساب FC Mobile أسطوري</div>
-            <div class="product-price">$150</div>
-            <button class="btn">إضافة للسلة</button>
+    <div class="navbar">
+        <div class="nav-right">
+            <i class="fa-solid fa-gamepad nav-brand-icon"></i>
+            <span class="nav-title">WD BEIN</span>
         </div>
-
-        <div class="product-card">
-            <div class="product-img">PUBG</div>
-            <div class="product-title">حساب PUBG ميثيك</div>
-            <div class="product-price">$80</div>
-            <button class="btn">إضافة للسلة</button>
-        </div>
-
-        <div class="product-card">
-            <div class="product-img">Siege</div>
-            <div class="product-title">حساب R6 Siege نادر</div>
-            <div class="product-price">$120</div>
-            <button class="btn">إضافة للسلة</button>
-        </div>
-
-        <div class="product-card">
-            <div class="product-img">COD</div>
-            <div class="product-title">حساب Call of Duty</div>
-            <div class="product-price">$60</div>
-            <button class="btn">إضافة للسلة</button>
+        <div class="nav-left">
+            <div class="cart-icon">
+                <i class="fa-solid fa-shopping-cart"></i>
+                <span class="cart-badge" id="cartCount">0</span>
+            </div>
+            <i class="fa-solid fa-gear"></i>
         </div>
     </div>
 
-    <div class="bottom-nav">
-        <div class="nav-item active">🏪 Store</div>
-        <div class="nav-item">🔍 Search</div>
-        <div class="nav-item">🛒 Cart</div>
-        <div class="nav-item">👤 Account</div>
+    <div class="hero-section">
+        <h1 class="hero-title">أقوى حسابات الألعاب<br>بين يديك</h1>
+        <p class="hero-subtitle">احصل على حسابات مشحونة وجاهزة للجلد في ببجي، فري فاير، بيس وفيفا بأفضل الأسعار!</p>
     </div>
 
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WD BEIN Store</title>
-<style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Tahoma, sans-serif; }
-    body { background: #0f0f1a; color: #fff; padding-bottom: 80px; }
-    .header, .banner, .products { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    .header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
-    .logo { font-size: 22px; font-weight: 700; color: #00d9ff; }
-    .banner { background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%); padding: 25px; border-radius: 20px; margin: 10px 0 20px 0; }
-    .banner h2 { font-size: 20px; line-height: 1.6; }
-    .banner
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterGame('الكل')">الكل</button>
+        <button class="filter-btn" onclick="filterGame('EA FC')">EA FC</button>
+        <button class="filter-btn" onclick="filterGame('PUBG')">PUBG</button>
+        <button class="filter-btn" onclick="filterGame('Siege')">Siege</button>
+        <button class="filter-btn" onclick="filterGame('COD')">COD</button>
+    </div>
+
+    <div class="products-grid">
+        
+        <div class="product-card" data-game="EA FC">
+            <span class="badge-premium">مميز</span>
+            <h2 class="product-title">حساب FC Mobile أسطوري</h2>
+            <div class="product-price">150 $</div>
+            <p class="product-desc">تشكيلة أسطورية بطاقات فوق الـ 100 مع سكنات وملاعب نادرة جاهزة فوراً.</p>
+            <div class="card-buttons">
+                <button class="btn-add-cart" onclick="addToCart()">
+                    <i class="fa-solid fa-cart-plus"></i> إضافة للسلة
+                </button>
+                <a href="https://wa.me/249XXXXXXXXX?text=أريد%20شراء%20حساب%20FC%20Mobile%20الأسطوري%20بسعر%20150$" target="_blank" class="btn-buy-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> شراء عبر واتساب
+                </a>
+            </div>
+        </div>
+
+        <div class="product-card" data-game="PUBG">
+            <h2 class="product-title">حساب ببجي موبايل مثك</h2>
+            <div class="product-price">80 $</div>
+            <p class="product-desc">يحتوي على الأسلحة المطورة الأكثر طلباً وبدلات مثك فاشن ممتازة.</p>
+            <div class="card-buttons">
+                <button class="btn-add-cart" onclick="addToCart()">
+                    <i class="fa-solid fa-cart-plus"></i> إضافة للسلة
+                </button>
+                <a href="https://wa.me/249XXXXXXXXX?text=أريد%20شراء%20حساب%20ببجي%20موبايل%20المثك%20بسعر%2080$" target="_blank" class="btn-buy-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> شراء عبر واتساب
+                </a>
+            </div>
+        </div>
+
+        <div class="product-card" data-game="Siege">
+            <h2 class="product-title">حساب R6 Siege نادر</h2>
+            <div class="product-price">120 $</div>
+            <p class="product-desc">رانك عالي جداً مع فتح أغلب السكنات والعملاء الأساسيين والتنافسيين.</p>
+            <div class="card-buttons">
+                <button class="btn-add-cart" onclick="addToCart()">
+                    <i class="fa-solid fa-cart-plus"></i> إضافة للسلة
+                </button>
+                <a href="https://wa.me/249XXXXXXXXX?text=أريد%20شراء%20حساب%20R6%20Siege%20النادر%20بسعر%20120$" target="_blank" class="btn-buy-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> شراء عبر واتساب
+                </a>
+            </div>
+        </div>
+
+        <div class="product-card" data-game="COD">
+            <h2 class="product-title">حساب Call of Duty</h2>
+            <div class="product-price">60 $</div>
+            <p class="product-desc">مشحون مواسم كاملة ومفتوح به أسلحة ليجندري جاهزة للجلد الفوري.</p>
+            <div class="card-buttons">
+                <button class="btn-add-cart" onclick="addToCart()">
+                    <i class="fa-solid fa-cart-plus"></i> إضافة للسلة
+                </button>
+                <a href="https://wa.me/249XXXXXXXXX?text=أريد%20شراء%20حساب%20Call%20of%20Duty%20بسعر%2060$" target="_blank" class="btn-buy-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> شراء عبر واتساب
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // نظام عداد السلة التفاعلي
