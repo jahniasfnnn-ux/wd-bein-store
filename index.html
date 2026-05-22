@@ -18,7 +18,6 @@
         padding-bottom: 80px;
     }
 
-    /* التعديل: خلى المحتوى في النص ووسعو */
     .header, .banner, .products, .categories {
         max-width: 1200px;
         margin: 0 auto;
@@ -35,4 +34,44 @@
     }
 
     .logo {
-        font-size: 22
+        font-size: 22px;
+        font-weight: 700;
+        color: #00d9ff;
+    }
+
+    .banner {
+        background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%);
+        padding: 25px;
+        border-radius: 20px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .banner h2 {
+        font-size: 20px;
+        line-height: 1.6;
+    }
+
+    .banner h2 span {
+        color: #00d9ff;
+    }
+
+    .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .product-card {
+        background: #1e1e2d;
+        border-radius: 18px;
+        padding: 15px;
+    }
+
+    .product-img {
+        width: 100%;
+        height: 150px;
+        background: #2d1b4e;
+        border-radius: 12px;
+        margin-bottom:
