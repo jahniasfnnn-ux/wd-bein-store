@@ -9,100 +9,125 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
         body { background-color: #0b0f19; color: #ffffff; padding: 15px; width: 100%; }
+        
+        /* الهيدر */
         .navbar { background-color: #111827; border-radius: 14px; padding: 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border: 1px solid #1f2937; }
         .nav-title { color: #06b6d4; font-size: 32px; font-weight: bold; }
         .nav-left { display: flex; gap: 20px; font-size: 30px; }
-        .cart-icon { position: relative; }
-        .cart-badge { position: absolute; top: -10px; right: -12px; background-color: #ef4444; color: white; font-size: 15px; padding: 2px 8px; border-radius: 50%; font-weight: bold; }
+        
+        /* البنر الترحيبي بنظام الطلب المخصص */
         .hero-section { text-align: center; margin-bottom: 30px; background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%); padding: 40px 15px; border-radius: 18px; border: 1px solid #3b0764; }
         .hero-title { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
-        .hero-subtitle { color: #e9d5ff; font-size: 18px; }
+        .hero-subtitle { color: #e9d5ff; font-size: 18px; line-height: 1.6; }
+
+        /* أزرار الفلترة */
         .filter-container { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 30px; scrollbar-width: none; }
         .filter-container::-webkit-scrollbar { display: none; }
         .filter-btn { background-color: transparent; color: #ffffff; border: 2px solid #374151; padding: 15px 35px; border-radius: 30px; font-size: 22px; font-weight: bold; white-space: nowrap; cursor: pointer; }
         .filter-btn.active { background-color: #7c3aed; border-color: #7c3aed; }
+
+        /* شبكة خدمات التجهيز */
         .products-grid { display: flex; flex-direction: column; gap: 25px; width: 100%; }
         .product-card { background-color: #111827; border-radius: 20px; border: 1px solid #1f2937; padding: 25px; text-align: right; width: 100%; position: relative; }
-        .badge-premium { position: absolute; top: 20px; left: 20px; background-color: #ef4444; color: white; font-size: 14px; padding: 4px 12px; border-radius: 8px; font-weight: bold; }
-        .product-title { font-size: 30px; font-weight: bold; margin-bottom: 10px; }
-        .product-price { color: #06b6d4; font-size: 36px; font-weight: bold; margin-bottom: 15px; }
-        .product-desc { color: #9ca3af; font-size: 20px; line-height: 1.6; margin-bottom: 25px; }
-        .card-buttons { display: flex; flex-direction: column; gap: 15px; width: 100%; }
-        .btn-add-cart { background-color: #7c3aed; color: white; border: none; width: 100%; height: 75px; border-radius: 16px; font-size: 26px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 15px; cursor: pointer; }
-        .btn-buy-telegram { background-color: #0088cc; color: white; text-decoration: none; width: 100%; height: 75px; border-radius: 16px; font-size: 26px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 15px; }
-        .btn-add-cart i, .btn-buy-telegram i { font-size: 28px; }
+        .badge-premium { position: absolute; top: 20px; left: 20px; background-color: #7c3aed; color: white; font-size: 14px; padding: 6px 14px; border-radius: 8px; font-weight: bold; }
+        .product-title { font-size: 30px; font-weight: bold; margin-bottom: 12px; }
+        .product-desc { color: #9ca3af; font-size: 19px; line-height: 1.6; margin-bottom: 25px; }
+        
+        /* الأزرار العملاقة للموبايل */
+        .card-buttons { width: 100%; }
+        .btn-buy-telegram { background-color: #0088cc; color: white; text-decoration: none; width: 100%; height: 75px; border-radius: 16px; font-size: 26px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 15px; transition: background-color 0.2s; }
+        .btn-buy-telegram i { font-size: 28px; }
     </style>
 </head>
 <body>
+
+    <!-- الهيدر العلوي -->
     <div class="navbar">
         <div class="nav-right"><span class="nav-title">WD BEIN</span></div>
-        <div class="nav-left">
-            <div class="cart-icon"><i class="fa-solid fa-shopping-cart"></i><span class="cart-badge" id="cartCount">0</span></div>
-            <i class="fa-solid fa-gear"></i>
-        </div>
+        <div class="nav-left"><i class="fa-solid fa-gear"></i></div>
     </div>
+
+    <!-- بنر ميزة التجهيز حسب الطلب -->
     <div class="hero-section">
-        <h1 class="hero-title">أقوى حسابات الألعاب</h1>
-        <p class="hero-subtitle">احصل على حسابات مشحونة وجاهزة بأفضل الأسعار!</p>
+        <h1 class="hero-title">تجهيز الحسابات حسب طلبك</h1>
+        <p class="hero-subtitle">لا تملك وقتاً للبحث؟ حدد مواصفات حسابك وميزانيتك، ونحن نوفره لك في أسرع وقت وبأعلى أمان!</p>
     </div>
+
+    <!-- أزرار اختيار اللعبة للطلب -->
     <div class="filter-container">
-        <button class="filter-btn active" onclick="filterGame('الكل', this)">الكل</button>
+        <button class="filter-btn active" onclick="filterGame('الكل', this)">جميع الألعاب</button>
         <button class="filter-btn" onclick="filterGame('Free Fire', this)">فري فاير</button>
         <button class="filter-btn" onclick="filterGame('eFootball', this)">eFootball</button>
         <button class="filter-btn" onclick="filterGame('EA FC', this)">EA FC</button>
         <button class="filter-btn" onclick="filterGame('PUBG', this)">PUBG</button>
     </div>
+
+    <!-- كروت تقديم الطلبات المخصصة -->
     <div class="products-grid">
+        
+        <!-- طلب فري فاير -->
         <div class="product-card" data-game="Free Fire">
-            <span class="badge-premium">نادر</span>
-            <h2 class="product-title">حساب فري فاير كريمنال</h2>
-            <div class="product-price">95 $</div>
-            <p class="product-desc">سكنات الكريمنال النادرة، فاير باس قديم، وأسلحة مطورة لفل ماكس.</p>
+            <span class="badge-premium">خدمة فورية</span>
+            <h2 class="product-title">طلب حساب فري فاير مخصص</h2>
+            <p class="product-desc">اطلب حسابك بمواصفاتك الخاصة: سكنات كريمنال، فاير باس قديم، حاضنة، أو أسلحة مطورة حسب ميزانيتك.</p>
             <div class="card-buttons">
-                <button class="btn-add-cart" onclick="addToCart()"><i class="fa-solid fa-cart-plus"></i> إضافة للسلة</button>
-                <a href="https://t.me/A_G_T4" target="_blank" class="btn-buy-telegram"><i class="fa-brands fa-telegram"></i> عبر تلجرام</a>
+                <a href="https://t.me/A_G_T4?text=أريد%20طلب%20حساب%20فري%20فاير%20حسب%20الطلب" target="_blank" class="btn-buy-telegram">
+                    <i class="fa-brands fa-telegram"></i> اطلب حسابك الآن
+                </a>
             </div>
         </div>
+
+        <!-- طلب eFootball -->
         <div class="product-card" data-game="eFootball">
-            <span class="badge-premium">قوي</span>
-            <h2 class="product-title">حساب eFootball ليفل خارق</h2>
-            <div class="product-price">110 $</div>
-            <p class="product-desc">تشكيلة مليئة بلاعبي الـ Epic والـ Big Time، وقوة الفريق تتعدى 3100.</p>
+            <span class="badge-premium">خدمة فورية</span>
+            <h2 class="product-title">طلب حساب eFootball مخصص</h2>
+            <p class="product-desc">نوفر لك تشكيلات ليفل خارق: لاعبي Epic، كروت Big Time، أو حساب مشحون بكاش متوافق مع ميزانيتك.</p>
             <div class="card-buttons">
-                <button class="btn-add-cart" onclick="addToCart()"><i class="fa-solid fa-cart-plus"></i> إضافة للسلة</button>
-                <a href="https://t.me/A_G_T4" target="_blank" class="btn-buy-telegram"><i class="fa-brands fa-telegram"></i> عبر تلجرام</a>
+                <a href="https://t.me/A_G_T4?text=أريد%20طلب%20حساب%20إيفوتبول%20حسب%20الطلب" target="_blank" class="btn-buy-telegram">
+                    <i class="fa-brands fa-telegram"></i> اطلب حسابك الآن
+                </a>
             </div>
         </div>
+
+        <!-- طلب EA FC -->
         <div class="product-card" data-game="EA FC">
-            <h2 class="product-title">حساب FC Mobile أسطوري</h2>
-            <div class="product-price">150 $</div>
-            <p class="product-desc">تشكيلة أسطورية بطاقات فوق الـ 100 جاهزة فوراً.</p>
+            <span class="badge-premium">خدمة فورية</span>
+            <h2 class="product-title">طلب حساب FC Mobile مخصص</h2>
+            <p class="product-desc">حدد الأوفر (OVER) المطلوب، التشكيلة، أو حجم الكوينز والشحن، وسنقوم بتجهيزه وتسليمه لك فوراً.</p>
             <div class="card-buttons">
-                <button class="btn-add-cart" onclick="addToCart()"><i class="fa-solid fa-cart-plus"></i> إضافة للسلة</button>
-                <a href="https://t.me/A_G_T4" target="_blank" class="btn-buy-telegram"><i class="fa-brands fa-telegram"></i> عبر تلجرام</a>
+                <a href="https://t.me/A_G_T4?text=أريد%20طلب%20حساب%20فيفا%20حسب%20الطلب" target="_blank" class="btn-buy-telegram">
+                    <i class="fa-brands fa-telegram"></i> اطلب حسابك الآن
+                </a>
             </div>
         </div>
+
+        <!-- طلب PUBG -->
         <div class="product-card" data-game="PUBG">
-            <h2 class="product-title">حساب ببجي موبايل مثك</h2>
-            <div class="product-price">80 $</div>
-            <p class="product-desc">يحتوي على الأسلحة المطورة الأكثر طلباً وبدلات ممتازة.</p>
+            <span class="badge-premium">خدمة فورية</span>
+            <h2 class="product-title">طلب حساب ببجي موبايل مخصص</h2>
+            <p class="product-desc">تبحث عن أسلحة مطورة معينة، بدلات مثك فاشن، أو رانك عالي؟ أرسل طلبك وسيتكفل فريقنا بالباقي.</p>
             <div class="card-buttons">
-                <button class="btn-add-cart" onclick="addToCart()"><i class="fa-solid fa-cart-plus"></i> إضافة للسلة</button>
-                <a href="https://t.me/A_G_T4" target="_blank" class="btn-buy-telegram"><i class="fa-brands fa-telegram"></i> عبر تلجرام</a>
+                <a href="https://t.me/A_G_T4?text=أريد%20طلب%20حساب%20ببجي%20حسب%20الطلب" target="_blank" class="btn-buy-telegram">
+                    <i class="fa-brands fa-telegram"></i> اطلب حسابك الآن
+                </a>
             </div>
         </div>
+        
     </div>
+
     <script>
-        let count = 0;
-        function addToCart() { count++; document.getElementById('cartCount').innerText = count; }
         function filterGame(game, element) {
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             element.classList.add('active');
+            
             const cards = document.querySelectorAll('.product-card');
             cards.forEach(card => {
-                if (game === 'الكل' || card.getAttribute('data-game') === game) { card.style.display = 'block'; }
-                else { card.style.display = 'none'; }
+                if (game === 'الكل' || card.getAttribute('data-game') === game) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
             });
         }
     </script>
