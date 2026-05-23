@@ -4,63 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WD BEIN STORE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-        body { background-color: #0b0f19; color: #ffffff; padding: 15px; padding-bottom: 90px; }
+        body { background-color: #0b0f19; color: #ffffff; padding: 15px; padding-bottom: 90px; display: block !important; }
         
-        /* الهيدر وشريط التنقل العلوي */
         .navbar { background-color: #111827; border-radius: 14px; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border: 1px solid #1f2937; }
-        .logo-img { height: 45px; width: auto; object-fit: contain; border-radius: 6px; }
-        .nav-links { display: flex; gap: 8px; }
-        .nav-link-btn { background: transparent; border: none; color: #9ca3af; font-size: 14px; font-weight: bold; cursor: pointer; padding: 4px 8px; }
-        .nav-link-btn.active { color: #7c3aed; border-bottom: 2px solid #7c3aed; }
-
-        /* شريط التنقل السفلي للموبايل */
+        .logo-text { font-size: 20px; font-weight: 800; color: #06b6d4; }
+        
         .mobile-tabbar { position: fixed; bottom: 15px; left: 15px; right: 15px; background-color: #111827; border: 1px solid #1f2937; border-radius: 20px; display: flex; justify-content: space-around; padding: 10px; z-index: 1000; }
         .tab-item { display: flex; flex-direction: column; align-items: center; color: #9ca3af; font-size: 12px; font-weight: bold; background: none; border: none; cursor: pointer; gap: 4px; }
         .tab-item i { font-size: 20px; }
         .tab-item.active { color: #7c3aed; }
 
-        /* الواجهات والفلاتر */
         .page-view { display: none; }
         .page-view.active { display: block !important; }
+        
         .hero-section { text-align: center; margin-bottom: 30px; background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%); padding: 35px 15px; border-radius: 18px; border: 1px solid #3b0764; }
-        .hero-title { font-size: 26px; margin-bottom: 10px; }
-        .hero-subtitle { color: #e9d5ff; font-size: 15px; }
+        .hero-title { font-size: 24px; margin-bottom: 10px; }
+        .hero-subtitle { color: #e9d5ff; font-size: 14px; }
 
-        /* أزرار فلاتر الألعاب */
-        .filter-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 25px; scrollbar-width: none; }
-        .filter-btn { background: transparent; color: #ffffff; border: 2px solid #374151; padding: 8px 20px; border-radius: 30px; font-size: 15px; font-weight: bold; white-space: nowrap; cursor: pointer; }
+        .filter-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 25px; }
+        .filter-btn { background: transparent; color: #ffffff; border: 2px solid #374151; padding: 8px 18px; border-radius: 30px; font-size: 14px; font-weight: bold; white-space: nowrap; cursor: pointer; }
         .filter-btn.active { background-color: #7c3aed; border-color: #7c3aed; }
 
-        /* كروت المنتجات والطلبات */
         .products-grid { display: flex; flex-direction: column; gap: 20px; }
         .product-card { background-color: #111827; border-radius: 20px; border: 1px solid #1f2937; padding: 20px; text-align: right; }
-        .product-title { font-size: 22px; margin-bottom: 10px; color: #06b6d4; }
+        .product-title { font-size: 20px; margin-bottom: 10px; color: #06b6d4; }
         
-        .order-textarea { width: 100%; height: 90px; background-color: #1f2937; border: 2px solid #374151; border-radius: 12px; color: white; padding: 12px; font-size: 16px; margin-bottom: 15px; resize: none; }
-        .order-textarea:focus { border-color: #7c3aed; outline: none; }
+        .order-textarea { width: 100%; height: 90px; background-color: #1f2937; border: 2px solid #374151; border-radius: 12px; color: white; padding: 12px; font-size: 15px; margin-bottom: 15px; resize: none; }
         .btn-buy-telegram { background-color: #0088cc; color: white; text-decoration: none; width: 100%; height: 55px; border-radius: 16px; font-size: 18px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; border: none; }
 
-        /* قسم من نحن */
         .feature-card { background-color: #111827; border: 1px solid #1f2937; border-radius: 20px; padding: 18px; display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
         .feature-icon { width: 50px; height: 50px; background-color: #1e1b4b; border: 1px solid #7c3aed; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #7c3aed; font-size: 20px; shrink: 0; }
         .feature-info h3 { font-size: 18px; color: #06b6d4; }
-        .feature-info p { color: #9ca3af; font-size: 15px; }
+        .feature-info p { color: #9ca3af; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <div class="navbar">
         <div class="nav-right">
-            <img src="logo.jpg" alt="WD BEIN STORE" class="logo-img" onerror="this.src='https://placehold.co/150x50/111827/06b6d4?text=WD+BEIN';">
-        </div>
-        <div class="nav-links">
-            <button class="nav-link-btn active" id="btn-nav-home" onclick="switchPage('home')">الرئيسية</button>
-            <button class="nav-link-btn" id="btn-nav-order" onclick="switchPage('order')">الطلبات</button>
-            <button class="nav-link-btn" id="btn-nav-about" onclick="switchPage('about')">من نحن</button>
+            <span class="logo-text">WD BEIN STORE</span>
         </div>
     </div>
 
@@ -71,9 +57,9 @@
         </div>
         <div class="product-card" style="text-align: center;">
             <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 35px; color: #7c3aed; margin-bottom: 15px;"></i>
-            <h2 style="font-size: 22px; margin-bottom: 10px;">اطلب حسابك المخصص الآن</h2>
-            <p style="color: #9ca3af; font-size: 16px; margin-bottom: 20px;">حدد السكنات والأسلحة والفل الذي تحلم به بأسعار منافسة وضمان كامل.</p>
-            <button class="btn-buy-telegram" onclick="switchPage('order')" style="background-color: #7c3aed; height: 55px;">
+            <h2 style="font-size: 20px; margin-bottom: 10px;">اطلب حسابك المخصص الآن</h2>
+            <p style="color: #9ca3af; font-size: 15px; margin-bottom: 20px;">حدد السكنات والأسلحة والفل الذي تحلم به بأسعار منافسة وضمان كامل.</p>
+            <button class="btn-buy-telegram" onclick="switchPage('order')" style="background-color: #7c3aed;">
                 <i class="fa-solid fa-paper-plane"></i> الذهاب لقسم الطلبات
             </button>
         </div>
@@ -91,11 +77,82 @@
         <div class="products-grid">
             <div class="product-card" data-game="Free Fire">
                 <h2 class="product-title">حساب فري فاير مخصص</h2>
-                <textarea class="order-textarea" id="msg-ff" placeholder="مثال: أريد حساب فري فاير فيه سكن الكريمنال الأزرق وميزانيتي 50 دولار..."></textarea>
+                <textarea class="order-textarea" id="msg-ff" placeholder="مثال: أريد حساب فري فاير فيه سكن الكريمنال الأزرق..."></textarea>
                 <button class="btn-buy-telegram" onclick="sendOrder('فري فاير', 'msg-ff')"><i class="fa-brands fa-telegram"></i> إرسال الطلب</button>
             </div>
-
             <div class="product-card" data-game="eFootball">
                 <h2 class="product-title">حساب eFootball مخصص</h2>
-                <textarea class="order-textarea" id="msg-ef" placeholder="مثال: أريد حساب فيه تشكيلة كاملة لاعبي إيبك وميزانيتي 70 دولار..."></textarea>
-                <button class="btn-buy-telegram" onclick="sendOrder('إ
+                <textarea class="order-textarea" id="msg-ef" placeholder="مثال: أريد حساب فيه تشكيلة كاملة لاعبي إيبك..."></textarea>
+                <button class="btn-buy-telegram" onclick="sendOrder('إيفوتبول', 'msg-ef')"><i class="fa-brands fa-telegram"></i> إرسال الطلب</button>
+            </div>
+            <div class="product-card" data-game="EA FC">
+                <h2 class="product-title">حساب FC Mobile مخصص</h2>
+                <textarea class="order-textarea" id="msg-fc" placeholder="مثال: أريد حساب فيفا موبايل أوفر فوق 105..."></textarea>
+                <button class="btn-buy-telegram" onclick="sendOrder('FC Mobile', 'msg-fc')"><i class="fa-brands fa-telegram"></i> إرسال الطلب</button>
+            </div>
+            <div class="product-card" data-game="PUBG">
+                <h2 class="product-title">حساب ببجي موبايل مخصص</h2>
+                <textarea class="order-textarea" id="msg-pubg" placeholder="مثال: أريد حساب ببجي فيه إم فور ثلجي لفل 4..."></textarea>
+                <button class="btn-buy-telegram" onclick="sendOrder('ببجي', 'msg-pubg')"><i class="fa-brands fa-telegram"></i> إرسال الطلب</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-about" class="page-view">
+        <div class="hero-section">
+            <h1 class="hero-title">لماذا تتسوق من متجرنا؟</h1>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="feature-info"><h3>أمان وضمان 100%</h3><p>جميع الحسابات يتم فحصها وتأمينها بالكامل لضمان عدم سحبها.</p></div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+            <div class="feature-info"><h3>تجهيز وتسليم سريع</h3><p>يبدأ فريقنا بالبحث الفوري وتجهيز الحساب لك وتسليمه خلال ساعات.</p></div>
+        </div>
+    </div>
+
+    <div class="mobile-tabbar">
+        <button class="tab-item active" id="tab-home" onclick="switchPage('home')"><i class="fa-solid fa-house"></i><span>الرئيسية</span></button>
+        <button class="tab-item" id="tab-order" onclick="switchPage('order')"><i class="fa-solid fa-gamepad"></i><span>الطلبات</span></button>
+        <button class="tab-item" id="tab-about" onclick="switchPage('about')"><i class="fa-solid fa-circle-info"></i><span>من نحن</span></button>
+    </div>
+
+    <script>
+        function switchPage(pageId) {
+            // إخفاء كل الواجهات أولاً
+            var pages = document.querySelectorAll('.page-view');
+            for(var i=0; i<pages.length; i++) { pages[i].style.display = 'none'; pages[i].classList.remove('active'); }
+            
+            // إظهار الواجهة المحددة فوراً
+            var targetPage = document.getElementById('page-' + pageId);
+            if(targetPage) { targetPage.style.display = 'block'; targetPage.classList.add('active'); }
+            
+            // تحديث أزرار التنقل السفلية
+            var tabs = document.querySelectorAll('.tab-item');
+            for(var j=0; j<tabs.length; j++) { tabs[j].classList.remove('active'); }
+            if(document.getElementById('tab-' + pageId)) document.getElementById('tab-' + pageId).classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function filterGame(game, element) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            element.classList.add('active');
+            document.querySelectorAll('.product-card').forEach(c => {
+                if (game === 'الكل' || c.getAttribute('data-game') === game) {
+                    c.style.display = 'block';
+                } else {
+                    c.style.display = 'none';
+                }
+            });
+        }
+
+        function sendOrder(gameName, textareaId) {
+            const textText = document.getElementById(textareaId).value;
+            if(!textText.trim()) { alert("الرجاء كتابة تفاصيل طلبك أولاً!"); return; }
+            window.open(`https://t.me/A_G_T4?text=${encodeURIComponent('طلب حساب ' + gameName + ' مخصص:\n' + textText)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
