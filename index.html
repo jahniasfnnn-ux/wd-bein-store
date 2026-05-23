@@ -8,165 +8,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-        
-        html, body {
-            width: 100%;
-            min-height: 100vh;
-            background-color: #0b0f19;
-            color: #ffffff;
-            padding: 15px;
-            padding-bottom: 120px;
-        }
-
-        /* هيدر المتجر */
-        .navbar { 
-            background-color: #111827; 
-            border-radius: 12px; 
-            padding: 15px; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            margin-bottom: 20px; 
-            border: 1px solid #1f2937;
-            width: 100%;
-        }
+        html, body { width: 100%; min-height: 100vh; background-color: #0b0f19; color: #ffffff; padding: 15px; padding-bottom: 120px; }
+        .navbar { background-color: #111827; border-radius: 12px; padding: 15px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; border: 1px solid #1f2937; width: 100%; }
         .logo-img { height: 55px; width: auto; object-fit: contain; border-radius: 6px; }
-        
         .page-view { display: none; width: 100%; }
         .page-view.active { display: block !important; }
-        
-        .hero-section { 
-            text-align: center; 
-            margin-bottom: 25px; 
-            background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%); 
-            padding: 35px 15px; 
-            border-radius: 16px; 
-            border: 1px solid #3b0764;
-            width: 100%;
-        }
+        .hero-section { text-align: center; margin-bottom: 25px; background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%); padding: 35px 15px; border-radius: 16px; border: 1px solid #3b0764; width: 100%; }
         .hero-title { font-size: 26px; margin-bottom: 10px; font-weight: 800; }
         .hero-subtitle { color: #e9d5ff; font-size: 16px; line-height: 1.6; }
-        
-        .filter-container { 
-            display: flex; 
-            gap: 10px; 
-            overflow-x: auto; 
-            padding-bottom: 12px; 
-            margin-bottom: 20px;
-            width: 100%;
-            -webkit-overflow-scrolling: touch;
-        }
-        .filter-btn { 
-            background: transparent; 
-            color: #ffffff; 
-            border: 2px solid #374151; 
-            padding: 10px 20px; 
-            border-radius: 30px; 
-            font-size: 15px; 
-            font-weight: bold; 
-            white-space: nowrap; 
-            cursor: pointer; 
-        }
+        .filter-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 20px; width: 100%; -webkit-overflow-scrolling: touch; }
+        .filter-btn { background: transparent; color: #ffffff; border: 2px solid #374151; padding: 10px 20px; border-radius: 30px; font-size: 15px; font-weight: bold; white-space: nowrap; cursor: pointer; }
         .filter-btn.active { background-color: #7c3aed; border-color: #7c3aed; }
-        
         .products-grid { display: flex; flex-direction: column; gap: 20px; width: 100%; }
         .product-card { background-color: #111827; border-radius: 16px; border: 1px solid #1f2937; padding: 20px; text-align: right; width: 100%; }
-        .product-title { font-size: 22px; margin-bottom: 12px; color: #06b6d4; font-weight: 800; }
-        
-        .order-textarea { 
-            width: 100%; 
-            height: 110px; 
-            background-color: #1f2937; 
-            border: 2px solid #374151; 
-            border-radius: 12px; 
-            color: white; 
-            padding: 12px; 
-            font-size: 16px; 
-            margin-bottom: 15px; 
-            resize: none; 
-        }
-        
-        .btn-buy-telegram { 
-            background-color: #0088cc; 
-            color: white; 
-            text-decoration: none; 
-            width: 100%; 
-            height: 55px; 
-            border-radius: 14px; 
-            font-size: 18px; 
-            font-weight: bold; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px; 
-            cursor: pointer; 
-            border: none; 
-        }
-        
-        .feature-card { background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 20px; display: flex; align-items: center; gap: 15px; margin-bottom: 15px; width: 100%; }
-        .feature-icon { width: 50px; height: 50px; background-color: #1e1b4b; border: 1px solid #7c3aed; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #7c3aed; font-size: 22px; shrink: 0; }
-        .feature-info h3 { font-size: 18px; color: #06b6d4; margin-bottom: 4px; }
-        .feature-info p { color: #9ca3af; font-size: 15px; line-height: 1.5; }
-
-        .mobile-tabbar { 
-            position: fixed; 
-            bottom: 15px; 
-            left: 15px; 
-            right: 15px; 
-            background-color: #111827; 
-            border: 1px solid #1f2937; 
-            border-radius: 16px; 
-            display: flex; 
-            justify-content: space-around; 
-            padding: 12px 5px; 
-            z-index: 999; 
-        }
-        .tab-item { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            color: #9ca3af; 
-            font-size: 13px; 
-            font-weight: bold; 
-            background: none; 
-            border: none; 
-            cursor: pointer; 
-            gap: 4px;
-            flex: 1;
-            text-align: center;
-        }
-        .tab-item i { font-size: 22px; } 
-        .tab-item.active { color: #7c3aed; }
-
-        /* ================= ستايل مساعد الذكاء الاصطناعي الجديد ================= */
-        .ai-chat-widget { position: fixed; bottom: 85px; left: 20px; z-index: 1000; }
-        .ai-toggle-btn { width: 60px; height: 60px; background-color: #7c3aed; border-radius: 50px; border: none; color: white; font-size: 26px; cursor: pointer; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
-        .ai-toggle-btn:hover { transform: scale(1.05); }
-        .ai-chat-window { display: none; width: 320px; height: 420px; background-color: #111827; border: 2px solid #7c3aed; border-radius: 16px; position: fixed; bottom: 155px; left: 20px; box-shadow: 0 5px 25px rgba(0,0,0,0.5); flex-direction: column; overflow: hidden; animation: fadeInUp 0.3s ease; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        .ai-chat-header { background-color: #1f2937; padding: 12px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #374151; }
-        .ai-chat-header i { color: #06b6d4; font-size: 20px; }
-        .ai-chat-header h4 { font-size: 15px; font-weight: bold; }
-        .ai-chat-messages { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; text-align: right; }
-        .ai-msg { padding: 10px 14px; border-radius: 12px; font-size: 14px; max-width: 85%; line-height: 1.5; }
-        .ai-msg.bot { background-color: #1f2937; color: #ffffff; align-self: flex-start; border-bottom-right-radius: 2px; }
-        .ai-msg.user { background-color: #7c3aed; color: #ffffff; align-self: flex-end; border-bottom-left-radius: 2px; }
-        .ai-chat-input-area { padding: 10px; background-color: #1f2937; display: flex; gap: 8px; border-top: 1px solid #374151; }
-        .ai-input { flex: 1; background-color: #111827; border: 1px solid #4b5563; border-radius: 8px; color: white; padding: 8px 12px; font-size: 14px; outline: none; }
-        .ai-send-btn { background-color: #7c3aed; border: none; color: white; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; }
-    </style>
-</head>
-<body>
-
-    <div class="navbar">
-        <img src="IMG-20260522-WA0014.jpg" alt="WD BEIN STORE" class="logo-img" onerror="this.src='https://placehold.co/150x50/111827/06b6d4?text=WD+BEIN';">
-    </div>
-
-    <div id="page-home" class="page-view active">
-        <div class="hero-section">
-            <h1 class="hero-title">مرحباً بك في متجر WD BEIN</h1>
-            <p class="hero-subtitle">منصتك الموثوقة لتجهيز الحسابات بمواصفاتك وميزانيتك الخاصة.</p>
-        </div>
-        <div class="product-card" style="text-align: center;">
-            <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 38px; color: #7c3aed; margin-bottom: 15px;"></i>
-            <h2 style="font-size: 20px; margin-bottom: 10px;">ا
+        .product-title { font-
