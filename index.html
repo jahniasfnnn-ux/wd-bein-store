@@ -9,15 +9,93 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
         body { background-color: #0b0f19; color: #ffffff; padding: 15px; padding-bottom: 90px; }
-        .navbar { background-color: #111827; border-radius: 14px; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border: 1px solid #1f2937; position: sticky; top: 10px; z-index: 100; }
-        .logo-img { height: 50px; width: auto; object-fit: contain; border-radius: 8px; }
-        .nav-links { display: flex; gap: 10px; }
-        .nav-link-btn { background: transparent; border: none; color: #9ca3af; font-size: 15px; font-weight: bold; cursor: pointer; padding: 5px; }
+        
+        /* الهيدر وشريط التنقل العلوي */
+        .navbar { background-color: #111827; border-radius: 14px; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border: 1px solid #1f2937; }
+        .logo-img { height: 45px; width: auto; object-fit: contain; border-radius: 6px; }
+        .nav-links { display: flex; gap: 8px; }
+        .nav-link-btn { background: transparent; border: none; color: #9ca3af; font-size: 14px; font-weight: bold; cursor: pointer; padding: 4px 8px; }
         .nav-link-btn.active { color: #7c3aed; border-bottom: 2px solid #7c3aed; }
+
+        /* شريط التنقل السفلي للموبايل */
         .mobile-tabbar { position: fixed; bottom: 15px; left: 15px; right: 15px; background-color: #111827; border: 1px solid #1f2937; border-radius: 20px; display: flex; justify-content: space-around; padding: 10px; z-index: 1000; }
         .tab-item { display: flex; flex-direction: column; align-items: center; color: #9ca3af; font-size: 12px; font-weight: bold; background: none; border: none; cursor: pointer; gap: 4px; }
         .tab-item i { font-size: 20px; }
         .tab-item.active { color: #7c3aed; }
+
+        /* الواجهات والفلاتر */
         .page-view { display: none; }
-        .page-view.active { display: block; }
-        .hero-section { text-align: center; margin-bottom: 30px; background: linear-gradient(135deg, #1e1b4
+        .page-view.active { display: block !important; }
+        .hero-section { text-align: center; margin-bottom: 30px; background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%); padding: 35px 15px; border-radius: 18px; border: 1px solid #3b0764; }
+        .hero-title { font-size: 26px; margin-bottom: 10px; }
+        .hero-subtitle { color: #e9d5ff; font-size: 15px; }
+
+        /* أزرار فلاتر الألعاب */
+        .filter-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 25px; scrollbar-width: none; }
+        .filter-btn { background: transparent; color: #ffffff; border: 2px solid #374151; padding: 8px 20px; border-radius: 30px; font-size: 15px; font-weight: bold; white-space: nowrap; cursor: pointer; }
+        .filter-btn.active { background-color: #7c3aed; border-color: #7c3aed; }
+
+        /* كروت المنتجات والطلبات */
+        .products-grid { display: flex; flex-direction: column; gap: 20px; }
+        .product-card { background-color: #111827; border-radius: 20px; border: 1px solid #1f2937; padding: 20px; text-align: right; }
+        .product-title { font-size: 22px; margin-bottom: 10px; color: #06b6d4; }
+        
+        .order-textarea { width: 100%; height: 90px; background-color: #1f2937; border: 2px solid #374151; border-radius: 12px; color: white; padding: 12px; font-size: 16px; margin-bottom: 15px; resize: none; }
+        .order-textarea:focus { border-color: #7c3aed; outline: none; }
+        .btn-buy-telegram { background-color: #0088cc; color: white; text-decoration: none; width: 100%; height: 55px; border-radius: 16px; font-size: 18px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; border: none; }
+
+        /* قسم من نحن */
+        .feature-card { background-color: #111827; border: 1px solid #1f2937; border-radius: 20px; padding: 18px; display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .feature-icon { width: 50px; height: 50px; background-color: #1e1b4b; border: 1px solid #7c3aed; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #7c3aed; font-size: 20px; shrink: 0; }
+        .feature-info h3 { font-size: 18px; color: #06b6d4; }
+        .feature-info p { color: #9ca3af; font-size: 15px; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="nav-right">
+            <img src="logo.jpg" alt="WD BEIN STORE" class="logo-img" onerror="this.src='https://placehold.co/150x50/111827/06b6d4?text=WD+BEIN';">
+        </div>
+        <div class="nav-links">
+            <button class="nav-link-btn active" id="btn-nav-home" onclick="switchPage('home')">الرئيسية</button>
+            <button class="nav-link-btn" id="btn-nav-order" onclick="switchPage('order')">الطلبات</button>
+            <button class="nav-link-btn" id="btn-nav-about" onclick="switchPage('about')">من نحن</button>
+        </div>
+    </div>
+
+    <div id="page-home" class="page-view active">
+        <div class="hero-section">
+            <h1 class="hero-title">مرحباً بك في متجر WD BEIN</h1>
+            <p class="hero-subtitle">منصتك الموثوقة لتجهيز الحسابات بمواصفاتك وميزانيتك الخاصة.</p>
+        </div>
+        <div class="product-card" style="text-align: center;">
+            <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 35px; color: #7c3aed; margin-bottom: 15px;"></i>
+            <h2 style="font-size: 22px; margin-bottom: 10px;">اطلب حسابك المخصص الآن</h2>
+            <p style="color: #9ca3af; font-size: 16px; margin-bottom: 20px;">حدد السكنات والأسلحة والفل الذي تحلم به بأسعار منافسة وضمان كامل.</p>
+            <button class="btn-buy-telegram" onclick="switchPage('order')" style="background-color: #7c3aed; height: 55px;">
+                <i class="fa-solid fa-paper-plane"></i> الذهاب لقسم الطلبات
+            </button>
+        </div>
+    </div>
+
+    <div id="page-order" class="page-view">
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterGame('الكل', this)">الكل</button>
+            <button class="filter-btn" onclick="filterGame('Free Fire', this)">فري فاير</button>
+            <button class="filter-btn" onclick="filterGame('eFootball', this)">eFootball</button>
+            <button class="filter-btn" onclick="filterGame('EA FC', this)">EA FC</button>
+            <button class="filter-btn" onclick="filterGame('PUBG', this)">PUBG</button>
+        </div>
+
+        <div class="products-grid">
+            <div class="product-card" data-game="Free Fire">
+                <h2 class="product-title">حساب فري فاير مخصص</h2>
+                <textarea class="order-textarea" id="msg-ff" placeholder="مثال: أريد حساب فري فاير فيه سكن الكريمنال الأزرق وميزانيتي 50 دولار..."></textarea>
+                <button class="btn-buy-telegram" onclick="sendOrder('فري فاير', 'msg-ff')"><i class="fa-brands fa-telegram"></i> إرسال الطلب</button>
+            </div>
+
+            <div class="product-card" data-game="eFootball">
+                <h2 class="product-title">حساب eFootball مخصص</h2>
+                <textarea class="order-textarea" id="msg-ef" placeholder="مثال: أريد حساب فيه تشكيلة كاملة لاعبي إيبك وميزانيتي 70 دولار..."></textarea>
+                <button class="btn-buy-telegram" onclick="sendOrder('إ
