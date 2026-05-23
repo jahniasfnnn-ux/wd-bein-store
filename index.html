@@ -2,36 +2,148 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>WD BEIN STORE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ضبط مرن للموقع ليمتد بكامل الشاشة */
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-        
-        body { 
-            background-color: #0b0f19; 
-            color: #ffffff; 
-            padding: 15px; 
-            padding-bottom: 110px; 
-            width: 100%;
+        /* إعدادات مرنة تضمن ملء الشاشة بالكامل وبشكل تلقائي */
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Cairo', sans-serif; 
         }
         
-        /* الهيدر واللوجو */
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #0b0f19;
+            color: #ffffff;
+            padding: 15px;
+            padding-bottom: 120px;
+        }
+
+        /* هيدر المتجر واللوجو العريض */
         .navbar { 
             background-color: #111827; 
-            border-radius: 14px; 
-            padding: 12px; 
+            border-radius: 12px; 
+            padding: 15px; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            margin-bottom: 25px; 
-            border: 1px solid #1f2937; 
+            margin-bottom: 20px; 
+            border: 1px solid #1f2937;
+            width: 100%;
         }
-        .logo-img { height: 50px; width: auto; object-fit: contain; border-radius: 6px; }
+        .logo-img { 
+            height: 55px; 
+            width: auto; 
+            object-fit: contain; 
+            border-radius: 6px; 
+        }
         
-        /* شريط أزرار التنقل السفلي المريح */
+        /* كروت الواجهات ممتدة بكامل عرض الشاشة */
+        .page-view { 
+            display: none; 
+            width: 100%; 
+        }
+        .page-view.active { 
+            display: block !important; 
+        }
+        
+        /* ستايل البانر الترحيبي الكبير */
+        .hero-section { 
+            text-align: center; 
+            margin-bottom: 25px; 
+            background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%); 
+            padding: 35px 15px; 
+            border-radius: 16px; 
+            border: 1px solid #3b0764;
+            width: 100%;
+        }
+        .hero-title { font-size: 26px; margin-bottom: 10px; font-weight: 800; }
+        .hero-subtitle { color: #e9d5ff; font-size: 16px; line-height: 1.6; }
+        
+        /* أزرار الفلاتر للألعاب */
+        .filter-container { 
+            display: flex; 
+            gap: 10px; 
+            overflow-x: auto; 
+            padding-bottom: 12px; 
+            margin-bottom: 20px;
+            width: 100%;
+            -webkit-overflow-scrolling: touch;
+        }
+        .filter-btn { 
+            background: transparent; 
+            color: #ffffff; 
+            border: 2px solid #374151; 
+            padding: 10px 20px; 
+            border-radius: 30px; 
+            font-size: 15px; 
+            font-weight: bold; 
+            white-space: nowrap; 
+            cursor: pointer; 
+        }
+        .filter-btn.active { background-color: #7c3aed; border-color: #7c3aed; }
+        
+        /* كروت المنتجات الكبيرة والمريحة للعين */
+        .products-grid { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px; 
+            width: 100%;
+        }
+        .product-card { 
+            background-color: #111827; 
+            border-radius: 16px; 
+            border: 1px solid #1f2937; 
+            padding: 20px; 
+            text-align: right;
+            width: 100%;
+        }
+        .product-title { font-size: 22px; margin-bottom: 12px; color: #06b6d4; font-weight: 800; }
+        
+        /* صناديق نص الطلبات الكبيرة */
+        .order-textarea { 
+            width: 100%; 
+            height: 110px; 
+            background-color: #1f2937; 
+            border: 2px solid #374151; 
+            border-radius: 12px; 
+            color: white; 
+            padding: 12px; 
+            font-size: 16px; 
+            margin-bottom: 15px; 
+            resize: none; 
+        }
+        
+        /* أزرار التليجرام الكبيرة والواضحة */
+        .btn-buy-telegram { 
+            background-color: #0088cc; 
+            color: white; 
+            text-decoration: none; 
+            width: 100%; 
+            height: 55px; 
+            border-radius: 14px; 
+            font-size: 18px; 
+            font-weight: bold; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
+            cursor: pointer; 
+            border: none; 
+        }
+        
+        /* كروت صفحة من نحن */
+        .feature-card { background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 20px; display: flex; align-items: center; gap: 15px; margin-bottom: 15px; width: 100%; }
+        .feature-icon { width: 50px; height: 50px; background-color: #1e1b4b; border: 1px solid #7c3aed; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #7c3aed; font-size: 22px; shrink: 0; }
+        .feature-info h3 { font-size: 18px; color: #06b6d4; margin-bottom: 4px; }
+        .feature-info p { color: #9ca3af; font-size: 15px; line-height: 1.5; }
+
+        /* شريط التنقل السفلي الثابت والموزع بالتساوي */
         .mobile-tabbar { 
             position: fixed; 
             bottom: 15px; 
@@ -39,10 +151,10 @@
             right: 15px; 
             background-color: #111827; 
             border: 1px solid #1f2937; 
-            border-radius: 20px; 
+            border-radius: 16px; 
             display: flex; 
             justify-content: space-around; 
-            padding: 12px 10px; 
+            padding: 12px 5px; 
             z-index: 9999; 
         }
         .tab-item { 
@@ -55,97 +167,18 @@
             background: none; 
             border: none; 
             cursor: pointer; 
-            gap: 4px; 
+            gap: 4px;
+            flex: 1;
+            text-align: center;
         }
         .tab-item i { font-size: 22px; } 
         .tab-item.active { color: #7c3aed; }
-        
-        .page-view { display: none; }
-        .page-view.active { display: block !important; }
-        
-        /* القسم الترحيبي */
-        .hero-section { 
-            text-align: center; 
-            margin-bottom: 30px; 
-            background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%); 
-            padding: 35px 15px; 
-            border-radius: 18px; 
-            border: 1px solid #3b0764; 
-        }
-        .hero-title { font-size: 24px; margin-bottom: 10px; font-weight: 800; }
-        .hero-subtitle { color: #e9d5ff; font-size: 15px; line-height: 1.6; }
-        
-        /* فلاتر الألعاب السفلية */
-        .filter-container { 
-            display: flex; 
-            gap: 10px; 
-            overflow-x: auto; 
-            padding-bottom: 10px; 
-            margin-bottom: 25px; 
-            -webkit-overflow-scrolling: touch;
-        }
-        .filter-btn { 
-            background: transparent; 
-            color: #ffffff; 
-            border: 2px solid #374151; 
-            padding: 8px 18px; 
-            border-radius: 30px; 
-            font-size: 14px; 
-            font-weight: bold; 
-            white-space: nowrap; 
-            cursor: pointer; 
-        }
-        .filter-btn.active { background-color: #7c3aed; border-color: #7c3aed; }
-        
-        /* كروت المنتجات والكتابة */
-        .products-grid { display: flex; flex-direction: column; gap: 20px; }
-        .product-card { background-color: #111827; border-radius: 20px; border: 1px solid #1f2937; padding: 20px; text-align: right; }
-        .product-title { font-size: 20px; margin-bottom: 10px; color: #06b6d4; font-weight: 800; }
-        
-        .order-textarea { 
-            width: 100%; 
-            height: 100px; 
-            background-color: #1f2937; 
-            border: 2px solid #374151; 
-            border-radius: 12px; 
-            color: white; 
-            padding: 12px; 
-            font-size: 16px; 
-            margin-bottom: 15px; 
-            resize: none; 
-        }
-        
-        /* زر التليجرام */
-        .btn-buy-telegram { 
-            background-color: #0088cc; 
-            color: white; 
-            text-decoration: none; 
-            width: 100%; 
-            height: 55px; 
-            border-radius: 16px; 
-            font-size: 18px; 
-            font-weight: bold; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px; 
-            cursor: pointer; 
-            border: none; 
-        }
-        
-        /* كروت من نحن */
-        .feature-card { background-color: #111827; border: 1px solid #1f2937; border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .feature-icon { width: 50px; height: 50px; background-color: #1e1b4b; border: 1px solid #7c3aed; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #7c3aed; font-size: 22px; shrink: 0; }
-        .feature-info h3 { font-size: 18px; color: #06b6d4; margin-bottom: 5px; }
-        .feature-info p { color: #9ca3af; font-size: 14px; line-height: 1.5; }
     </style>
 </head>
 <body>
 
     <div class="navbar">
-        <div class="nav-right">
-            <img src="IMG-20260522-WA0014.jpg" alt="WD BEIN STORE" class="logo-img" onerror="this.src='https://placehold.co/150x50/111827/06b6d4?text=WD+BEIN';">
-        </div>
+        <img src="IMG-20260522-WA0014.jpg" alt="WD BEIN STORE" class="logo-img" onerror="this.src='https://placehold.co/150x50/111827/06b6d4?text=WD+BEIN';">
     </div>
 
     <div id="page-home" class="page-view active">
@@ -154,10 +187,10 @@
             <p class="hero-subtitle">منصتك الموثوقة لتجهيز الحسابات بمواصفاتك وميزانيتك الخاصة.</p>
         </div>
         <div class="product-card" style="text-align: center;">
-            <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 40px; color: #7c3aed; margin-bottom: 15px;"></i>
-            <h2 style="font-size: 20px; margin-bottom: 12px;">اطلب حسابك المخصص الآن</h2>
-            <p style="color: #9ca3af; font-size: 16px; margin-bottom: 22px; line-height: 1.6;">حدد المواصفات والسكنات التي تحلم بها بأسعار منافسة وضمان كامل.</p>
-            <button class="btn-buy-telegram" onclick="switchPage('order')" style="background-color: #7c3aed; height: 50px; font-size: 17px;"><i class="fa-solid fa-paper-plane"></i> الذهاب لقسم الطلبات</button>
+            <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 38px; color: #7c3aed; margin-bottom: 15px;"></i>
+            <h2 style="font-size: 20px; margin-bottom: 10px;">اطلب حسابك المخصص الآن</h2>
+            <p style="color: #9ca3af; font-size: 16px; margin-bottom: 20px; line-height: 1.6;">حدد المواصفات والسكنات التي تحلم بها بأسعار منافسة وضمان كامل.</p>
+            <button class="btn-buy-telegram" onclick="switchPage('order')" style="background-color: #7c3aed;"><i class="fa-solid fa-paper-plane"></i> الذهاب لقسم الطلبات</button>
         </div>
     </div>
 
