@@ -29,9 +29,10 @@
         .product-title { font-size: 20px; margin-bottom: 10px; color: #06b6d4; font-weight: 800; display: flex; align-items: center; gap: 8px; }
         .product-title i { color: #eab308; }
         
-        .order-textarea, .order-input { width: 100%; background-color: #1f2937; border: 2px solid #374151; border-radius: 12px; color: white; padding: 12px; font-size: 15px; margin-bottom: 15px; outline: none; }
+        .order-textarea, .order-input, .order-select { width: 100%; background-color: #1f2937; border: 2px solid #374151; border-radius: 12px; color: white; padding: 12px; font-size: 15px; margin-bottom: 15px; outline: none; }
         .order-textarea { height: 90px; resize: none; }
-        .order-input { height: 48px; }
+        .order-input, .order-select { height: 48px; }
+        .order-select option { background-color: #111827; color: white; }
         
         .btn-buy-telegram { background-color: #0088cc; color: white; text-decoration: none; width: 100%; height: 50px; border-radius: 12px; font-size: 17px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; border: none; }
         
@@ -63,7 +64,7 @@
         <div class="product-card" style="text-align: center; margin-bottom: 20px; background: linear-gradient(135deg, #0f172a 0%, #1e152a 100%); border-color: #06b6d4;">
             <i class="fa-solid fa-bolt-lightning" style="font-size: 40px; color: #06b6d4; margin-bottom: 15px;"></i>
             <h2 style="font-size: 20px; margin-bottom: 10px; color: #06b6d4;">قسم شحن الألعاب الفوري</h2>
-            <p style="color: #9ca3af; font-size: 15px; margin-bottom: 20px; line-height: 1.6;">اشحن جواهرك، شداتك، ونقاط ألعابك المفضلة فورياً عن طريق الـ ID وبأرخص الأسعار.</p>
+            <p style="color: #9ca3af; font-size: 15px; margin-bottom: 20px; line-height: 1.6;">اشحن عروضك فورياً عن طريق الـ ID وبخيارات جاهزة ومحددة لتسهيل طلبك.</p>
             <button class="btn-buy-telegram" onclick="switchPage('order'); filterGame('شحن', document.getElementById('btn-filter-charge'))" style="background-color: #06b6d4;"><i class="fa-solid fa-cart-shopping"></i> اذهب لخدمات الشحن الفوري</button>
         </div>
 
@@ -90,119 +91,32 @@
             <div class="product-card" data-game="شحن Free Fire">
                 <div style="display:flex; align-items:center;"><h2 class="product-title"><i class="fa-solid fa-gem"></i> شحن جواهر فري فاير</h2><span class="badge-type">شحن فوري</span></div>
                 <input type="number" class="order-input" id="id-ff" placeholder="أدخل معرف اللاعب (ID)...">
-                <input type="text" class="order-input" id="amount-ff" placeholder="كمية الجواهر المطلوبة (مثال: 570 جوهرة)...">
-                <button class="btn-buy-telegram" onclick="sendChargeOrder('جواهر فري فاير', 'id-ff', 'amount-ff')"><i class="fa-brands fa-telegram"></i> اطلب الشحن الآن</button>
+                <select class="order-select" id="amount-ff">
+                    <option value="" disabled selected>اختر باقة الجواهر المطلوبة...</option>
+                    <option value="100 جوهرة">100 جوهرة 💎</option>
+                    <option value="210 جوهرة">210 جوهرة 💎</option>
+                    <option value="530 جوهرة">530 جوهرة 💎</option>
+                    <option value="1080 جوهرة">1080 جوهرة 💎</option>
+                    <option value="2200 جوهرة">2200 جوهرة 💎</option>
+                </select>
+                <button class="btn-buy-telegram" onclick="sendChargeOrder('جواهر فري فاير', 'id-ff', 'amount-ff')"><i class="fa-brands fa-telegram"></i> شحن فوري يدوي</button>
             </div>
 
             <div class="product-card" data-game="شحن PUBG">
                 <div style="display:flex; align-items:center;"><h2 class="product-title"><i class="fa-solid fa-coins"></i> شحن شدات ببجي (UC)</h2><span class="badge-type">شحن فوري</span></div>
                 <input type="number" class="order-input" id="id-pubg-c" placeholder="أدخل معرف اللاعب (ID)...">
-                <input type="text" class="order-input" id="amount-pubg-c" placeholder="كمية الشدات المطلوبة (مثال: 660 شدة)...">
-                <button class="btn-buy-telegram" onclick="sendChargeOrder('شدات ببجي', 'id-pubg-c', 'amount-pubg-c')"><i class="fa-brands fa-telegram"></i> اطلب الشحن الآن</button>
+                <select class="order-select" id="amount-pubg-c">
+                    <option value="" disabled selected>اختر باقة الشدات المطلوبة...</option>
+                    <option value="60 شدة">60 شدة ⚡</option>
+                    <option value="325 شدة">325 شدة ⚡</option>
+                    <option value="660 شدة">660 شدة ⚡</option>
+                    <option value="1800 شدة">1800 شدة ⚡</option>
+                    <option value="3850 شدة">3850 شدة ⚡</option>
+                </select>
+                <button class="btn-buy-telegram" onclick="sendChargeOrder('شدات ببجي', 'id-pubg-c', 'amount-pubg-c')"><i class="fa-brands fa-telegram"></i> شحن فوري يدوي</button>
             </div>
 
             <div class="product-card" data-game="شحن eFootball">
                 <div style="display:flex; align-items:center;"><h2 class="product-title"><i class="fa-solid fa-circle-dollar-to-slot"></i> شحن كؤوس eFootball</h2><span class="badge-type">شحن بالحساب</span></div>
                 <input type="text" class="order-input" id="acc-ef" placeholder="البريد الإلكتروني أو معرف كونامي...">
-                <input type="text" class="order-input" id="amount-ef-c" placeholder="كمية الكؤوس المطلوبة (مثال: 2150 كوينز)...">
-                <button class="btn-buy-telegram" onclick="sendChargeOrder('كوينز إيفوتبول', 'acc-ef', 'amount-ef-c')"><i class="fa-brands fa-telegram"></i> اطلب الشحن الآن</button>
-            </div>
-
-            <div class="product-card" data-game="شحن EA FC">
-                <div style="display:flex; align-items:center;"><h2 class="product-title"><i class="fa-solid fa-star"></i> شحن نقاط FC Mobile</h2><span class="badge-type">شحن بالحساب</span></div>
-                <input type="text" class="order-input" id="acc-fc" placeholder="طريقة تسجيل الدخول والبريد...">
-                <input type="text" class="order-input" id="amount-fc-c" placeholder="كمية النقاط أو التصريح المطلوب...">
-                <button class="btn-buy-telegram" onclick="sendChargeOrder('نقاط فيفا موبايل', 'acc-fc', 'amount-fc-c')"><i class="fa-brands fa-telegram"></i> اطلب الشحن الآن</button>
-            </div>
-            
-            <div class="product-card" data-game="Free Fire">
-                <h2 class="product-title">تجهيز حساب فري فاير مخصص</h2>
-                <textarea class="order-textarea" id="msg-ff" placeholder="مثال: أريد حساب فري فاير فيه سكن الكريمنال الأزرق وضمن ميزانيتي..."></textarea>
-                <button class="btn-buy-telegram" onclick="sendOrder('فري فاير', 'msg-ff')"><i class="fa-brands fa-telegram"></i> إرسال طلب الحساب</button>
-            </div>
-            
-            <div class="product-card" data-game="eFootball">
-                <h2 class="product-title">تجهيز حساب eFootball مخصص</h2>
-                <textarea class="order-textarea" id="msg-ef" placeholder="مثال: أريد حساب فيه تشكيلة كاملة لاعبي إيبك وبرشلونة..."></textarea>
-                <button class="btn-buy-telegram" onclick="sendOrder('إيفوتبول', 'msg-ef')"><i class="fa-brands fa-telegram"></i> إرسال طلب الحساب</button>
-            </div>
-            
-            <div class="product-card" data-game="EA FC">
-                <h2 class="product-title">تجهيز حساب FC Mobile مخصص</h2>
-                <textarea class="order-textarea" id="msg-fc" placeholder="مثال: أريد حساب فيفا موبايل أوفر فوق 105 وتشكيلة قوية..."></textarea>
-                <button class="btn-buy-telegram" onclick="sendOrder('FC Mobile', 'msg-fc')"><i class="fa-brands fa-telegram"></i> إرسال طلب الحساب</button>
-            </div>
-            
-            <div class="product-card" data-game="PUBG">
-                <h2 class="product-title">تجهيز حساب ببجي مخصص</h2>
-                <textarea class="order-textarea" id="msg-pubg" placeholder="مثال: أريد حساب ببجي فيه إم فور ثلجي لفل 4 وبدلة تطوير..."></textarea>
-                <button class="btn-buy-telegram" onclick="sendOrder('ببجي', 'msg-pubg')"><i class="fa-brands fa-telegram"></i> إرسال طلب الحساب</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="page-about" class="page-view">
-        <div class="hero-section"><h1 class="hero-title">لماذا تتسوق من متجرنا؟</h1></div>
-        <div class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-            <div class="feature-info"><h3>أمان وضمان 100%</h3><p>جميع عمليات الشحن رسمية والحسابات يتم فحصها بدقة لتأمينها بالكامل.</p></div>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
-            <div class="feature-info"><h3>شحن وتسليم فوري</h3><p>يبدأ فريقنا فورياً بشحن طلبك بعد الدفع لتصلك الجواهر والشدات خلال دقائق معدودة.</p></div>
-        </div>
-    </div>
-
-    <div class="mobile-tabbar">
-        <button class="tab-item active" id="tab-home" onclick="switchPage('home')"><i class="fa-solid fa-house"></i><span>الرئيسية</span></button>
-        <button class="tab-item" id="tab-order" onclick="switchPage('order')"><i class="fa-solid fa-gamepad"></i><span>الطلبات</span></button>
-        <button class="tab-item" id="tab-about" onclick="switchPage('about')"><i class="fa-solid fa-circle-info"></i><span>من نحن</span></button>
-    </div>
-
-    <script>
-        function switchPage(pId) {
-            document.querySelectorAll('.page-view').forEach(p => { p.style.display = 'none'; p.classList.remove('active'); });
-            var tPage = document.getElementById('page-' + pId);
-            if(tPage) { tPage.style.display = 'block'; tPage.classList.add('active'); }
-            document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
-            if(document.getElementById('tab-' + pId)) document.getElementById('tab-' + pId).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        
-        function filterGame(g, el) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            el.classList.add('active');
-            document.querySelectorAll('.product-card').forEach(c => {
-                const cardGame = c.getAttribute('data-game');
-                if (g === 'الكل') {
-                    c.style.display = 'block';
-                } else if (g === 'شحن') {
-                    c.style.display = cardGame.startsWith('شحن') ? 'block' : 'none';
-                } else {
-                    c.style.display = (cardGame === g) ? 'block' : 'none';
-                }
-            });
-        }
-        
-        // إرسال طلب الحسابات
-        function sendOrder(gName, tId) {
-            const txt = document.getElementById(tId).value;
-            if(!txt.trim()) { alert("الرجاء كتابة تفاصيل طلبك أولاً!"); return; }
-            window.open(`https://t.me/A_G_T4?text=${encodeURIComponent('👑 طلب حساب ' + gName + ' مخصص:\n' + txt)}`, '_blank');
-        }
-
-        // إرسال طلب شحن الألعاب الجديد
-        function sendChargeOrder(gameType, idField, amountField) {
-            const userId = document.getElementById(idField).value;
-            const amount = document.getElementById(amountField).value;
-            if(!userId.trim() || !amount.trim()) { alert("الرجاء ملء جميع الخانات (المعرف والكمية) لإتمام طلب الشحن!"); return; }
-            
-            const message = `⚡ طلب شحن ألعاب فوري:\n🎮 اللعبة: ${gameType}\n🆔 المعرف/الحساب: ${userId}\n💎 الكمية المطلوبة: ${amount}`;
-            window.open(`https://t.me/A_G_T4?text=${encodeURIComponent(message)}`, '_blank');
-        }
-    </script>
-
-    <script src="ai.js"></script>
-
-</body>
-</html>
+                <select class="order-select" id="amount-ef-c">
