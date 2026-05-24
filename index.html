@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-        body { background-color: #0b0f19; color: #ffffff; padding: 15px; padding-bottom: 110px; width: 100%; }
+        body { background-color: #0b0f19; color: #ffffff; padding: 15px; padding-bottom: 110px; width: 100%; min-height: 100vh; position: relative; }
         
         .navbar { background-color: #111827; border-radius: 12px; padding: 15px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; border: 1px solid #1f2937; }
         .logo-img { height: 50px; width: auto; object-fit: contain; border-radius: 6px; }
@@ -25,7 +25,7 @@
         .filter-btn.active { background-color: #7c3aed; border-color: #7c3aed; }
         
         .products-grid { display: flex; flex-direction: column; gap: 20px; }
-        .product-card { background-color: #111827; border-radius: 16px; border: 1px solid #1f2937; padding: 20px; text-align: right; }
+        .product-card { background-color: #111827; border-radius: 16px; border: 1px solid #1f2937; padding: 20px; text-align: right; display: block; }
         .product-title { font-size: 20px; margin-bottom: 10px; color: #06b6d4; font-weight: 800; display: flex; align-items: center; gap: 8px; }
         .product-title i { color: #eab308; }
         
@@ -34,73 +34,4 @@
         .order-input, .order-select { height: 48px; }
         .order-select option { background-color: #111827; color: white; }
         
-        .btn-buy-telegram { background-color: #0088cc; color: white; text-decoration: none; width: 100%; height: 50px; border-radius: 12px; font-size: 17px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; border: none; }
-        
-        .feature-card { background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 20px; display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .feature-icon { width: 45px; height: 45px; background-color: #1e1b4b; border: 1px solid #7c3aed; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #7c3aed; font-size: 20px; shrink: 0; }
-        .feature-info h3 { font-size: 17px; color: #06b6d4; margin-bottom: 4px; }
-        .feature-info p { color: #9ca3af; font-size: 14px; line-height: 1.5; }
-        
-        .mobile-tabbar { position: fixed; bottom: 15px; left: 15px; right: 15px; background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; display: flex; justify-content: space-around; padding: 10px 5px; z-index: 999; }
-        .tab-item { display: flex; flex-direction: column; align-items: center; color: #9ca3af; font-size: 12px; font-weight: bold; background: none; border: none; cursor: pointer; gap: 4px; flex: 1; }
-        .tab-item i { font-size: 20px; } 
-        .tab-item.active { color: #7c3aed; }
-        
-        .badge-type { background-color: #1e1b4b; color: #a78bfa; border: 1px solid #7c3aed; font-size: 12px; padding: 3px 10px; border-radius: 20px; font-weight: bold; margin-right: auto; }
-    </style>
-</head>
-<body>
-
-    <div class="navbar">
-        <img src="IMG-20260522-WA0014.jpg" alt="WD BEIN STORE" class="logo-img" onerror="this.src='https://placehold.co/150x50/111827/06b6d4?text=WD+BEIN';">
-    </div>
-
-    <div id="page-home" class="page-view active">
-        <div class="hero-section">
-            <h1 class="hero-title">مرحباً بك في متجر WD BEIN</h1>
-            <p class="hero-subtitle">بوابتك الموثوقة لشحن الألعاب وتجهيز الحسابات بأفضل الأسعار الممكنة.</p>
-        </div>
-        
-        <div class="product-card" style="text-align: center; margin-bottom: 20px; background: linear-gradient(135deg, #0f172a 0%, #1e152a 100%); border-color: #06b6d4;">
-            <i class="fa-solid fa-bolt-lightning" style="font-size: 40px; color: #06b6d4; margin-bottom: 15px;"></i>
-            <h2 style="font-size: 20px; margin-bottom: 10px; color: #06b6d4;">قسم شحن الألعاب الفوري</h2>
-            <p style="color: #9ca3af; font-size: 15px; margin-bottom: 20px; line-height: 1.6;">اشحن عروضك فورياً عن طريق الـ ID وبخيارات جاهزة ومحددة لتسهيل طلبك.</p>
-            <button class="btn-buy-telegram" onclick="switchPage('order'); filterGame('شحن', document.getElementById('btn-filter-charge'))" style="background-color: #06b6d4;"><i class="fa-solid fa-cart-shopping"></i> اذهب لخدمات الشحن الفوري</button>
-        </div>
-
-        <div class="product-card" style="text-align: center;">
-            <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 35px; color: #7c3aed; margin-bottom: 15px;"></i>
-            <h2 style="font-size: 18px; margin-bottom: 10px;">طلب حساب مخصص</h2>
-            <p style="color: #9ca3af; font-size: 15px; margin-bottom: 20px; line-height: 1.6;">حدد المواصفات والسكنات التي تحلم بها وسنقوم بتجهيز الحساب وضمانه لك بالكامل.</p>
-            <button class="btn-buy-telegram" onclick="switchPage('order'); filterGame('الكل', document.getElementsByClassName('filter-btn')[0])" style="background-color: #7c3aed;"><i class="fa-solid fa-paper-plane"></i> الذهاب لقسم الحسابات</button>
-        </div>
-    </div>
-
-    <div id="page-order" class="page-view">
-        <div class="filter-container">
-            <button class="filter-btn active" onclick="filterGame('الكل', this)">الكل</button>
-            <button id="btn-filter-charge" class="filter-btn" onclick="filterGame('شحن', this)">⚡ شحن الألعاب</button>
-            <button class="filter-btn" onclick="filterGame('Free Fire', this)">فري فاير</button>
-            <button class="filter-btn" onclick="filterGame('eFootball', this)">eFootball</button>
-            <button class="filter-btn" onclick="filterGame('EA FC', this)">EA FC</button>
-            <button class="filter-btn" onclick="filterGame('PUBG', this)">PUBG</button>
-        </div>
-        
-        <div class="products-grid">
-            
-            <div class="product-card" data-game="شحن Free Fire">
-                <div style="display:flex; align-items:center;"><h2 class="product-title"><i class="fa-solid fa-gem"></i> شحن جواهر فري فاير</h2><span class="badge-type">شحن فوري</span></div>
-                <input type="number" class="order-input" id="id-ff" placeholder="أدخل معرف اللاعب (ID)...">
-                <select class="order-select" id="amount-ff">
-                    <option value="" disabled selected>اختر باقة الجواهر المطلوبة...</option>
-                    <option value="100 جوهرة">100 جوهرة 💎</option>
-                    <option value="210 جوهرة">210 جوهرة 💎</option>
-                    <option value="530 جوهرة">530 جوهرة 💎</option>
-                    <option value="1080 جوهرة">1080 جوهرة 💎</option>
-                    <option value="2200 جوهرة">2200 جوهرة 💎</option>
-                </select>
-                <button class="btn-buy-telegram" onclick="sendChargeOrder('جواهر فري فاير', 'id-ff', 'amount-ff')"><i class="fa-brands fa-telegram"></i> شحن فوري يدوي</button>
-            </div>
-
-            <div class="product-card" data-game="شحن PUBG">
-                <div style="display:flex; align-items:center;"><h2 class="product-title"><i class="fa-solid fa-coins"></i> شحن
+        .btn-buy-telegram { background-color: #0088cc; color: white; text
