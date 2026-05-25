@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر اليونكو</title>
+    <title>WD BEIN STORE</title>
     <style>
-        /* نظام خطوط وألوان متناسق ومستقر */
+        /* نظام خطوط وألوان متناسق ومستقر ومناسب للثيم البنفسجي الغامق */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #0b0f19; color: #ffffff; padding: 15px; padding-bottom: 110px; min-height: 100vh; }
         
         /* الهيدر العلوي للمتجر */
         .navbar { background-color: #111827; border-radius: 12px; padding: 15px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; border: 1px solid #1f2937; }
-        .logo-title { font-size: 22px; color: #a78bfa; font-weight: bold; }
+        .logo-title { font-size: 22px; color: #06b6d4; font-weight: bold; letter-spacing: 0.5px; }
         
-        /* أزرار الفلترة والتنقل بين الأقسام */
+        /* نظام التنقل والتبديل بين الواجهات */
+        .page-view { display: none; width: 100%; }
+        .page-view.active { display: block !important; }
+        
+        /* أزرار الفلترة والتصنيف للخدمات */
         .filter-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 20px; -webkit-overflow-scrolling: touch; }
         .filter-container::-webkit-scrollbar { height: 4px; }
         .filter-container::-webkit-scrollbar-thumb { background-color: #374151; border-radius: 4px; }
@@ -41,134 +45,14 @@
         .btn-action { background-color: #0088cc; color: white; border: none; width: 100%; padding: 9px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; transition: background 0.2s; }
         .btn-action:hover { background-color: #0077b5; }
 
-        /* شريط التنقل السفلي الثابت والمستقر */
+        /* شريط التنقل السفلي الثابت والمستقر للموبايل */
         .mobile-tabbar { position: fixed; bottom: 15px; left: 15px; right: 15px; background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; display: flex; justify-content: space-around; padding: 10px 0; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
         .tab-item { display: flex; flex-direction: column; align-items: center; color: #9ca3af; font-size: 12px; background: none; border: none; cursor: pointer; gap: 4px; flex: 1; }
         .tab-item.active { color: #7c3aed; font-weight: bold; }
-    </style>
-</head>
-<body>
 
-    <div class="navbar">
-        <div class="logo-title">🔥 متجر اليونكو STORE</div>
-    </div>
-
-    <div id="page-order" class="page-view active">
-        
-        <div class="filter-container">
-            <button class="filter-btn active" onclick="filterSection('all', this)">الكل</button>
-            <button class="filter-btn" onclick="filterSection('games', this)">الألعاب والشحن</button>
-            <button class="filter-btn" onclick="filterSection('cards', this)">بطاقات الهدايا</button>
-            <button class="filter-btn" onclick="filterSection('subs', this)">الاشتراكات</button>
-        </div>
-
-        <div class="main-section-wrapper" data-sec="games">
-            <div class="products-grid">
-                
-                <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/garena-free-fire.svg" alt="Free Fire">
-                    </div>
-                    <div class="p-title">الشحن اليدوي فري فاير</div>
-                    <input type="text" class="card-input" id="id-ff" placeholder="أدخل معرف الـ ID...">
-                    <button class="btn-action" onclick="sendOrder('الشحن اليدوي فري فاير', 'id-ff')">✈️ طلب شحن</button>
-                </div>
-
-                <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/efootball.svg" alt="eFootball">
-                    </div>
-                    <div class="p-title">شحن eFOOTBALL</div>
-                    <input type="text" class="card-input" id="id-ef" placeholder="البريد أو معرف كونامي...">
-                    <button class="btn-action" onclick="sendOrder('شحن eFOOTBALL', 'id-ef')">✈️ طلب شحن</button>
-                </div>
-
-                <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/tiktok.svg" alt="TikTok">
-                    </div>
-                    <div class="p-title">شحن عملات تيك توك</div>
-                    <input type="text" class="card-input" id="id-tk" placeholder="اسم المستخدم (Username)...">
-                    <button class="btn-action" onclick="sendOrder('شحن عملات تيك توك', 'id-tk')">✈️ طلب شحن</button>
-                </div>
-
-                <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/starlink.svg" alt="Starlink">
-                    </div>
-                    <div class="p-title">تجديد باقات استارلينك</div>
-                    <input type="text" class="card-input" id="id-sl" placeholder="رقم الحساب أو الجهاز...">
-                    <button class="btn-action" onclick="sendOrder('تجديد باقات استارلينك', 'id-sl')">✈️ تجديد الآن</button>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="main-section-wrapper" data-sec="cards">
-            <div class="section-divider">
-                <span class="section-title">بطاقات الهدايا</span>
-            </div>
-            
-            <div class="products-grid">
-                
-                <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/itunes.svg" alt="iTunes">
-                    </div>
-                    <div class="p-title">بطاقات متجر آيتونز</div>
-                    <button class="btn-action" onclick="sendDirectOrder('بطاقات متجر آيتونز')">✈️ اطلب البطاقة</button>
-                </div>
-
-                <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/playstation.svg" alt="PlayStation">
-                    </div>
-                    <div class="p-title">بطاقة بلايستيشن</div>
-                    <button class="btn-action" onclick="sendDirectOrder('بطاقات بلايستيشن ستور')">✈️ اطلب البطاقة</button>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="main-section-wrapper" data-sec="subs">
-            <div class="section-divider">
-                <span class="section-title">الاشتراكات</span>
-            </div>
-            
-            <div class="products-grid">
-                
-                <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/chatgpt.svg" alt="AI Subs" style="max-width:45%; margin-right:5px;">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/google-gemini.svg" alt="AI Subs" style="max-width:45%;">
-                    </div>
-                    <div class="p-title">اشتراكات الذكاء الاصطناعي</div>
-                    <button class="btn-action" onclick="sendDirectOrder('اشتراكات الذكاء الاصطناعي (ChatGPT / Gemini)')">✈️ تفعيل اشتراك</button>
-                </div>
-
-                <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/google-play.svg" alt="Apps Subs">
-                    </div>
-                    <div class="p-title">اشتراكات البرامج والميديا</div>
-                    <button class="btn-action" onclick="sendDirectOrder('اشتراكات البرامج والتطبيقات الميكس')">✈️ تفعيل اشتراك</button>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-    <div class="mobile-tabbar">
-        <button class="tab-item active"><span style="font-size:18px;">🎮</span><span>الخدمات</span></button>
-        <button class="tab-item" onclick="alert('الصفحة الرئيسية قيد التجهيز الفني...')"><span style="font-size:18px;">🏠</span><span>الرئيسية</span></button>
-    </div>
-
-    <script>
-        // دالة تصفية الفلترة السلسة والذكية للأقسام
-        function filterSection(secName, btn) {
-            var btns = document.getElementsByClassName('filter-btn');
-            for(var i=0; i<btns.length; i++) { btns[i].classList.remove('active'); }
-            btn.classList.add('active');
-
-            var wrappers = document.getElementsByClassName('main-section-wrapper
+        /* تصميم المساعد الذكي AI المدمج والمستقر */
+        .ai-btn { position: fixed; bottom: 85px; left: 20px; width: 55px; height: 55px; background-color: #7c3aed; border-radius: 50%; border: none; color: white; font-size: 24px; cursor: pointer; z-index: 99999; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+        .ai-box { display: none; position: fixed; bottom: 150px; left: 20px; width: 290px; height: 380px; background-color: #111827; border: 2px solid #7c3aed; border-radius: 14px; z-index: 99999; flex-direction: column; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .ai-header { background-color: #1f2937; padding: 12px; font-size: 14px; font-weight: bold; border-bottom: 1px solid #374151; display: flex; gap: 8px; align-items: center; color: white; }
+        .ai-chat { flex: 1; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; font-size: 13px; text-align: right; }
+        .msg { padding: 8px 12px; border-radius: 10px; max-width: 85%; line-height: 1.5; color: white; word-wrap: break-word; display: block; margin-bottom: 5px;
