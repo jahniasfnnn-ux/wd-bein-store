@@ -3,308 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WD BEIN STORE</title>
+    <title>متجر اليونكو</title>
     <style>
-        /* استخدام خطوط النظام المدمجة لضمان التشغيل الفوري وعدم الحظر */
+        /* نظام خطوط وألوان متناسق ومستقر */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #0b0f19; color: #ffffff; padding: 15px; padding-bottom: 110px; min-height: 100vh; }
         
-        /* الهيدر واللوجو */
+        /* الهيدر العلوي للمتجر */
         .navbar { background-color: #111827; border-radius: 12px; padding: 15px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; border: 1px solid #1f2937; }
-        .logo-img { height: 50px; width: auto; object-fit: contain; }
+        .logo-title { font-size: 22px; color: #a78bfa; font-weight: bold; }
         
-        /* نظام الصفحات */
-        .page-view { display: none; width: 100%; }
-        .page-view.active { display: block !important; }
-        
-        /* البانر العلوي */
-        .hero-section { text-align: center; margin-bottom: 25px; background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%); padding: 35px 15px; border-radius: 16px; border: 1px solid #3b0764; }
-        .hero-title { font-size: 24px; margin-bottom: 10px; font-weight: bold; }
-        .hero-subtitle { color: #e9d5ff; font-size: 15px; }
-        
-        /* أزرار الفلترة لواجهة الشحن */
-        .filter-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 20px; }
-        .filter-btn { background: transparent; color: #ffffff; border: 2px solid #374151; padding: 8px 18px; border-radius: 30px; font-size: 14px; font-weight: bold; white-space: nowrap; cursor: pointer; }
+        /* أزرار الفلترة والتنقل بين الأقسام */
+        .filter-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 20px; -webkit-overflow-scrolling: touch; }
+        .filter-container::-webkit-scrollbar { height: 4px; }
+        .filter-container::-webkit-scrollbar-thumb { background-color: #374151; border-radius: 4px; }
+        .filter-btn { background: transparent; color: #ffffff; border: 2px solid #374151; padding: 8px 18px; border-radius: 30px; font-size: 14px; font-weight: bold; white-space: nowrap; cursor: pointer; transition: all 0.2s; }
         .filter-btn.active { background-color: #7c3aed; border-color: #7c3aed; }
         
-        /* كروت المنتجات والألعاب */
-        .products-grid { display: flex; flex-direction: column; gap: 20px; }
-        .product-card { background-color: #111827; border-radius: 16px; border: 1px solid #1f2937; padding: 20px; text-align: right; }
-        .product-title { font-size: 19px; margin-bottom: 12px; color: #06b6d4; font-weight: bold; display: flex; align-items: center; gap: 8px; }
-        .badge-type { background-color: #1e1b4b; color: #a78bfa; border: 1px solid #7c3aed; font-size: 12px; padding: 3px 10px; border-radius: 20px; font-weight: bold; margin-right: auto; }
-        
-        /* القوائم والمدخلات */
-        .order-textarea, .order-input, .order-select { width: 100%; background-color: #1f2937; border: 2px solid #374151; border-radius: 12px; color: white; padding: 12px; font-size: 15px; margin-bottom: 15px; outline: none; }
-        .order-textarea { height: 90px; resize: none; }
-        .order-input, .order-select { height: 48px; }
-        .order-select option { background-color: #111827; color: white; }
-        
-        /* زر التليجرام */
-        .btn-buy-telegram { background-color: #0088cc; color: white; text-decoration: none; width: 100%; height: 50px; border-radius: 12px; font-size: 16px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; border: none; }
-        
-        /* شريط التنقل السفلي الثابت والمضمون استقراره */
-        .mobile-tabbar { position: fixed; bottom: 15px; left: 15px; right: 15px; background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; display: flex; justify-content: space-around; padding: 10px 0; z-index: 9999; }
-        .tab-item { display: flex; flex-direction: column; align-items: center; color: #9ca3af; font-size: 12px; font-weight: bold; background: none; border: none; cursor: pointer; gap: 4px; flex: 1; }
-        .tab-item span.icon { font-size: 20px; }
-        .tab-item.active { color: #7c3aed; }
+        /* فواصل الأقسام الرئيسية (الاشتراكات / بطاقات الهدايا) */
+        .section-divider { text-align: center; margin: 30px 0 20px 0; position: relative; }
+        .section-divider::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: #4c1d95; z-index: 1; }
+        .section-title { position: relative; z-index: 2; background-color: #4c1d95; color: white; padding: 6px 25px; border-radius: 20px; font-size: 16px; font-weight: bold; display: inline-block; }
 
-        /* ستايلات المساعد الذكي AI */
-        .ai-btn { position: fixed; bottom: 85px; left: 20px; width: 55px; height: 55px; background-color: #7c3aed; border-radius: 50%; border: none; color: white; font-size: 24px; cursor: pointer; z-index: 99999; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
-        .ai-box { display: none; position: fixed; bottom: 150px; left: 20px; width: 290px; height: 380px; background-color: #111827; border: 2px solid #7c3aed; border-radius: 14px; z-index: 99999; flex-direction: column; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-        .ai-header { background-color: #1f2937; padding: 10px; font-size: 13px; font-weight: bold; border-bottom: 1px solid #374151; display: flex; gap: 8px; align-items: center; color: white; }
-        .ai-chat { flex: 1; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; font-size: 13px; text-align: right; }
-        .msg { padding: 8px 12px; border-radius: 10px; max-width: 85%; line-height: 1.5; color: white; word-wrap: break-word; display: block; margin-bottom: 5px; }
-        .msg.bot { background-color: #1f2937; align-self: flex-start; text-align: right; }
-        .msg.user { background-color: #7c3aed; align-self: flex-end; text-align: right; }
-        .ai-input-box { padding: 8px; background-color: #1f2937; display: flex; gap: 6px; border-top: 1px solid #374151; }
-        .ai-input { flex: 1; background: #111827; border: 1px solid #4b5563; border-radius: 6px; color: white; padding: 6px 10px; font-size: 13px; outline: none; }
-        .ai-send { background: #7c3aed; border: none; color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px; }
+        /* شبكة المنتجات (نظام كرتين متجاورين في الموبايل تماماً مثل الصور) */
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .product-card { background-color: #1e1b4b; border: 2px solid #4c1d95; border-radius: 16px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        
+        /* حاوية الصورة وعرض الشعارات بطريقة احترافية */
+        .image-placeholder { width: 100%; aspect-ratio: 1/1; background-color: #111827; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border: 1px solid #374151; overflow: hidden; padding: 8px; }
+        .image-placeholder img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        
+        .p-title { font-size: 13px; font-weight: bold; color: #ffffff; margin-bottom: 10px; min-height: 38px; display: flex; align-items: center; justify-content: center; line-height: 1.4; }
+        
+        /* حقول الإدخال والطلبات السريعة */
+        .card-input { width: 100%; background: #111827; border: 1px solid #4c1d95; border-radius: 8px; color: white; padding: 8px 5px; font-size: 12px; margin-bottom: 8px; text-align: center; outline: none; transition: border-color 0.2s; }
+        .card-input:focus { border-color: #7c3aed; }
+        .btn-action { background-color: #0088cc; color: white; border: none; width: 100%; padding: 9px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; transition: background 0.2s; }
+        .btn-action:hover { background-color: #0077b5; }
+
+        /* شريط التنقل السفلي الثابت والمستقر */
+        .mobile-tabbar { position: fixed; bottom: 15px; left: 15px; right: 15px; background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; display: flex; justify-content: space-around; padding: 10px 0; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .tab-item { display: flex; flex-direction: column; align-items: center; color: #9ca3af; font-size: 12px; background: none; border: none; cursor: pointer; gap: 4px; flex: 1; }
+        .tab-item.active { color: #7c3aed; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <div class="navbar">
-        <img src="IMG-20260522-WA0014.jpg" alt="WD BEIN STORE" class="logo-img" onerror="this.src='https://placehold.co/150x50/111827/06b6d4?text=WD+BEIN';">
+        <div class="logo-title">🔥 متجر اليونكو STORE</div>
     </div>
 
-    <div id="page-home" class="page-view active">
-        <div class="hero-section">
-            <h1 class="hero-title">مرحباً بك في متجر WD BEIN</h1>
-            <p class="hero-subtitle">بوابتك الموثوقة لشحن الألعاب وتجهيز الحسابات بأفضل الأسعار.</p>
-        </div>
+    <div id="page-order" class="page-view active">
         
-        <div class="product-card" style="text-align: center; margin-bottom: 20px;">
-            <div style="font-size: 40px; margin-bottom: 15px;">⚡</div>
-            <h2 style="font-size: 20px; margin-bottom: 10px; color: #06b6d4;">قسم شحن الألعاب والطلبات</h2>
-            <p style="color: #9ca3af; font-size: 15px; margin-bottom: 20px;">اشحن جواهر وشدات فورياً أو اطلب حسابك المخصص الآن بمواصفاتك.</p>
-            <button class="btn-buy-telegram" onclick="switchPage('order'); filterGame('الكل', document.getElementById('btn-filter-all'));" style="background-color: #7c3aed;">🛒 اذهب لقسم الخدمات والشحن</button>
-        </div>
-    </div>
-
-    <div id="page-order" class="page-view">
         <div class="filter-container">
-            <button id="btn-filter-all" class="filter-btn active" onclick="filterGame('الكل', this)">الكل</button>
-            <button class="filter-btn" onclick="filterGame('شحن', this)">⚡ شحن الألعاب</button>
-            <button class="filter-btn" onclick="filterGame('Free Fire', this)">فري فاير</button>
-            <button class="filter-btn" onclick="filterGame('eFootball', this)">eFootball</button>
-            <button class="filter-btn" onclick="filterGame('EA FC', this)">EA FC</button>
-            <button class="filter-btn" onclick="filterGame('PUBG', this)">PUBG</button>
+            <button class="filter-btn active" onclick="filterSection('all', this)">الكل</button>
+            <button class="filter-btn" onclick="filterSection('games', this)">الألعاب والشحن</button>
+            <button class="filter-btn" onclick="filterSection('cards', this)">بطاقات الهدايا</button>
+            <button class="filter-btn" onclick="filterSection('subs', this)">الاشتراكات</button>
         </div>
-        
-        <div class="products-grid">
-            <div class="product-card" data-game="شحن Free Fire">
-                <div style="display:flex; align-items:center;"><h2 class="product-title">💎 شحن جواهر فري فاير</h2><span class="badge-type">شحن فوري</span></div>
-                <input type="number" class="order-input" id="id-ff" placeholder="أدخل معرف اللاعب (ID)...">
-                <select class="order-select" id="amount-ff">
-                    <option value="" disabled selected>اختر باقة الجواهر المطلوبة...</option>
-                    <option value="100 جوهرة">100 جوهرة 💎</option>
-                    <option value="210 جوهرة">210 جوهرة 💎</option>
-                    <option value="530 جوهرة">530 جوهرة 💎</option>
-                    <option value="1080 جوهرة">1080 جوهرة 💎</option>
-                </select>
-                <button class="btn-buy-telegram" onclick="sendChargeOrder('جواهر فري فاير', 'id-ff', 'amount-ff')">✈️ اطلب الشحن الفوري</button>
-            </div>
 
-            <div class="product-card" data-game="شحن PUBG">
-                <div style="display:flex; align-items:center;"><h2 class="product-title">🪙 شحن شدات ببجي (UC)</h2><span class="badge-type">شحن فوري</span></div>
-                <input type="number" class="order-input" id="id-pubg-c" placeholder="أدخل معرف اللاعب (ID)...">
-                <select class="order-select" id="amount-pubg-c">
-                    <option value="" disabled selected>اختر باقة الشدات المطلوبة...</option>
-                    <option value="60 شدة">60 شدة ⚡</option>
-                    <option value="325 شدة">325 شدة ⚡</option>
-                    <option value="660 شدة">660 شدة ⚡</option>
-                </select>
-                <button class="btn-buy-telegram" onclick="sendChargeOrder('شدات ببجي', 'id-pubg-c', 'amount-pubg-c')">✈️ اطلب الشحن الفوري</button>
-            </div>
+        <div class="main-section-wrapper" data-sec="games">
+            <div class="products-grid">
+                
+                <div class="product-card">
+                    <div class="image-placeholder">
+                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/garena-free-fire.svg" alt="Free Fire">
+                    </div>
+                    <div class="p-title">الشحن اليدوي فري فاير</div>
+                    <input type="text" class="card-input" id="id-ff" placeholder="أدخل معرف الـ ID...">
+                    <button class="btn-action" onclick="sendOrder('الشحن اليدوي فري فاير', 'id-ff')">✈️ طلب شحن</button>
+                </div>
 
-            <div class="product-card" data-game="شحن eFootball">
-                <div style="display:flex; align-items:center;"><h2 class="product-title">⚽ شحن كؤوس eFootball</h2><span class="badge-type">شحن بالحساب</span></div>
-                <input type="text" class="order-input" id="acc-ef" placeholder="البريد الإلكتروني أو معرف كونامي...">
-                <select class="order-select" id="amount-ef-c">
-                    <option value="" disabled selected>اختر كمية الكوينز المطلوبة...</option>
-                    <option value="130 كوينز">130 كوينز ⚽</option>
-                    <option value="550 كوينز">550 كوينز ⚽</option>
-                    <option value="1040 كوينز">1040 كوينز ⚽</option>
-                </select>
-                <button class="btn-buy-telegram" onclick="sendChargeOrder('كوينز إيفوتبول', 'acc-ef', 'amount-ef-c')">✈️ اطلب الشحن الفوري</button>
-            </div>
+                <div class="product-card">
+                    <div class="image-placeholder">
+                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/efootball.svg" alt="eFootball">
+                    </div>
+                    <div class="p-title">شحن eFOOTBALL</div>
+                    <input type="text" class="card-input" id="id-ef" placeholder="البريد أو معرف كونامي...">
+                    <button class="btn-action" onclick="sendOrder('شحن eFOOTBALL', 'id-ef')">✈️ طلب شحن</button>
+                </div>
 
-            <div class="product-card" data-game="شحن EA FC">
-                <div style="display:flex; align-items:center;"><h2 class="product-title">⭐ شحن نقاط FC Mobile</h2><span class="badge-type">شحن بالحساب</span></div>
-                <input type="text" class="order-input" id="acc-fc" placeholder="طريقة تسجيل الدخول والبريد...">
-                <select class="order-select" id="amount-fc-c">
-                    <option value="" disabled selected>اختر باقة النقاط...</option>
-                    <option value="500 نقطة FC">500 نقطة FC 🎮</option>
-                    <option value="1050 نقطة FC">1050 نقطة FC 🎮</option>
-                    <option value="التصريح الممتاز (Star Pass)">التصريح الممتاز (Star Pass) ⭐</option>
-                </select>
-                <button class="btn-buy-telegram" onclick="sendChargeOrder('نقاط فيفا موبايل', 'acc-fc', 'amount-fc-c')">✈️ اطلب الشحن الفوري</button>
+                <div class="product-card">
+                    <div class="image-placeholder">
+                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/tiktok.svg" alt="TikTok">
+                    </div>
+                    <div class="p-title">شحن عملات تيك توك</div>
+                    <input type="text" class="card-input" id="id-tk" placeholder="اسم المستخدم (Username)...">
+                    <button class="btn-action" onclick="sendOrder('شحن عملات تيك توك', 'id-tk')">✈️ طلب شحن</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-placeholder">
+                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/starlink.svg" alt="Starlink">
+                    </div>
+                    <div class="p-title">تجديد باقات استارلينك</div>
+                    <input type="text" class="card-input" id="id-sl" placeholder="رقم الحساب أو الجهاز...">
+                    <button class="btn-action" onclick="sendOrder('تجديد باقات استارلينك', 'id-sl')">✈️ تجديد الآن</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="main-section-wrapper" data-sec="cards">
+            <div class="section-divider">
+                <span class="section-title">بطاقات الهدايا</span>
             </div>
             
-            <div class="product-card" data-game="Free Fire">
-                <h2 class="product-title">تجهيز حساب فري فاير مخصص</h2>
-                <textarea class="order-textarea" id="msg-ff" placeholder="اكتب السكنات المطلوبة (مثل: الكريمنال الأزرق)..."></textarea>
-                <button class="btn-buy-telegram" onclick="sendOrder('فري فاير', 'msg-ff')">✈️ إرسال مواصفات الحساب</button>
+            <div class="products-grid">
+                
+                <div class="product-card">
+                    <div class="image-placeholder">
+                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/itunes.svg" alt="iTunes">
+                    </div>
+                    <div class="p-title">بطاقات متجر آيتونز</div>
+                    <button class="btn-action" onclick="sendDirectOrder('بطاقات متجر آيتونز')">✈️ اطلب البطاقة</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-placeholder">
+                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/playstation.svg" alt="PlayStation">
+                    </div>
+                    <div class="p-title">بطاقة بلايستيشن</div>
+                    <button class="btn-action" onclick="sendDirectOrder('بطاقات بلايستيشن ستور')">✈️ اطلب البطاقة</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="main-section-wrapper" data-sec="subs">
+            <div class="section-divider">
+                <span class="section-title">الاشتراكات</span>
             </div>
             
-            <div class="product-card" data-game="eFootball">
-                <h2 class="product-title">تجهيز حساب eFootball مخصص</h2>
-                <textarea class="order-textarea" id="msg-ef" placeholder="اكتب التشكيلة أو اللاعبين المطلوبين..."></textarea>
-                <button class="btn-buy-telegram" onclick="sendOrder('إيفوتبول', 'msg-ef')">✈️ إرسال مواصفات الحساب</button>
-            </div>
-            
-            <div class="product-card" data-game="EA FC">
-                <h2 class="product-title">تجهيز حساب FC Mobile مخصص</h2>
-                <textarea class="order-textarea" id="msg-fc" placeholder="اكتب الأوفر والتشكيلة المطلوبة..."></textarea>
-                <button class="btn-buy-telegram" onclick="sendOrder('FC Mobile', 'msg-fc')">✈️ إرسال مواصفات الحساب</button>
-            </div>
-            
-            <div class="product-card" data-game="PUBG">
-                <h2 class="product-title">تجهيز حساب ببجي مخصص</h2>
-                <textarea class="order-textarea" id="msg-pubg" placeholder="اكتب الأسلحة المطورة أو البدلات المطلوبة..."></textarea>
-                <button class="btn-buy-telegram" onclick="sendOrder('ببجي', 'msg-pubg')">✈️ إرسال مواصفات الحساب</button>
-            </div>
-        </div>
-    </div>
+            <div class="products-grid">
+                
+                <div class="product-card">
+                    <div class="image-placeholder">
+                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/chatgpt.svg" alt="AI Subs" style="max-width:45%; margin-right:5px;">
+                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/google-gemini.svg" alt="AI Subs" style="max-width:45%;">
+                    </div>
+                    <div class="p-title">اشتراكات الذكاء الاصطناعي</div>
+                    <button class="btn-action" onclick="sendDirectOrder('اشتراكات الذكاء الاصطناعي (ChatGPT / Gemini)')">✈️ تفعيل اشتراك</button>
+                </div>
 
-    <div id="page-about" class="page-view">
-        <div class="hero-section"><h1 class="hero-title">متجر WD BEIN</h1></div>
-        <div class="product-card">
-            <h2 style="color: #06b6d4; margin-bottom: 10px;">🛡️ ضمان وموثوقية 100%</h2>
-            <p style="color: #9ca3af; line-height: 1.6;">نوفر شحن رسمي ومضمون بالكامل لجميع الألعاب مع تسليم سريع وخدمة دعم فني ذكي ومتواصل.</p>
-        </div>
-    </div>
+                <div class="product-card">
+                    <div class="image-placeholder">
+                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/google-play.svg" alt="Apps Subs">
+                    </div>
+                    <div class="p-title">اشتراكات البرامج والميديا</div>
+                    <button class="btn-action" onclick="sendDirectOrder('اشتراكات البرامج والتطبيقات الميكس')">✈️ تفعيل اشتراك</button>
+                </div>
 
-    <button class="ai-btn" onclick="toggleAI()">🤖</button>
+            </div>
+        </div>
 
-    <div class="ai-box" id="aiBox">
-        <div class="ai-header">🧠 مساعد WD BEIN الذكي</div>
-        <div class="ai-chat" id="aiChat">
-            <div class="msg bot">مرحباً بك يا غالي! 🔥 أنا مساعدك الذكي المبني بالذكاء الاصطناعي لمتجر WD BEIN. اسألني عن أسعار الألعاب، الضمان، أو طريقة الشراء وسأجيبك فوراً! 😊</div>
-        </div>
-        <div class="ai-input-box">
-            <input type="text" class="ai-input" id="aiIn" placeholder="اكتب سؤالك هنا..." onkeypress="if(event.key==='Enter') askAI()">
-            <button class="ai-send" onclick="askAI()">إرسال</button>
-        </div>
     </div>
 
     <div class="mobile-tabbar">
-        <button class="tab-item active" id="tab-home" onclick="switchPage('home')"><span class="icon">🏠</span><span>الرئيسية</span></button>
-        <button class="tab-item" id="tab-order" onclick="switchPage('order')"><span class="icon">🎮</span><span>الطلبات</span></button>
-        <button class="tab-item" id="tab-about" onclick="switchPage('about')"><span class="icon">ℹ️</span><span>من نحن</span></button>
+        <button class="tab-item active"><span style="font-size:18px;">🎮</span><span>الخدمات</span></button>
+        <button class="tab-item" onclick="alert('الصفحة الرئيسية قيد التجهيز الفني...')"><span style="font-size:18px;">🏠</span><span>الرئيسية</span></button>
     </div>
 
     <script>
-        function switchPage(pId) {
-            var views = document.getElementsByClassName('page-view');
-            for(var i=0; i<views.length; i++) { views[i].classList.remove('active'); }
-            
-            var tPage = document.getElementById('page-' + pId);
-            if(tPage) { tPage.classList.add('active'); }
-            
-            var tabs = document.getElementsByClassName('tab-item');
-            for(var j=0; j<tabs.length; j++) { tabs[j].classList.remove('active'); }
-            
-            var tTab = document.getElementById('tab-' + pId);
-            if(tTab) { tTab.classList.add('active'); }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        
-        function filterGame(g, el) {
+        // دالة تصفية الفلترة السلسة والذكية للأقسام
+        function filterSection(secName, btn) {
             var btns = document.getElementsByClassName('filter-btn');
             for(var i=0; i<btns.length; i++) { btns[i].classList.remove('active'); }
-            if(el) { el.classList.add('active'); }
-            
-            var cards = document.getElementsByClassName('product-card');
-            for(var j=0; j<cards.length; j++) {
-                var cardGame = cards[j].getAttribute('data-game');
-                if (g === 'الكل') {
-                    cards[j].style.display = 'block';
-                } else if (g === 'شحن') {
-                    cards[j].style.display = (cardGame && cardGame.indexOf('شحن') === 0) ? 'block' : 'none';
-                } else {
-                    cards[j].style.display = (cardGame === g) ? 'block' : 'none';
-                }
-            }
-        }
-        
-        function sendOrder(gName, tId) {
-            var txt = document.getElementById(tId).value;
-            if(!txt.trim()) { alert("الرجاء كتابة تفاصيل طلبك أولاً!"); return; }
-            window.open('https://t.me/A_G_T4?text=' + encodeURIComponent('👑 طلب حساب ' + gName + ' مخصص:\n' + txt), '_blank');
-        }
+            btn.classList.add('active');
 
-        function sendChargeOrder(gameType, idField, selectField) {
-            var userId = document.getElementById(idField).value;
-            var amount = document.getElementById(selectField).value;
-            
-            if(!userId.trim()) { alert("الرجاء إدخال الـ ID أو بيانات الحساب أولاً!"); return; }
-            if(!amount) { alert("الرجاء تحديد الباقة المطلوبة!"); return; }
-            
-            var message = '⚡ طلب شحن يدوي فوري:\n🎮 اللعبة: ' + gameType + '\n🆔 المعرف/الحساب: ' + userId + '\n📦 الباقة المختارة: ' + amount;
-            window.open('https://t.me/A_G_T4?text=' + encodeURIComponent(message), '_blank');
-        }
-
-        function toggleAI() {
-            var box = document.getElementById('aiBox');
-            if(box) { box.style.display = (box.style.display === 'flex') ? 'none' : 'flex'; }
-        }
-
-        function askAI() {
-            var inp = document.getElementById('aiIn');
-            if(!inp) return;
-            var txt = inp.value.trim();
-            if (!txt) return;
-            
-            addBubble(txt, 'user');
-            inp.value = '';
-            
-            var chat = document.getElementById('aiChat');
-            var thinkingDiv = document.createElement('div');
-            thinkingDiv.className = 'msg bot';
-            thinkingDiv.id = 'ai-thinking';
-            thinkingDiv.innerText = 'جاري التفكير...';
-            chat.appendChild(thinkingDiv);
-            chat.scrollTop = chat.scrollHeight;
-
-            setTimeout(function() {
-                var tDiv = document.getElementById('ai-thinking');
-                if(tDiv) tDiv.remove();
-
-                var reply = "";
-                var msgLow = txt.toLowerCase();
-                
-                var التحيات = ['سلام', 'مرحبا', 'هلا', 'الو', 'اهلين', 'منور', 'كيفك'];
-                var الأسعار = ['سعر', 'بكم', 'ب كام', 'فلوس', 'رخيص', 'اسعار'];
-                var الألعاب = ['العاب', 'حسابات', 'متوفر', 'الالعاب', 'فري', 'ببجي', 'فيفا', 'بيس', 'ايفوتبول'];
-                var الضمان = ['ضمان', 'مضمون', 'امان', 'امن', 'ثقة'];
-                var الطلب = ['كيف', 'طريقة', 'شلون اطلب', 'اشتري'];
-
-                if (التحيات.some(function(k) { return msgLow.indexOf(k) !== -1; })) {
-                    reply = "يا ميت أهلاً وسهلاً بك يا غالي في متجر WD BEIN STORE! كيف يمكنني مساعدتك اليوم في الشحن أو الحسابات؟ 😊";
-                } else if (الألعاب.some(function(k) { return msgLow.indexOf(k) !== -1; })) {
-                    reply = "نوفر لك خدمات شحن فوري وتجهيز حسابات لـ: فري فاير، ببجي، eFootball، و EA FC Mobile. تفضل بالذهاب لصفحة (الطلبات) لرؤية العروض الجاهزة والفلترة!";
-                } else if (الأسعار.some(function(k) { return msgLow.indexOf(k) !== -1; })) {
-                    reply = "أسعارنا منافسة وممتازة جداً! أسعار الشحن ثابتة وموجودة داخل القوائم في صفحة الطلبات، أما أسعار الحسابات المخصصة فتبدأ حسب ميزانيتك والمواصفات المطلوبة.";
-                } else if (الضمان.some(function(k) { return msgLow.indexOf(k) !== -1; })) {
-                    reply = "متجر WD BEIN يضمن لك أمان وموثوقية 100% 🛡️، جميع عمليات الشحن رسمية عبر المعرف (ID) والحسابات يتم فحصها وتأمينها بالكامل قبل تسليمها.";
-                } else if (الطلب.some(function(k) { return msgLow.indexOf(k) !== -1; })) {
-                    reply = "سهلة جداً: اضغط على (الطلبات) بأسفل الشاشة، اختر باقة الشحن الفوري أو اكتب مواصفات الحساب، ثم اضغط زر الإرسال ليفتح لك تليجرام المالك لتأكيد الدفع والاستلام فوراً! 🚀";
-                } else {
-                    reply = "سؤالك رائع يا غالي! لخدمتك بشكل أفضل وتلبية طلبك، يرجى مراسلة المالك مباشرة على التليجرام: @A_G_T4 وسيقوم بالرد عليك في ثوانٍ.";
-                }
-
-                addBubble(reply, 'bot');
-            }, 600);
-        }
-
-        function addBubble(t, s) {
-            var chat = document.getElementById('aiChat');
-            if(!chat) return;
-            var d = document.createElement('div');
-            d.className = 'msg ' + s; d.innerText = t;
-            chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
-        }
-    </script>
-</body>
-</html>
+            var wrappers = document.getElementsByClassName('main-section-wrapper
