@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WD BEIN STORE</title>
+    <!-- استدعاء مكتبة الأيقونات العالمية لضمان ظهور الشعارات بشكل سليم -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* نظام ألوان متناسق ومستقر ومناسب للثيم البنفسجي الغامق الفخم */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -24,17 +26,17 @@
         .filter-btn { background: transparent; color: #ffffff; border: 2px solid #374151; padding: 8px 18px; border-radius: 30px; font-size: 14px; font-weight: bold; white-space: nowrap; cursor: pointer; transition: all 0.2s; }
         .filter-btn.active { background-color: #7c3aed; border-color: #7c3aed; }
         
-        /* فواصل الأقسام الرئيسية (الاشتراكات / بطاقات الهدايا) */
+        /* فواصل الأقسام الرئيسية */
         .section-divider { text-align: center; margin: 30px 0 20px 0; position: relative; }
         .section-divider::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: #4c1d95; z-index: 1; }
         .section-title { position: relative; z-index: 2; background-color: #4c1d95; color: white; padding: 6px 25px; border-radius: 20px; font-size: 16px; font-weight: bold; display: inline-block; }
 
-        /* شبكة المنتجات (نظام كرتين متجاورين في الموبايل تماماً مثل الصور) */
+        /* شبكة المنتجات */
         .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         .product-card { background-color: #1e1b4b; border: 2px solid #4c1d95; border-radius: 16px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         
-        /* حاوية الصورة وعرض الشعارات بطريقة احترافية */
-        .image-placeholder { width: 100%; aspect-ratio: 1/1; background-color: #111827; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border: 1px solid #374151; overflow: hidden; padding: 8px; }
+        /* حاوية الأيقونات لضمان المظهر الجميل والثابت */
+        .image-placeholder { width: 100%; aspect-ratio: 1/1; background-color: #111827; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border: 1px solid #374151; font-size: 45px; color: #a78bfa; }
         .image-placeholder img { max-width: 100%; max-height: 100%; object-fit: contain; }
         
         .p-title { font-size: 13px; font-weight: bold; color: #ffffff; margin-bottom: 10px; min-height: 38px; display: flex; align-items: center; justify-content: center; line-height: 1.4; }
@@ -45,12 +47,12 @@
         .btn-action { background-color: #0088cc; color: white; border: none; width: 100%; padding: 9px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; transition: background 0.2s; }
         .btn-action:hover { background-color: #0077b5; }
 
-        /* شريط التنقل السفلي الثابت والمستقر للموبايل */
+        /* شريط التنقل السفلي الثابت والمستقر */
         .mobile-tabbar { position: fixed; bottom: 15px; left: 15px; right: 15px; background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; display: flex; justify-content: space-around; padding: 10px 0; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
         .tab-item { display: flex; flex-direction: column; align-items: center; color: #9ca3af; font-size: 12px; background: none; border: none; cursor: pointer; gap: 4px; flex: 1; }
         .tab-item.active { color: #7c3aed; font-weight: bold; }
 
-        /* تصميم المساعد الذكي AI المدمج والمستقر */
+        /* تصميم المساعد الذكي AI المدمج */
         .ai-btn { position: fixed; bottom: 85px; left: 20px; width: 55px; height: 55px; background-color: #7c3aed; border-radius: 50%; border: none; color: white; font-size: 24px; cursor: pointer; z-index: 99999; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
         .ai-box { display: none; position: fixed; bottom: 150px; left: 20px; width: 290px; height: 380px; background-color: #111827; border: 2px solid #7c3aed; border-radius: 14px; z-index: 99999; flex-direction: column; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
         .ai-header { background-color: #1f2937; padding: 12px; font-size: 14px; font-weight: bold; border-bottom: 1px solid #374151; display: flex; gap: 8px; align-items: center; color: white; }
@@ -65,12 +67,11 @@
 </head>
 <body>
 
-    <!-- هيدر المتجر باسم WD BEIN STORE -->
+    <!-- هيدر المتجر المحدث -->
     <div class="navbar">
         <div class="logo-title">🔥 WD BEIN STORE</div>
     </div>
 
-    <!-- قسم عرض وفلترة الخدمات الرئيسي -->
     <div id="page-order" class="page-view active">
         
         <!-- أزرار الفلترة السريعة -->
@@ -81,14 +82,14 @@
             <button class="filter-btn" onclick="filterSection('subs', this)">الاشتراكات</button>
         </div>
 
-        <!-- ================= قسم الألعاب والشحن الفوري واليدوي ================= -->
+        <!-- ================= أولاً: قسم الألعاب والشحن الفوري ================= -->
         <div class="main-section-wrapper" data-sec="games">
             <div class="products-grid">
                 
                 <!-- الشحن اليدوي فري فاير -->
                 <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/garena-free-fire.svg" alt="Free Fire">
+                    <div class="image-placeholder" style="color: #ff4a4a;">
+                        <i class="fa-solid fa-gamepad"></i>
                     </div>
                     <div class="p-title">الشحن اليدوي فري فاير</div>
                     <input type="text" class="card-input" id="id-ff" placeholder="أدخل معرف الـ ID...">
@@ -97,8 +98,8 @@
 
                 <!-- شحن إيفوتبول بيس -->
                 <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/efootball.svg" alt="eFootball">
+                    <div class="image-placeholder" style="color: #3b82f6;">
+                        <i class="fa-solid fa-circle-play"></i>
                     </div>
                     <div class="p-title">شحن eFOOTBALL</div>
                     <input type="text" class="card-input" id="id-ef" placeholder="البريد أو معرف كونامي...">
@@ -107,8 +108,8 @@
 
                 <!-- شحن عملات تيك توك -->
                 <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/tiktok.svg" alt="TikTok">
+                    <div class="image-placeholder" style="color: #00f2fe;">
+                        <i class="fa-brands fa-tiktok"></i>
                     </div>
                     <div class="p-title">شحن عملات تيك توك</div>
                     <input type="text" class="card-input" id="id-tk" placeholder="اسم المستخدم (Username)...">
@@ -117,8 +118,8 @@
 
                 <!-- تجديد باقات ستارلينك -->
                 <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/starlink.svg" alt="Starlink">
+                    <div class="image-placeholder" style="color: #a78bfa;">
+                        <i class="fa-solid fa-satellite-dish"></i>
                     </div>
                     <div class="p-title">تجديد باقات استارلينك</div>
                     <input type="text" class="card-input" id="id-sl" placeholder="رقم الحساب أو الجهاز...">
@@ -128,7 +129,7 @@
             </div>
         </div>
 
-        <!-- ================= قسم بطاقات الهدايا والاستبدال ================= -->
+        <!-- ================= ثانياً: قسم بطاقات الهدايا والاستبدال ================= -->
         <div class="main-section-wrapper" data-sec="cards">
             <div class="section-divider">
                 <span class="section-title">بطاقات الهدايا</span>
@@ -138,8 +139,8 @@
                 
                 <!-- بطاقات متجر آيتونز -->
                 <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/itunes.svg" alt="iTunes">
+                    <div class="image-placeholder" style="color: #f43f5e;">
+                        <i class="fa-brands fa-apple"></i>
                     </div>
                     <div class="p-title">بطاقات متجر آيتونز</div>
                     <button class="btn-action" onclick="sendDirectOrder('بطاقات متجر آيتونز')">✈️ اطلب البطاقة</button>
@@ -147,8 +148,8 @@
 
                 <!-- بطاقات بلايستيشن -->
                 <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/playstation.svg" alt="PlayStation">
+                    <div class="image-placeholder" style="color: #00439c;">
+                        <i class="fa-brands fa-playstation"></i>
                     </div>
                     <div class="p-title">بطاقة بلايستيشن</div>
                     <button class="btn-action" onclick="sendDirectOrder('بطاقات بلايستيشن ستور')">✈️ اطلب البطاقة</button>
@@ -157,7 +158,7 @@
             </div>
         </div>
 
-        <!-- ================= قسم الاشتراكات الشهرية والبرامج ================= -->
+        <!-- ================= ثالثاً: قسم الاشتراكات الشهرية والبرامج ================= -->
         <div class="main-section-wrapper" data-sec="subs">
             <div class="section-divider">
                 <span class="section-title">الاشتراكات</span>
@@ -167,9 +168,8 @@
                 
                 <!-- اشتراكات الذكاء الاصطناعي -->
                 <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/chatgpt.svg" alt="AI Subs" style="max-width:45%; margin-right:5px;">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/google-gemini.svg" alt="AI Subs" style="max-width:45%;">
+                    <div class="image-placeholder" style="color: #10b981;">
+                        <i class="fa-solid fa-brain"></i>
                     </div>
                     <div class="p-title">اشتراكات الذكاء الاصطناعي</div>
                     <button class="btn-action" onclick="sendDirectOrder('اشتراكات الذكاء الاصطناعي (ChatGPT / Gemini)')">✈️ تفعيل اشتراك</button>
@@ -177,8 +177,8 @@
 
                 <!-- اشتراكات البرامج والترفيه -->
                 <div class="product-card">
-                    <div class="image-placeholder">
-                        <img src="https://pub-c5e31b5cdafb419a86a69d5d340a9ade.r2.dev/google-play.svg" alt="Apps Subs">
+                    <div class="image-placeholder" style="color: #f59e0b;">
+                        <i class="fa-solid fa-layer-group"></i>
                     </div>
                     <div class="p-title">اشتراكات البرامج والميديا</div>
                     <button class="btn-action" onclick="sendDirectOrder('اشتراكات البرامج والتطبيقات الميكس')">✈️ تفعيل اشتراك</button>
@@ -196,7 +196,7 @@
     <div class="ai-box" id="aiBox">
         <div class="ai-header">🧠 مساعد WD BEIN الذكي</div>
         <div class="ai-chat" id="aiChat">
-            <div class="msg bot">مرحباً بك يا غالي! 🔥 أنا مساعدك الذكي المبني بالذكاء الاصطناعي لمتجر WD BEIN. اسألني عن أسعار الألعاب، الضمان، أو طريقة الشراء وسأجيبك فوراً! 😊</div>
+            <div class="msg bot">مرحباً بك يا غالي! 🔥 أنا مساعدك الذكي لمتجر WD BEIN. اسألني عن الأسعار أو طريقة الشراء وسأجيبك فوراً! 😊</div>
         </div>
         <div class="ai-input-box">
             <input type="text" class="ai-input" id="aiIn" placeholder="اكتب سؤالك هنا..." onkeypress="if(event.key==='Enter') askAI()">
@@ -228,10 +228,10 @@
             }
         }
 
-        // دالة إرسال طلب الشحن اليدوي والفوري بالتفاصيل للتليجرام الخاص بك
+        // دالة إرسال طلب الشحن اليدوي والفوري بالتفاصيل لتليجرام
         function sendOrder(serviceName, inputId) {
             var inputVal = document.getElementById(inputId).value;
-            if(!inputVal.trim()) { alert('يا غالي، يرجى إدخال البيانات أو الـ ID المطلوب أولاً!'); return; }
+            if(!inputVal.trim()) { alert('يرجى إدخال البيانات أو الـ ID المطلوب أولاً!'); return; }
             var msg = '🛒 طلب خدمة من متجر WD BEIN STORE:\n📦 الخدمة: ' + serviceName + '\n🆔 البيانات المدخلة: ' + inputVal;
             window.open('https://t.me/A_G_T4?text=' + encodeURIComponent(msg), '_blank');
         }
@@ -279,17 +279,17 @@
                 var الطلب = ['كيف', 'طريقة', 'شلون اطلب', 'اشتري'];
 
                 if (التحيات.some(function(k) { return msgLow.indexOf(k) !== -1; })) {
-                    reply = "يا ميت أهلاً وسهلاً بك يا غالي في متجر WD BEIN STORE! كيف يمكنني مساعدتك اليوم في الشحن أو الحسابات؟ 😊";
+                    reply = "يا ميت أهلاً وسهلاً بك يا غالي في متجر WD BEIN STORE! كيف يمكنني مساعدتك اليوم؟ 😊";
                 } else if (الألعاب.some(function(k) { return msgLow.indexOf(k) !== -1; })) {
-                    reply = "نوفر لك خدمات شحن فوري وتجديد باقات لـ: فري فاير، تيك توك، ستارلينك، و eFootball. تفضل بالضغط على الأزرار العلوية للفلترة ورؤية الخدمات الفورية!";
+                    reply = "نوفر لك خدمات شحن فوري وتجديد باقات لـ: فري فاير، تيك توك، ستارلينك، و eFootball. اضغط على أزرار الفلترة لرؤية التفاصيل!";
                 } else if (الأسعار.some(function(k) { return msgLow.indexOf(k) !== -1; })) {
-                    reply = "أسعارنا في WD BEIN منافسة وممتازة جداً! تواصل مع المالك لتزويدك بأسعار اليوم المحدثة للباقات والاشتراكات.";
+                    reply = "أسعارنا في WD BEIN منافسة وممتازة جداً! تواصل مع المالك لتزويدك بأسعار اليوم المحدثة.";
                 } else if (الضمان.some(function(k) { return msgLow.indexOf(k) !== -1; })) {
-                    reply = "متجر WD BEIN يضمن لك أمان وموثوقية 100% 🛡️، جميع عمليات الشحن رسمية ومضمونة ويتم متابعتها مباشرة من المالك.";
+                    reply = "متجر WD BEIN يضمن لك أمان وموثوقية 100% 🛡️، جميع عمليات الشحن رسمية ومضمونة.";
                 } else if (الطلب.some(function(k) { return msgLow.indexOf(k) !== -1; })) {
-                    reply = "سهلة جداً: اختر الخدمة المطلوبة من الكروت، أدخل الـ ID أو بيانات الحساب في الخانة، ثم اضغط زر (طلب شحن) ليفتح لك تليجرام المالك لتأكيد الدفع والاستلام فوراً! 🚀";
+                    reply = "سهلة جداً: اختر الخدمة المطلوبة، أدخل الـ ID في الخانة، ثم اضغط زر (طلب شحن) ليفتح لك تليجرام المالك لتأكيد طلبك فوراً! 🚀";
                 } else {
-                    reply = "سؤالك رائع يا غالي! لخدمتك بشكل أفضل وتلبية طلبك، يرجى مراسلة المالك مباشرة على التليجرام: @A_G_T4 وسيقوم بالرد عليك في ثوانٍ.";
+                    reply = "سؤالك رائع يا غالي! يرجى مراسلة المالك مباشرة على التليجرام: @A_G_T4 وسيقوم بالرد عليك فورا.";
                 }
 
                 addBubble(reply, 'bot');
