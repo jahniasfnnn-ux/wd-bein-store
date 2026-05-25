@@ -6,21 +6,24 @@
     <title>WD BEIN STORE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* نظام الألوان والثيم البنفسجي الغامق الفخم الثابت */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #0b0f19; color: #ffffff; padding: 15px; padding-bottom: 110px; min-height: 100vh; }
         
+        /* الهيدر العلوي للمتجر */
         .navbar { background-color: #111827; border-radius: 12px; padding: 15px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; border: 1px solid #1f2937; }
-        .logo-title { font-size: 22px; color: #a78bfa; font-weight: bold; }
+        .logo-title { font-size: 22px; color: #a78bfa; font-weight: bold; letter-spacing: 0.5px; }
         
+        /* نظام التنقل الفوري بين الواجهات */
         .page-view { display: none; width: 100%; animation: fadeIn 0.3s ease-in-out; }
         .page-view.active { display: block !important; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* الواجهة الرئيسية */
+        /* ================= ستايل الواجهة الرئيسية ================= */
         .hero-banner { background: linear-gradient(135deg, #4c1d95, #1e1b4b); border-radius: 16px; padding: 25px 15px; text-align: center; border: 1px solid #7c3aed; margin-bottom: 20px; }
-        .hero-banner h1 { font-size: 24px; margin-bottom: 8px; }
+        .hero-banner h1 { font-size: 24px; color: #ffffff; margin-bottom: 8px; }
         .hero-banner p { font-size: 14px; color: #ddd6fe; margin-bottom: 15px; }
-        .btn-primary { background-color: #7c3aed; color: white; border: none; padding: 10px 24px; border-radius: 30px; font-weight: bold; cursor: pointer; }
+        .btn-primary { background-color: #7c3aed; color: white; border: none; padding: 10px 24px; border-radius: 30px; font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.2s; }
         
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
         .stat-box { background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 12px 5px; text-align: center; }
@@ -32,39 +35,42 @@
         .feat-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 13px; color: #d1d5db; }
         .feat-icon { background-color: #1e1b4b; border: 1px solid #4c1d95; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #a78bfa; flex-shrink: 0; }
 
-        /* واجهات الحماية والمحفظة */
-        .auth-card { background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+        /* ================= ستايل واجهات تسجيل الدخول والحماية للمحفظة ================= */
+        .auth-card { background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); margin-bottom: 25px; }
         .auth-title { font-size: 16px; font-weight: bold; color: #a78bfa; margin-bottom: 15px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .auth-toggle-text { font-size: 13px; color: #9ca3af; text-align: center; margin-top: 15px; }
         .auth-toggle-link { color: #7c3aed; font-weight: bold; cursor: pointer; text-decoration: underline; }
         
-        .form-group { margin-bottom: 15px; }
+        .form-group { margin-bottom: 15px; text-align: right; }
         .form-group label { font-size: 12px; color: #9ca3af; display: block; margin-bottom: 5px; }
-        .form-input { width: 100%; background: #0b0f19; border: 1px solid #4c1d95; border-radius: 8px; color: white; padding: 10px; font-size: 14px; outline: none; text-align: right; }
+        .form-input { width: 100%; background: #0b0f19; border: 1px solid #4c1d95; border-radius: 8px; color: white; padding: 10px 12px; font-size: 14px; outline: none; text-align: right; }
         
-        .wallet-card { background: linear-gradient(135deg, #1f2937, #111827); border: 2px solid #7c3aed; border-radius: 18px; padding: 20px; text-align: center; margin-bottom: 25px; }
-        .wallet-lbl { font-size: 14px; color: #9ca3af; margin-bottom: 5px; }
+        /* ================= ستايل واجهة المحفظة الإلكترونية النشطة ================= */
+        .wallet-card { background: linear-gradient(135deg, #1f2937, #111827); border: 2px solid #7c3aed; border-radius: 18px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4); margin-bottom: 25px; position: relative; overflow: hidden; }
+        .wallet-lbl { font-size: 14px; color: #9ca3af; margin-bottom: 5px; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .wallet-balance { font-size: 32px; font-weight: bold; color: #ffffff; margin-bottom: 5px; font-family: monospace; }
         .wallet-currency { font-size: 13px; color: #a78bfa; font-weight: bold; margin-bottom: 10px; }
-        .user-badge { font-size: 11px; background-color: #1e1b4b; padding: 4px 10px; border-radius: 20px; color: #ddd6fe; border: 1px solid #4c1d95; }
-        .btn-logout { background: none; border: none; color: #f43f5e; font-size: 12px; cursor: pointer; text-decoration: underline; margin-top: 10px; }
+        .user-badge { font-size: 11px; background-color: #1e1b4b; padding: 4px 10px; border-radius: 20px; color: #ddd6fe; border: 1px solid #4c1d95; display: inline-block; }
+        .btn-logout { background: none; border: none; color: #f43f5e; font-size: 12px; cursor: pointer; text-decoration: underline; margin-top: 10px; display: inline-block; }
         
-        .deposit-section { background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 15px; margin-bottom: 20px; }
+        .deposit-section { background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 15px; }
         .deposit-title { font-size: 15px; font-weight: bold; color: #a78bfa; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
-        .select-input { width: 100%; background: #0b0f19; border: 1px solid #4c1d95; border-radius: 8px; color: white; padding: 10px; font-size: 13px; margin-bottom: 12px; }
+        .select-input { width: 100%; background: #0b0f19; border: 1px solid #4c1d95; border-radius: 8px; color: white; padding: 10px; font-size: 13px; margin-bottom: 12px; outline: none; }
         .deposit-btn { background-color: #10b981; color: white; border: none; width: 100%; padding: 11px; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
 
-        /* ستايل لوحة تحكم المالك السرية المضافة */
-        .admin-section { background-color: #1e1b4b; border: 2px dashed #7c3aed; border-radius: 16px; padding: 15px; margin-top: 20px; }
-        .admin-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
+        /* ================= ستايل لوحة تحكم المالك السرية ================= */
+        .admin-section { background-color: #1e1b4b; border: 2px dashed #7c3aed; border-radius: 16px; padding: 15px; margin-top: 20px; text-align: right; }
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; color: white; }
         .admin-table th, .admin-table td { border: 1px solid #4c1d95; padding: 8px; text-align: center; }
         .admin-table th { background-color: #111827; color: #a78bfa; }
-        .admin-input { width: 70px; background: #0b0f19; border: 1px solid #7c3aed; color: white; border-radius: 4px; padding: 3px; text-align: center; }
-        .btn-admin-save { background-color: #7c3aed; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 11px; }
+        .admin-input { width: 80px; background: #0b0f19; border: 1px solid #7c3aed; color: white; border-radius: 4px; padding: 4px; text-align: center; outline: none; }
+        .btn-admin-save { background-color: #7c3aed; color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: bold; }
 
-        /* صفحة الخدمات والفلترة */
-        .filter-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 20px; }
-        .filter-btn { background: transparent; color: #ffffff; border: 2px solid #374151; padding: 8px 18px; border-radius: 30px; font-size: 14px; font-weight: bold; white-space: nowrap; cursor: pointer; }
+        /* ================= ستايل صفحة الخدمات والفلترة ================= */
+        .filter-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 20px; -webkit-overflow-scrolling: touch; }
+        .filter-container::-webkit-scrollbar { height: 4px; }
+        .filter-container::-webkit-scrollbar-thumb { background-color: #374151; border-radius: 4px; }
+        .filter-btn { background: transparent; color: #ffffff; border: 2px solid #374151; padding: 8px 18px; border-radius: 30px; font-size: 14px; font-weight: bold; white-space: nowrap; cursor: pointer; transition: all 0.2s; }
         .filter-btn.active { background-color: #7c3aed; border-color: #7c3aed; }
         
         .section-divider { text-align: center; margin: 30px 0 20px 0; position: relative; }
@@ -76,52 +82,21 @@
         
         .image-placeholder { width: 100%; aspect-ratio: 1/1; background-color: #111827; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border: 1px solid #374151; overflow: hidden; padding: 12px; }
         .image-placeholder img { max-width: 100%; max-height: 100%; object-fit: contain; }
-        .multi-img { display: flex; gap: 6px; align-items: center; justify-content: center; }
-        .multi-img img { max-width: 45%; object-fit: contain; }
+        .multi-img { display: flex; gap: 6px; align-items: center; justify-content: center; width: 100%; }
+        .multi-img img { max-width: 45%; max-height: 100%; object-fit: contain; }
         
-        .p-title { font-size: 13px; font-weight: bold; color: #ffffff; margin-bottom: 10px; min-height: 38px; display: flex; align-items: center; justify-content: center; line-height: 1.4; }
-        .p-price { font-size: 12px; color: #a78bfa; font-weight: bold; margin-bottom: 8px; }
+        .p-title { font-size: 13px; font-weight: bold; color: #ffffff; margin-bottom: 8px; min-height: 38px; display: flex; align-items: center; justify-content: center; line-height: 1.4; }
+        .p-price { font-size: 11px; color: #a78bfa; font-weight: bold; margin-bottom: 8px; }
+
+        .card-input { width: 100%; background: #111827; border: 1px solid #4c1d95; border-radius: 8px; color: white; padding: 8px 5px; font-size: 12px; margin-bottom: 8px; text-align: center; outline: none; transition: border-color 0.2s; }
+        .card-input:focus { border-color: #7c3aed; }
+        .btn-action { background-color: #0088cc; color: white; border: none; width: 100%; padding: 9px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; transition: background 0.2s; }
         
-        .card-input { width: 100%; background: #111827; border: 1px solid #4c1d95; border-radius: 8px; color: white; padding: 8px 5px; font-size: 12px; margin-bottom: 8px; text-align: center; outline: none; }
-        .btn-action { background-color: #0088cc; color: white; border: none; width: 100%; padding: 9px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; }
-        
-        /* شريط التنقل السفلي */
+        /* شريط التنقل السفلي الثابت والمستقر */
         .mobile-tabbar { position: fixed; bottom: 15px; left: 15px; right: 15px; background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; display: flex; justify-content: space-around; padding: 10px 0; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        .tab-item { display: flex; flex-direction: column; align-items: center; color: #9ca3af; font-size: 11px; background: none; border: none; cursor: pointer; gap: 4px; flex: 1; }
+        .tab-item { display: flex; flex-direction: column; align-items: center; color: #9ca3af; font-size: 11px; background: none; border: none; cursor: pointer; gap: 4px; flex: 1; transition: 0.2s; }
         .tab-item i { font-size: 18px; }
         .tab-item.active { color: #7c3aed; font-weight: bold; }
 
-        /* المساعد الذكي AI */
-        .ai-btn { position: fixed; bottom: 85px; left: 20px; width: 55px; height: 55px; background-color: #7c3aed; border-radius: 50%; border: none; color: white; font-size: 24px; cursor: pointer; z-index: 99999; display: flex; align-items: center; justify-content: center; }
-        .ai-box { display: none; position: fixed; bottom: 150px; left: 20px; width: 290px; height: 380px; background-color: #111827; border: 2px solid #7c3aed; border-radius: 14px; z-index: 99999; flex-direction: column; overflow: hidden; }
-        .ai-header { background-color: #1f2937; padding: 12px; font-size: 14px; font-weight: bold; border-bottom: 1px solid #374151; display: flex; gap: 8px; align-items: center; }
-        .ai-chat { flex: 1; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; font-size: 13px; text-align: right; }
-        .msg { padding: 8px 12px; border-radius: 10px; max-width: 85%; line-height: 1.5; color: white; display: block; margin-bottom: 5px; }
-        .msg.bot { background-color: #1f2937; align-self: flex-start; }
-        .msg.user { background-color: #7c3aed; align-self: flex-end; }
-        .ai-input-box { padding: 8px; background-color: #1f2937; display: flex; gap: 6px; }
-        .ai-input { flex: 1; background: #111827; border: 1px solid #4b5563; border-radius: 6px; color: white; padding: 6px 10px; font-size: 13px; outline: none; }
-        .ai-send { background: #7c3aed; border: none; color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    </style>
-</head>
-<body>
-
-    <div class="navbar">
-        <div class="logo-title">🔥 WD BEIN STORE</div>
-    </div>
-
-    <div id="view-home" class="page-view active">
-        <div class="hero-banner">
-            <h1>مرحباً بك في متجر الرائد والسرعة ⚡</h1>
-            <p>شحن ألعاب، بطاقات هدايا، واشتراكات ترفيهية وذكاء اصطناعي بأفضل الأسعار الممكنة!</p>
-            <button class="btn-primary" onclick="switchTab('services', 1)">🚀 تصفح الخدمات الآن</button>
-        </div>
-        <div class="stats-grid">
-            <div class="stat-box"><div class="stat-val">+1,500</div><div class="stat-lbl">طلب مكتمل</div></div>
-            <div class="stat-box"><div class="stat-val">100%</div><div class="stat-lbl">أمان وضمان</div></div>
-            <div class="stat-box"><div class="stat-val">24/7</div><div class="stat-lbl">دعم فوري</div></div>
-        </div>
-    </div>
-
-    <div id="view-services" class="page-view">
-        
+        /* ستايل المساعد الذكي AI */
+        .ai-btn { position: fixed; bottom: 85px; left: 20px; width: 55px; height: 55px; background-color: #7c3aed; border-radius: 50%; border: none; color: white; font-size: 24px; cursor: pointer; z-index: 99999; display: flex; align-items: center; justify-content: center;
