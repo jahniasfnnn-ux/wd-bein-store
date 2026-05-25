@@ -30,7 +30,7 @@
         .stat-val { font-size: 18px; font-weight: bold; color: #a78bfa; margin-bottom: 3px; }
         .stat-lbl { font-size: 11px; color: #9ca3af; }
 
-        .features-section { background-color: #111827; border-radius: 16px; padding: 15px; border: 1px solid #1f2937; margin-bottom: 20px; }
+        .features-section { background-color: #111827; border-radius: 16px; padding: 15px; border: 1px solid #1f2937; margin-bottom: 20px; text-align: right; }
         .features-section h3 { font-size: 16px; color: #a78bfa; margin-bottom: 15px; border-right: 3px solid #7c3aed; padding-right: 8px; }
         .feat-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 13px; color: #d1d5db; }
         .feat-icon { background-color: #1e1b4b; border: 1px solid #4c1d95; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #a78bfa; flex-shrink: 0; }
@@ -53,13 +53,13 @@
         .user-badge { font-size: 11px; background-color: #1e1b4b; padding: 4px 10px; border-radius: 20px; color: #ddd6fe; border: 1px solid #4c1d95; display: inline-block; }
         .btn-logout { background: none; border: none; color: #f43f5e; font-size: 12px; cursor: pointer; text-decoration: underline; margin-top: 10px; display: inline-block; }
         
-        .deposit-section { background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 15px; }
+        .deposit-section { background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 15px; text-align: right; }
         .deposit-title { font-size: 15px; font-weight: bold; color: #a78bfa; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
         .select-input { width: 100%; background: #0b0f19; border: 1px solid #4c1d95; border-radius: 8px; color: white; padding: 10px; font-size: 13px; margin-bottom: 12px; outline: none; }
         .deposit-btn { background-color: #10b981; color: white; border: none; width: 100%; padding: 11px; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
 
         /* ================= ستايل لوحة تحكم المالك السرية ================= */
-        .admin-section { background-color: #1e1b4b; border: 2px dashed #7c3aed; border-radius: 16px; padding: 15px; margin-top: 20px; text-align: right; }
+        .admin-section { background-color: #1e1b4b; border: 2px dashed #f59e0b; border-radius: 16px; padding: 15px; margin-top: 20px; text-align: right; }
         .admin-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; color: white; }
         .admin-table th, .admin-table td { border: 1px solid #4c1d95; padding: 8px; text-align: center; }
         .admin-table th { background-color: #111827; color: #a78bfa; }
@@ -73,30 +73,8 @@
         .filter-btn { background: transparent; color: #ffffff; border: 2px solid #374151; padding: 8px 18px; border-radius: 30px; font-size: 14px; font-weight: bold; white-space: nowrap; cursor: pointer; transition: all 0.2s; }
         .filter-btn.active { background-color: #7c3aed; border-color: #7c3aed; }
         
-        .section-divider { text-align: center; margin: 30px 0 20px 0; position: relative; }
+        .section-divider { text-align: center; margin: 25px 0 15px 0; position: relative; width: 100%; }
         .section-divider::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: #4c1d95; z-index: 1; }
-        .section-title { position: relative; z-index: 2; background-color: #4c1d95; color: white; padding: 6px 25px; border-radius: 20px; font-size: 16px; font-weight: bold; display: inline-block; }
+        .section-title { position: relative; z-index: 2; background-color: #4c1d95; color: white; padding: 4px 20px; border-radius: 20px; font-size: 14px; font-weight: bold; display: inline-block; }
 
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .product-card { background-color: #1e1b4b; border: 2px solid #4c1d95; border-radius: 16px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        
-        .image-placeholder { width: 100%; aspect-ratio: 1/1; background-color: #111827; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border: 1px solid #374151; overflow: hidden; padding: 12px; }
-        .image-placeholder img { max-width: 100%; max-height: 100%; object-fit: contain; }
-        .multi-img { display: flex; gap: 6px; align-items: center; justify-content: center; width: 100%; }
-        .multi-img img { max-width: 45%; max-height: 100%; object-fit: contain; }
-        
-        .p-title { font-size: 13px; font-weight: bold; color: #ffffff; margin-bottom: 8px; min-height: 38px; display: flex; align-items: center; justify-content: center; line-height: 1.4; }
-        .p-price { font-size: 11px; color: #a78bfa; font-weight: bold; margin-bottom: 8px; }
-
-        .card-input { width: 100%; background: #111827; border: 1px solid #4c1d95; border-radius: 8px; color: white; padding: 8px 5px; font-size: 12px; margin-bottom: 8px; text-align: center; outline: none; transition: border-color 0.2s; }
-        .card-input:focus { border-color: #7c3aed; }
-        .btn-action { background-color: #0088cc; color: white; border: none; width: 100%; padding: 9px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; transition: background 0.2s; }
-        
-        /* شريط التنقل السفلي الثابت والمستقر */
-        .mobile-tabbar { position: fixed; bottom: 15px; left: 15px; right: 15px; background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; display: flex; justify-content: space-around; padding: 10px 0; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        .tab-item { display: flex; flex-direction: column; align-items: center; color: #9ca3af; font-size: 11px; background: none; border: none; cursor: pointer; gap: 4px; flex: 1; transition: 0.2s; }
-        .tab-item i { font-size: 18px; }
-        .tab-item.active { color: #7c3aed; font-weight: bold; }
-
-        /* ستايل المساعد الذكي AI */
-        .ai-btn { position: fixed; bottom: 85px; left: 20px; width: 55px; height: 55px; background-color: #7c3aed; border-radius: 50%; border: none; color: white; font-size: 24px; cursor: pointer; z-index: 99999; display: flex; align-items: center; justify-content: center;
+        .products-grid { display:
