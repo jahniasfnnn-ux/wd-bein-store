@@ -3,64 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WD BEIN STORE - بوابة تسجيل الدخول</title>
+    <title>WD BEIN STORE - بوابة الدخول</title>
     <style>
-        /* نظام الألوان والتنسيق العام */
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        /* إعدادات أساسية لضمان عدم حدوث صفحة بيضاء */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
         body { background-color: #0b0f19; color: #ffffff; padding: 15px; padding-bottom: 120px; text-align: right; }
         
-        /* الهيدر العلوي */
-        .navbar { background-color: #111827; border-radius: 12px; padding: 15px; text-align: center; margin-bottom: 20px; border: 1px solid #1f2937; }
-        .logo-title { font-size: 24px; color: #a78bfa; font-weight: bold; }
-        
-        /* شاشة القفل الجدارية (تسجيل الدخول الإجباري) */
+        /* شاشة القفل الإلزامية لحماية البيانات */
         #gatekeeper-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #0b0f19; z-index: 100000; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow-y: auto; }
         .gatekeeper-logo { font-size: 28px; font-weight: bold; color: #a78bfa; margin-bottom: 5px; text-align: center; }
         .gatekeeper-sub { font-size: 13px; color: #9ca3af; margin-bottom: 25px; text-align: center; }
         
-        /* نظام التبديل بين واجهات الموقع بعد الدخول */
+        /* الهيدر بعد الدخول */
+        .navbar { background-color: #111827; border-radius: 12px; padding: 15px; text-align: center; margin-bottom: 20px; border: 1px solid #1f2937; display: none; }
+        .logo-title { font-size: 24px; color: #a78bfa; font-weight: bold; }
+        
+        /* نظام التبويب والصفحات */
         .page-view { display: none; }
         .page-view.active { display: block; }
         
-        /* عناصر الواجهات */
+        /* تصميم كروت الواجهة والمحتوى */
         .hero-banner { background: linear-gradient(135deg, #4c1d95, #1e1b4b); border-radius: 16px; padding: 30px 15px; text-align: center; border: 1px solid #7c3aed; margin-bottom: 20px; }
-        .hero-banner h1 { font-size: 24px; margin-bottom: 10px; color: #fff; }
-        .hero-banner p { font-size: 14px; color: #ddd6fe; margin-bottom: 20px; }
-        .btn-primary { background-color: #7c3aed; color: white; border: none; padding: 12px 30px; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 14px; }
+        .hero-banner h1 { font-size: 22px; margin-bottom: 10px; color: #fff; }
+        .hero-banner p { font-size: 13px; color: #ddd6fe; margin-bottom: 20px; }
+        .btn-primary { background-color: #7c3aed; color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 13px; }
         
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; text-align: center; }
-        .stat-box { background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 12px 5px; }
-        .stat-val { font-size: 18px; font-weight: bold; color: #a78bfa; }
+        .stat-box { background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 10px 5px; }
+        .stat-val { font-size: 16px; font-weight: bold; color: #a78bfa; }
         .stat-lbl { font-size: 11px; color: #9ca3af; }
 
-        .section-divider { text-align: center; margin: 30px 0 20px 0; position: relative; }
+        .section-divider { text-align: center; margin: 25px 0 15px 0; position: relative; }
         .section-divider::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: #4c1d95; z-index: 1; }
-        .section-title { position: relative; z-index: 2; background-color: #7c3aed; color: white; padding: 6px 25px; border-radius: 20px; font-size: 15px; font-weight: bold; display: inline-block; }
+        .section-title { position: relative; z-index: 2; background-color: #7c3aed; color: white; padding: 6px 20px; border-radius: 20px; font-size: 14px; font-weight: bold; display: inline-block; }
 
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px; }
-        .product-card { background-color: #1e1b4b; border: 2px solid #4c1d95; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        /* شبكة المنتجات والخدمات */
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+        .product-card { background-color: #1e1b4b; border: 2px solid #4c1d95; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; text-align: center; }
         
-        .image-container { width: 100%; aspect-ratio: 1/1; background-color: #111827; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; border: 1px solid #374151; overflow: hidden; padding: 10px; }
-        .image-container img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+        /* حاوية الأيقونات البديلة للصور لضمان عدم حدوث مساحة فارغة */
+        .emoji-container { width: 100%; aspect-ratio: 1/1; background-color: #111827; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; border: 1px solid #374151; font-size: 40px; }
         
-        .p-title { font-size: 14px; font-weight: bold; margin-bottom: 8px; min-height: 40px; display: flex; align-items: center; justify-content: center; color: #ffffff; }
-        .p-price { font-size: 12px; color: #a78bfa; margin-bottom: 10px; font-weight: bold; }
+        .p-title { font-size: 13px; font-weight: bold; margin-bottom: 6px; min-height: 35px; display: flex; align-items: center; justify-content: center; }
+        .p-price { font-size: 11px; color: #a78bfa; margin-bottom: 10px; font-weight: bold; }
 
-        .card-input { width: 100%; background: #111827; border: 1px solid #4c1d95; border-radius: 8px; color: white; padding: 8px; font-size: 13px; margin-bottom: 10px; text-align: center; outline: none; }
-        .btn-action { background-color: #0088cc; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; }
+        .card-input { width: 100%; background: #111827; border: 1px solid #4c1d95; border-radius: 8px; color: white; padding: 8px; font-size: 12px; margin-bottom: 10px; text-align: center; outline: none; }
+        .btn-action { background-color: #0088cc; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-size: 12px; font-weight: bold; cursor: pointer; }
         
-        /* كروت النماذج والمحفظة */
-        .auth-card { background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 20px; width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        .auth-title { font-size: 16px; font-weight: bold; color: #a78bfa; margin-bottom: 15px; text-align: center; }
-        .form-group { margin-bottom: 15px; width: 100%; }
-        .form-group label { font-size: 12px; color: #9ca3af; display: block; margin-bottom: 6px; }
-        .form-input { width: 100%; background: #0b0f19; border: 1px solid #4c1d95; border-radius: 8px; color: white; padding: 11px; font-size: 14px; outline: none; text-align: right; }
+        /* نماذج التسجيل والمحفظة */
+        .auth-card { background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 20px; width: 100%; max-width: 380px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .auth-title { font-size: 15px; font-weight: bold; color: #a78bfa; margin-bottom: 15px; text-align: center; }
+        .form-group { margin-bottom: 12px; width: 100%; }
+        .form-group label { font-size: 12px; color: #9ca3af; display: block; margin-bottom: 5px; }
+        .form-input { width: 100%; background: #0b0f19; border: 1px solid #4c1d95; border-radius: 8px; color: white; padding: 10px; font-size: 13px; outline: none; text-align: right; }
         
-        .wallet-card { background: linear-gradient(135deg, #1f2937, #111827); border: 2px solid #7c3aed; border-radius: 18px; padding: 25px 20px; text-align: center; margin-bottom: 25px; }
-        .wallet-balance { font-size: 32px; font-weight: bold; color: #10b981; margin: 8px 0; font-family: monospace; }
-        .deposit-btn { background-color: #10b981; color: white; border: none; width: 100%; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; }
+        .wallet-card { background: linear-gradient(135deg, #1f2937, #111827); border: 2px solid #7c3aed; border-radius: 18px; padding: 20px; text-align: center; margin-bottom: 20px; }
+        .wallet-balance { font-size: 28px; font-weight: bold; color: #10b981; margin: 5px 0; }
+        .deposit-btn { background-color: #10b981; color: white; border: none; width: 100%; padding: 12px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; }
 
-        /* لوحة التحكم للآدمن */
-        .admin-section { background-color: #1e1b4b; border: 2px dashed #f59e0b; border-radius: 16px; padding: 15px; margin-top: 25px; }
-        .admin-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 12px; }
-        .admin-table th, .admin-table td { border: 1px solid #4c1d95; padding: 8px; text-
+        /* لوحة التحكم والآدمن */
+        .admin-section { background-color: #1e1b4b; border: 2px dashed #f59e0b; border-radius: 16px; padding: 15px; margin-top: 25px; display: none; }
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 11px; }
+        .admin-table th, .admin-table td { border: 1px solid #4c1d95; padding: 6px; text-align: center; }
+        .admin-table th { background-color: #111827; color: #a78bfa; }
+        .admin-input { width: 60px; background: #0b0f19; border: 1px solid #7c3aed; color: white; padding: 4px; text-align: center; border-radius: 4px; }
+
+        /* ذكاء اصطناعي AI */
+        .ai-container { background-color: #111827; border: 2px solid #7c3aed; border-radius: 16px; padding: 15px; margin-top: 25px; }
+        .ai-header { font-size: 14px; font-weight: bold; color: #a78bfa; margin-bottom: 10px; }
+        .ai-chat-box { background-color: #0b0f19; height: 160px; border-radius: 10px; padding: 10px; overflow-y: auto; margin-bottom: 10px; border: 1px solid #1f2937; }
+        .ai-msg { padding: 8px 12px; border-radius: 8px; font-size: 12px; line-height: 1.4; margin-bottom: 8px; max-width: 90%; }
+        .ai-msg.bot { background-color: #1f2937; color: #ffffff; margin-left: auto; }
+        .ai-msg.user { background-color: #7c3aed; color: #ffffff; margin-right: auto; }
+        .ai-input-group { display: flex; gap: 8px; }
+
+        /* شريط التنقل السفلي */
+        #main-mobile-tabbar { position: fixed; bottom: 15px; left: 15px; right: 15px; background-color: #111827; border: 1px solid #1f2937; border-radius: 16px; display: none; justify-content: space-around; padding: 12px 0; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .tab-item { display: flex; flex-direction: column; align-items: center; color: #9ca3af; font-size: 11px; background: none; border: none; cursor: pointer; gap: 4px; flex: 1; font-weight: bold; }
+        .tab-item.active { color: #a78bfa; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <!-- ================= بوابة الحماية وتسجيل الدخول الإجباري ================= -->
+    <div id="gatekeeper-screen">
+        <div class="gatekeeper-logo">🔥 WD BEIN STORE</div>
+        <div class="gatekeeper-sub">يرجى تسجيل الدخول أو إنشاء حساب محفظة لفتح الموقع بالكامل</div>
+
+        <!-- تسجيل الدخول -->
+        <div class="auth-card" id="login-box">
+            <div class="auth-title">🔐 تسجيل الدخول للمحفظة المشفرة</div>
+            <div class="form-group">
+                <label>البريد الإلكتروني المعتمد:</label>
+                <input type="email" class="form-input" id="login-email" placeholder="example@gmail.com">
+            </div>
+            <div class="form-group">
+                <label>كلمة السر الخاصه بك:</label>
+                <input type="password" class="form-input" id="login-pass" placeholder="••••••••">
+            </div>
+            <button class="deposit-btn" style="background-color:#7c3aed;" onclick="handleLogin()">تسجيل الدخول الآمن 🚀</button>
+            <p style="text-align:center; font-size:12px; margin-top:15px; color:#9ca3af;">ليس لديك حساب؟ <span style="color:#7c3aed; cursor:pointer; font-weight:bold; text-decoration:underline;" onclick="toggleAuth(false)">أنشئ حسابك الآن</span></p>
+        </div>
+
+        <!-- إنشاء حساب جديد -->
+        <div class="auth-card" id="register-box" style="display:none;">
+            <div class="auth-title">✨ إنشاء وتفعيل حساب محفظة جديد</div>
+            <div class="form-group">
+                <label>البريد الإلكتروني الجديد:</label>
+                <input type="email" class="form-input" id="reg-email" placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+                <label>تعيين كلمة سر للمحفظة:</label>
+                <input type="password" class="form-input" id="reg-pass" placeholder="أدخل كلمة مرور لحسابك...">
+            </div>
+            <button class="deposit-btn" onclick="handleRegister()">تفعيل المحفظة فوراً 🎉</button>
+            <p style="text-align:center; font-size:12px; margin-top:15px; color:#9ca3af;">لديك حساب بالفعل؟ <span style="color:#7c3aed; cursor:pointer; font-weight:bold; text-decoration:underline;" onclick="toggleAuth(true)">سجل دخولك من هنا</span></p>
+        </div>
+    </div>
+
+    <!-- ================= محتوى المتجر المحمي (يظهر بالكامل بعد الدخول فقط) ================= -->
+    <div id="main-content-wrapper" style="display: none;">
+        
+        <div class="navbar" id="topNavbar" style="display: block;">
+            <div class="logo-title">WD BEIN STORE</div>
+        </div>
+
+        <!-- 1️⃣ الواجهة الرئيسية والـ AI -->
+        <div id="view-home" class="page-view">
+            <div class="hero-banner">
+                <h1>مرحباً بك في متجر الرائد والسرعة ⚡</h1>
+                <p>شحن ألعاب، باقات ترفيهية، وذكاء اصطناعي مربوط بمحفظتك مباشرة وبأفضل الأسعار!</p>
+                <button class="btn-primary" onclick="switchTab('services', 1)">🚀 تصفح الخدمات والمنتجات</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box"><div class="stat-val">+1,500</div><div class="stat-lbl">طلب مكتمل</div></div>
+                <div class="stat-box"><div class="stat-val">100%</div><div class="stat-lbl">أمان وضمان</div></div>
+                <div class="stat-box"><div class="stat-val">24/7</div><div class="stat-lbl">دعم فوري</div></div>
+            </div>
+            
+            <div class="ai-container">
+                <div class="ai-header">🤖 مساعد WD BEIN الذكي السريع</div>
+                <div class="ai-chat-box" id="aiChatBox">
+                    <div class="ai-msg bot">مرحباً بك يا غالي بعد تسجيل الدخول الموفق! اسألني عن أي خدمة أو شحن وسأجيبك فوراً. 😊</div>
+                </div>
+                <div class="ai-input-group">
+                    <input type="text" class="form-input" id="aiInput" placeholder="اكتب سؤالك هنا للـ AI..." style="margin-bottom:0;">
+                    <button class="btn-primary" style="padding:0 20px; border-radius:8px;" onclick="askAI()">إرسال</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2️⃣ واجهة الخدمات والمنتجات المدعومة برموز تعبيرية لمنع الصفحات الفارغة -->
+        <div id="view-services" class="page-view">
+            <div class="section-divider"><span class="section-title">الألعاب والشحن اليدوي</span></div>
+            <div class="products-grid">
+                
+                <div class="product-card">
+                    <div class="emoji-container">🎮</div>
+                    <div class="p-title">شحن فري فاير يدوي فوري</div>
+                    <div class="p-price">سحب مخصوم من المحفظة</div>
+                    <input type="text" class="card-input" id="id-ff" placeholder="أدخل معرف الـ ID...">
+                    <button class="btn-action" onclick="purchaseService('شحن فري فاير يدوي', 'id-ff')">🛒 شراء الآن</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="emoji-container">⚽</div>
+                    <div class="p-title">شحن كوينات eFOOTBALL</div>
+                    <div class="p-price">سحب مخصوم من المحفظة</div>
+                    <input type="text" class="card-input" id="id-ef" placeholder="البريد أو معرف كونامي...">
+                    <button class="btn-action" onclick="purchaseService('شحن eFOOTBALL', 'id-ef')">🛒 شراء الآن</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="emoji-container">🎵</div>
+                    <div class="p-title">عملات وهدايا تيك توك</div>
+                    <div class="p-price">سحب مخصوم من المحفظة</div>
+                    <input type="text" class="card-input" id="id-tk" placeholder="اسم المستخدم (Username)...">
+                    <button class="btn-action" onclick="purchaseService('عملات تيك توك', 'id-tk')">🛒 شراء الآن</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="emoji-container">📡</div>
+                    <div class="p-title">تجديد باقات استارلينك والإنترنت</div>
+                    <div class="p-price">حسب نوع الباقة المشحونة</div>
+                    <input type="text" class="card-input" id="id-sl" placeholder="رقم الجهاز أو الحساب...">
+                    <button class="btn-action" onclick="purchaseService('باقات استارلينك', 'id-sl')">🛒 تجديد</button>
+                </div>
+            </div>
+
+            <div class="section-divider"><span class="section-title">بطاقات الهدايا والاشتراكات الفخمة</span></div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="emoji-container">🍏</div>
+                    <div class="p-title">بطاقات آيتونز كارد العالمية</div>
+                    <button class="btn-action" onclick="purchaseDirectService('بطاقات آيتونز')">🛒 طلب الكود المباشر</button>
+                </div>
+                <div class="product-card">
+                    <div class="emoji-container">🕹️</div>
+                    <div class="p-title">بطاقات بلايستيشن ستور المضمونة</div>
+                    <button class="btn-action" onclick="purchaseDirectService('بطاقات بلايستيشن')">🛒 طلب الكود المباشر</button>
+                </div>
+                <div class="product-card">
+                    <div class="emoji-container">🧠</div>
+                    <div class="p-title">اشتراكات وحسابات (ChatGPT Pro)</div>
+                    <button class="btn-action" onclick="purchaseDirectService('اشتراكات ذكاء اصطناعي')">🛒 تفعيل الحساب</button>
+                </div>
+                <div class="product-card">
+                    <div class="emoji-container">🎬</div>
+                    <div class="p-title">اشتراكات الميديا (شاشات ترفيهية)</div>
+                    <button class="btn-action" onclick="purchaseDirectService('اشتراكات ميديا وبرامج')">🛒 تفعيل الحساب</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3️⃣ واجهة المحفظة وإيداع الأموال والآدمن -->
+        <div id="view-wallet" class="page-view">
+            <div class="wallet-card">
+                <div style="font-size:13px; color:#9ca3af;">رصيد محفظتك المربوط بحسابك الحالي</div>
+                <div class="wallet-balance" id="userBalance">0.00</div>
+                <div style="font-size:12px; color:#a78bfa; margin-bottom:10px;" id="currentUserBadge">الحساب الحالي: لا يوجد</div>
+                <button onclick="handleLogout()" style="background:none; border:none; color:#f43f5e; font-size:13px; text-decoration:underline; cursor:pointer; font-weight:bold;">🚪 تسجيل الخروج وقفل الموقع</button>
+            </div>
+
+            <div class="auth-card" style="max-width:100%; box-shadow:none; border-color:#4c1d95;">
+                <div class="auth-title" style="text-align:right;">💰 تقديم طلب شحن رصيد المحفظة</div>
+                <label style="font-size:12px; color:#9ca3af; display:block; margin-bottom:5px;">اختر طريقة التحويل المتوفرة لديك:</label>
+                <select class="form-input" id="payMethod" style="margin-bottom:12px; background:#111827;">
+                    <option value="تطبيق بنكك (Bankak)">تطبيق بنكك (Bankak)</option>
+                    <option value="تطبيق أوكاش (Ocash)">تطبيق أوكاش (Ocash)</option>
+                    <option value="تحويل رصيد مباشر">تحويل رصيد مباشر للمالك</option>
+                </select>
+                <label style="font-size:12px; color:#9ca3af; display:block; margin-bottom:5px;">المبلغ المطلوب شحنه بالجنيه السوداني:</label>
+                <input type="number" class="form-input" id="depositAmount" placeholder="أدخل قيمة الرصيد المطلوب..." style="margin-bottom:15px;">
+                <button class="deposit-btn" onclick="sendDepositOrder()">ارسل طلب تفعيل الرصيد للمالك 📲</button>
+            </div>
+
+            <div style="text-align: center; margin-top: 25px;">
+                <button onclick="openAdminPanel()" style="background:none; border:none; color:#4b5563; font-size:11px; cursor:pointer; text-decoration:underline;">دخول الإدارة 🛠️</button>
+            </div>
+
+            <div class="admin-section" id="adminPanelBox">
+                <div class="auth-title" style="color: #f59e0b;">🛠️ لوحة شحن حسابات الزبائن (المالك)</div>
+                <table class="admin-table">
+                    <thead>
+                        <tr><th>الزبون</th><th>الرصيد المربوط</th><th>إضافة/تعديل</th></tr>
+                    </thead>
+                    <tbody id="adminUsersList"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- شريط التنقل السفلي المحمي -->
+        <div id="main-mobile-tabbar">
+            <button class="tab-item active" id="tab-home" onclick="switchTab('home', 0)">🏠 <span>الرئيسية</span></button>
+            <button class="tab-item" id="tab-services" onclick="switchTab('services', 1)">🎮 <span>الخدمات</span></button>
+            <button class="tab-item" id="tab-wallet" onclick="switchTab('wallet', 2)">💳 <span>المحفظة</span></button>
+        </div>
+
+    </div>
+
+    <script>
+        // دالة فحص وتأمين جدار الحماية وقفل الموقع
+        function enforceSecurity() {
+            var loggedUser = localStorage.getItem('wd_logged_user');
+            if (!loggedUser) {
+                document.getElementById('gatekeeper-screen').style.display = 'flex';
+                document.getElementById('main-content-wrapper').style.display = 'none';
+                document.getElementById('main-mobile-tabbar').style.display = 'none';
+            } else {
+                document.getElementById('gatekeeper-screen').style.display = 'none';
+                document.getElementById('main-content-wrapper').style.display = 'block';
+                document.getElementById('main-mobile-tabbar').style.display = 'flex';
+                
+                // فتح الرئيسية تلقائياً
+                var hasActive = false;
+                var views = document.getElementsByClassName('page-view');
+                for(var i=0; i<views.length; i++) {
+                    if(views[i].classList.contains('active')) hasActive = true;
+                }
+                if(!hasActive) { switchTab('home', 0); }
+                
+                // مزامنة وربط معلومات المحفظة بالايميل الحالي
+                document.getElementById('currentUserBadge').innerText = 'الحساب الحالي: ' + loggedUser;
+                var bal = localStorage.getItem('wd_bal_' + loggedUser) || "0.00";
+                document.getElementById('userBalance').innerText = parseFloat(bal).toFixed(2);
+            }
+        }
+
+        function switchTab(viewName, tabIndex) {
+            if(!localStorage.getItem('wd_logged_user')) { enforceSecurity(); return; }
+            
+            var views = document.getElementsByClassName('page-view');
+            for (var i = 0; i < views.length; i++) { views[i].classList.remove('active'); }
+            document.getElementById('view-' + viewName).classList.add('active');
+            
+            var tabs = document.getElementsByClassName('tab-item');
+            for (var j = 0; j < tabs.length; j++) { tabs[j].classList.remove('active'); }
+            tabs[tabIndex].classList.add('active');
+        }
+
+        function toggleAuth(showLogin) {
+            document.getElementById('login-box').style.display = showLogin ? 'block' : 'none';
+            document.getElementById('register-box').style.display = showLogin ? 'none' : 'block';
+        }
+
+        // إنشاء الحساب وربط معلومات المحفظة بالايميل والباسوورد
+        function handleRegister() {
+            var email = document.getElementById('reg-email').value.trim();
+            var pass = document.getElementById('reg-pass').value.trim();
+            if(!email || !pass) { alert('الرجاء كتابة البيانات كاملة!'); return; }
+            
+            localStorage.setItem('wd_user_mail_' + email, pass);
+            if(!localStorage.getItem('wd_bal_' + email)) { localStorage.setItem('wd_bal_' + email, "0.00"); }
+            
+            var list = JSON.parse(localStorage.getItem('wd_all_users_list') || "[]");
+            if(list.indexOf(email) === -1) { list.push(email); localStorage.setItem('wd_all_users_list', JSON.stringify(list)); }
+            
+            localStorage.setItem('wd_logged_user', email);
+            alert('تم تفعيل الحساب والمحفظة بنجاح! 🎉');
+            enforceSecurity();
+        }
+
+        // مطابقة تسجيل الدخول بالايميل وكلمة السر المعتمدة
+        function handleLogin() {
+            var email = document.getElementById('login-email').value.trim();
+            var pass = document.getElementById('login-pass').value.trim();
+            var saved = localStorage.getItem('wd_user_mail_' + email);
+            
+            if(saved && saved === pass) {
+                localStorage.setItem('wd_logged_user', email);
+                alert('تم تسجيل الدخول بنجاح! 🔥');
+                enforceSecurity();
+            } else {
+                alert('البيانات المدخلة خاطئة، يرجى إعادة التأكد!');
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('wd_logged_user');
+            alert('تم تسجيل الخروج وقفل الموقع.');
+            location.reload();
+        }
+
+        function sendDepositOrder() {
+            var method = document.getElementById('payMethod').value;
+            var amount = document.getElementById('depositAmount').value;
+            var user = localStorage.getItem('wd_logged_user') || 'غير معروف';
+            if(!amount || amount <= 0) { alert('ادخل قيمة مبلغ صحيحة!'); return; }
+            
+            var msg = `💳 طلب شحن رصيد محفظة إلكترونية WD:\n👤 حساب العميل: ${user}\n💰 الرصيد المطلوب: ${amount} جنيه سوداني\n🏦 وسيلة الدفع المستخدمة: ${method}`;
+            window.open('https://t.me/A_G_T4?text=' + encodeURIComponent(msg), '_blank');
+        }
+
+        function openAdminPanel() {
+            var code = prompt("ادخل كلمة سر الإدارة السرية:");
+            if(code === "1234") {
+                document.getElementById('adminPanelBox').style.display = 'block';
+                refreshAdminList();
+            } else { alert("رمز الدخول خاطئ!"); }
+        }
+
+        function refreshAdminList() {
+            var tbody = document.getElementById('adminUsersList');
+            tbody.innerHTML = "";
+            var list = JSON.parse(localStorage.getItem('wd_all_users_list') || "[]");
+            if(list.length === 0) { tbody.innerHTML = "<tr><td colspan='3'>لا يوجد زبائن مسجلين حالياً</td></tr>"; return; }
+            
+            list.forEach(function(email) {
+                var bal = localStorage.getItem('wd_bal_' + email) || "0.00";
+                var clean = btoa(email).replace(/=/g,'');
+                var tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="word-break:break-all; font-size:11px; direction:ltr;">${email}</td>
+                    <td style="color:#10b981; font-weight:bold;">${parseFloat(bal).toFixed(2)}</td>
+                    <td>
+                        <input type="number" class="admin-input" id="amt-${clean}" placeholder="+/- مبلغ">
+                        <button onclick="updateBal('${email}')" style="background:#7c3aed; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-weight:bold;">شحن</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateBal(email) {
+            var clean = btoa(email).replace(/=/g,'');
+            var val = document.getElementById('amt-' + clean).value;
+            if(!val) { alert('اكتب المبلغ أولاً!'); return; }
+            var old = parseFloat(localStorage.getItem('wd_bal_' + email) || "0.00");
+            var res = old + parseFloat(val);
+            if(res < 0) res = 0;
+            localStorage.setItem('wd_bal_' + email, res.toString());
+            alert('تم شحن حساب وتحديث محفظة الزبون بنجاح!');
+            refreshAdminList();
+            enforceSecurity();
+        }
+
+        function purchaseService(name, inputId) {
+            var user = localStorage.getItem('wd_logged_user');
+            var val = document.getElementById(inputId).value.trim();
+            if(!val) { alert('الرجاء إدخال البيانات المطلوبة أولاً!'); return; }
+            var msg = `🛒 طلب شراء مخصوم من المحفظة:\n👤 حساب العميل: ${user}\n📦 نوع الخدمة: ${name}\n🆔 بيانات المعرف: ${val}`;
+            window.open('https://t.me/A_G_T4?text=' + encodeURIComponent(msg), '_blank');
+        }
+
+        function purchaseDirectService(name) {
+            var user = localStorage.getItem('wd_logged_user');
+            var msg = `🛒 طلب مباشر مخصوم من المحفظة:\n👤 حساب العميل: ${user}\n📦 المنتج المطلوب: ${name}`;
+            window.open('https://t.me/A_G_T4?text=' + encodeURIComponent(msg), '_blank');
+        }
+
+        function askAI() {
+            var input = document.getElementById('aiInput');
+            var txt = input.value.trim();
+            if(!txt) return;
+            
+            var chatBox = document.getElementById('aiChatBox');
+            var userDiv = document.createElement('div');
+            userDiv.className = 'ai-msg user';
+            userDiv.innerText = txt;
+            chatBox.appendChild(userDiv);
+            
+            input.value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+            
+            setTimeout(function() {
+                var botDiv = document.createElement('div');
+                botDiv.className = 'ai-msg bot';
+                var lowerTxt = txt.toLowerCase();
+                if(lowerTxt.includes('شحن') || lowerTxt.includes('اسعار')) {
+                    botDiv.innerText = "أسعار الشحن لدينا مميزة جداً ومربوطة بمحفظتك المؤمنة بالايميل الخاص بك لتسريع التفعيل! ⚡";
+                } else if(lowerTxt.includes('محفظة') || lowerTxt.includes('رصيد')) {
+                    botDiv.innerText = "رصيدك مشفر ومحمي بكلمة السر الخاصة بك. يمكنك طلب التغذية عبر تطبيق بنكك وسيقوم المالك بتأكيده فوراً! 💳";
+                } else {
+                    botDiv.innerText = "أبشر يا غالي! متجر WD BEIN STORE يوفر لك أسرع شحن للألعاب والاشتراكات الفخمة وسحب فوري آمن ومباشر من محفظتك. 🌟";
+                }
+                chatBox.appendChild(botDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 800);
+        }
+
+        window.onload = function() { enforceSecurity(); };
+    </script>
+</body>
+</html>
