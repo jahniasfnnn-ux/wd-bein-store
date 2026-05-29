@@ -7,38 +7,42 @@
         body { background: #0d0515; color: #fff; font-family: sans-serif; margin: 0; text-align: center; }
         .page { display: none; padding: 20px; }
         .active { display: block; }
-        .card { background: #1a1025; padding: 15px; border-radius: 15px; margin: 10px; border: 1px solid #4a148c; }
-        .btn { background: #6a0dad; color: white; padding: 10px 20px; border: none; border-radius: 10px; cursor: pointer; margin: 5px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-top: 20px; }
+        .card { background: #1a1025; padding: 15px; border-radius: 15px; border: 1px solid #4a148c; }
+        .card img { width: 60px; height: 60px; border-radius: 10px; margin-bottom: 10px; }
+        .btn { background: #6a0dad; color: white; padding: 10px 15px; border: none; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 5px; }
     </style>
 </head>
 <body>
 
+    <!-- الواجهة 1: الترحيب -->
     <div id="page1" class="page active">
         <h1>مرحباً بك في WD BEIN STORE</h1>
-        <button class="btn" onclick="showPage('page2')">دخول المتجر</button>
+        <p>وجهتك الأولى لشحن الألعاب والحسابات</p>
+        <button class="btn" style="width: 200px;" onclick="showPage('page2')">دخول المتجر</button>
     </div>
 
+    <!-- الواجهة 2: الخدمات -->
     <div id="page2" class="page">
         <h1>خدمات المتجر</h1>
-        <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/en/3/3d/PUBG_Mobile_Logo.jpg" width="50">
-            <p>ببجي موبايل</p>
-            <button class="btn" onclick="showPage('page3')">شحن الآن</button>
+        <div class="grid">
+            <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/3/3d/PUBG_Mobile_Logo.jpg"> <p>ببجي</p> <button class="btn" onclick="showPage('page3')">شحن</button></div>
+            <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/f/f6/Free_Fire_Logo.jpg"> <p>فري فاير</p> <button class="btn" onclick="showPage('page3')">شحن</button></div>
+            <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/2/25/EFootball_2022_logo.jpg"> <p>بيس</p> <button class="btn" onclick="showPage('page3')">شحن</button></div>
+            <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/8/8c/Clash_of_Clans_logo.png"> <p>كلاش</p> <button class="btn" onclick="showPage('page3')">شحن</button></div>
+            <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Call_of_Duty_Mobile_logo.png"> <p>كول اوف ديوتي</p> <button class="btn" onclick="showPage('page3')">شحن</button></div>
         </div>
-        <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/en/f/f6/Free_Fire_Logo.jpg" width="50">
-            <p>فري فاير</p>
-            <button class="btn" onclick="showPage('page3')">شحن الآن</button>
-        </div>
+        <br><button onclick="showPage('page1')">رجوع</button>
     </div>
 
+    <!-- الواجهة 3: الشحن -->
     <div id="page3" class="page">
         <h1>إتمام الشحن</h1>
-        <input type="text" placeholder="أدخل ID الحساب" style="padding:10px; border-radius:10px;">
+        <input type="text" placeholder="أدخل ID الحساب" style="padding:10px; border-radius:10px; width:80%;">
         <br><br>
-        <button class="btn" onclick="window.location.href='https://t.me/A_G_T4'">تأكيد الطلب</button>
-        <br>
-        <button onclick="showPage('page2')">رجوع</button>
+        <button class="btn" style="width: 80%;" onclick="window.location.href='https://t.me/A_G_T4'">تأكيد الطلب عبر التليجرام</button>
+        <br><br>
+        <button onclick="showPage('page2')">رجوع للخدمات</button>
     </div>
 
     <script>
