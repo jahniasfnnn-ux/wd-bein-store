@@ -2,53 +2,54 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>WD BEIN STORE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WD BEIN STORE | Pro Gaming</title>
     <style>
-        body { background: #0d0515; color: #fff; font-family: sans-serif; margin: 0; text-align: center; }
-        .page { display: none; padding: 20px; }
-        .active { display: block; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-top: 20px; }
-        .card { background: #1a1025; padding: 15px; border-radius: 15px; border: 1px solid #4a148c; }
-        .card img { width: 60px; height: 60px; border-radius: 10px; margin-bottom: 10px; }
-        .btn { background: #6a0dad; color: white; padding: 10px 15px; border: none; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 5px; }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        
+        body { margin: 0; background: #050505; color: #fff; font-family: 'Cairo', sans-serif; }
+        .page { display: none; min-height: 100vh; padding: 20px; align-items: center; justify-content: center; }
+        .active { display: flex; flex-direction: column; }
+        
+        /* تصميم كروت الألعاب */
+        .game-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; max-width: 400px; }
+        .card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 20px; text-align: center; transition: 0.3s; }
+        .card img { width: 50px; height: 50px; border-radius: 12px; margin-bottom: 10px; }
+        
+        /* الأزرار */
+        .btn-main { background: linear-gradient(45deg, #7b2cbf, #5a189a); color: white; padding: 15px 30px; border: none; border-radius: 15px; font-weight: bold; cursor: pointer; }
+        .btn-small { background: #333; color: white; padding: 8px; border: none; border-radius: 10px; width: 100%; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <!-- الواجهة 1: الترحيب -->
     <div id="page1" class="page active">
-        <h1>مرحباً بك في WD BEIN STORE</h1>
-        <p>وجهتك الأولى لشحن الألعاب والحسابات</p>
-        <button class="btn" style="width: 200px;" onclick="showPage('page2')">دخول المتجر</button>
+        <h1 style="color: #9d4edd; font-size: 2.5rem;">WD BEIN</h1>
+        <p style="opacity: 0.7;">أفخم متجر لشحن الألعاب في السودان</p>
+        <button class="btn-main" onclick="showPage('page2')">استكشاف المتجر</button>
     </div>
 
-    <!-- الواجهة 2: الخدمات -->
     <div id="page2" class="page">
-        <h1>خدمات المتجر</h1>
-        <div class="grid">
-            <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/3/3d/PUBG_Mobile_Logo.jpg"> <p>ببجي</p> <button class="btn" onclick="showPage('page3')">شحن</button></div>
-            <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/f/f6/Free_Fire_Logo.jpg"> <p>فري فاير</p> <button class="btn" onclick="showPage('page3')">شحن</button></div>
-            <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/2/25/EFootball_2022_logo.jpg"> <p>بيس</p> <button class="btn" onclick="showPage('page3')">شحن</button></div>
-            <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/8/8c/Clash_of_Clans_logo.png"> <p>كلاش</p> <button class="btn" onclick="showPage('page3')">شحن</button></div>
-            <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Call_of_Duty_Mobile_logo.png"> <p>كول اوف ديوتي</p> <button class="btn" onclick="showPage('page3')">شحن</button></div>
+        <h2 style="margin-bottom: 20px;">اختر لعبتك</h2>
+        <div class="game-grid">
+            <div class="card"><img src="https://cdn-icons-png.flaticon.com/128/6062/6062646.png"> <p>ببجي</p> <button class="btn-small" onclick="showPage('page3')">شحن</button></div>
+            <div class="card"><img src="https://cdn-icons-png.flaticon.com/128/9017/9017637.png"> <p>فري فاير</p> <button class="btn-small" onclick="showPage('page3')">شحن</button></div>
+            <div class="card"><img src="https://cdn-icons-png.flaticon.com/128/4676/4676159.png"> <p>بيس</p> <button class="btn-small" onclick="showPage('page3')">شحن</button></div>
+            <div class="card"><img src="https://cdn-icons-png.flaticon.com/128/3558/3558963.png"> <p>كلاش</p> <button class="btn-small" onclick="showPage('page3')">شحن</button></div>
         </div>
-        <br><button onclick="showPage('page1')">رجوع</button>
     </div>
 
-    <!-- الواجهة 3: الشحن -->
     <div id="page3" class="page">
-        <h1>إتمام الشحن</h1>
-        <input type="text" placeholder="أدخل ID الحساب" style="padding:10px; border-radius:10px; width:80%;">
-        <br><br>
-        <button class="btn" style="width: 80%;" onclick="window.location.href='https://t.me/A_G_T4'">تأكيد الطلب عبر التليجرام</button>
-        <br><br>
-        <button onclick="showPage('page2')">رجوع للخدمات</button>
+        <h2 style="color: #9d4edd;">إتمام الشحن</h2>
+        <input type="text" placeholder="أدخل ID الحساب" style="background: #111; border: 1px solid #333; color: white; padding: 15px; border-radius: 10px; width: 80%; margin-bottom: 10px;">
+        <button class="btn-main" style="width: 85%;" onclick="window.location.href='https://t.me/A_G_T4'">إرسال الطلب للواتساب</button>
+        <button style="background: none; border: none; color: #666; margin-top: 20px;" onclick="showPage('page2')">رجوع</button>
     </div>
 
     <script>
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+        function showPage(p) {
+            document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+            document.getElementById(p).classList.add('active');
         }
     </script>
 </body>
