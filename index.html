@@ -4,14 +4,48 @@
     <meta charset="UTF-8">
     <title>WD BEIN STORE</title>
     <style>
-        body { background: #0d0515; color: #fff; text-align: center; font-family: sans-serif; padding-top: 100px; }
-        .hero-btn { background: #6a0dad; color: #fff; padding: 15px 40px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 1.2rem; }
+        body { background: #0d0515; color: #fff; font-family: sans-serif; margin: 0; text-align: center; }
+        .page { display: none; padding: 20px; }
+        .active { display: block; }
+        .card { background: #1a1025; padding: 15px; border-radius: 15px; margin: 10px; border: 1px solid #4a148c; }
+        .btn { background: #6a0dad; color: white; padding: 10px 20px; border: none; border-radius: 10px; cursor: pointer; margin: 5px; }
     </style>
 </head>
 <body>
-    <h1>مرحباً بك في WD BEIN STORE</h1>
-    <p>وجهتك الموثوقة لشحن الألعاب والحسابات</p>
-    <br><br>
-    <a href="login.html" class="hero-btn">ابدأ الآن (دخول/تسجيل)</a>
+
+    <div id="page1" class="page active">
+        <h1>مرحباً بك في WD BEIN STORE</h1>
+        <button class="btn" onclick="showPage('page2')">دخول المتجر</button>
+    </div>
+
+    <div id="page2" class="page">
+        <h1>خدمات المتجر</h1>
+        <div class="card">
+            <img src="https://upload.wikimedia.org/wikipedia/en/3/3d/PUBG_Mobile_Logo.jpg" width="50">
+            <p>ببجي موبايل</p>
+            <button class="btn" onclick="showPage('page3')">شحن الآن</button>
+        </div>
+        <div class="card">
+            <img src="https://upload.wikimedia.org/wikipedia/en/f/f6/Free_Fire_Logo.jpg" width="50">
+            <p>فري فاير</p>
+            <button class="btn" onclick="showPage('page3')">شحن الآن</button>
+        </div>
+    </div>
+
+    <div id="page3" class="page">
+        <h1>إتمام الشحن</h1>
+        <input type="text" placeholder="أدخل ID الحساب" style="padding:10px; border-radius:10px;">
+        <br><br>
+        <button class="btn" onclick="window.location.href='https://t.me/A_G_T4'">تأكيد الطلب</button>
+        <br>
+        <button onclick="showPage('page2')">رجوع</button>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+    </script>
 </body>
 </html>
