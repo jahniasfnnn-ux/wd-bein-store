@@ -1,0 +1,19 @@
+<div id="login-box">
+    <input type="email" id="email" placeholder="البريد الإلكتروني">
+    <input type="password" id="pass" placeholder="كلمة المرور">
+    <button onclick="login()">دخول / تسجيل جديد</button>
+</div>
+
+<script type="module">
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    const auth = getAuth();
+
+    window.login = () => {
+        const email = document.getElementById("email").value;
+        const pass = document.getElementById("pass").value;
+        
+        signInWithEmailAndPassword(auth, email, pass)
+        .catch(() => createUserWithEmailAndPassword(auth, email, pass))
+        .then(() => window.location.href = "index.html"); // انتقل للمتجر
+    };
+</script>
