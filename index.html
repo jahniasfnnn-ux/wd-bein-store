@@ -2,72 +2,40 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>WD BEIN STORE | المتجر</title>
+    <title>WD BEIN STORE | المتجر الفخم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
     <style>
-        body { background: #050505; color: #fff; font-family: 'Cairo', sans-serif; margin: 0; padding: 20px; text-align: center; }
-        .page { display: none; }
-        .active { display: block; }
-        .game-btn { background: #1a1025; border: 1px solid #4a148c; padding: 15px; border-radius: 15px; margin: 10px 0; display: flex; align-items: center; cursor: pointer; text-align: right; }
-        .game-btn img { width: 50px; height: 50px; border-radius: 10px; margin-left: 15px; }
-        .btn { background: #7b2cbf; color: white; padding: 12px; border: none; border-radius: 8px; width: 100%; cursor: pointer; margin-top: 10px; }
-        input { width: 85%; padding: 12px; margin: 5px 0; border-radius: 8px; border: none; background: #222; color: white; }
+        :root { --primary: #8a2be2; --bg: #0a0a0a; }
+        body { font-family: 'Cairo', sans-serif; background-color: var(--bg); color: white; margin: 0; }
+        
+        /* تصميم الأزرار والبطاقات */
+        .header { padding: 50px 20px; text-align: center; background: linear-gradient(180deg, #1a0033, #0a0a0a); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; padding: 20px; }
+        .game-card { background: #161616; border-radius: 20px; padding: 15px; border: 2px solid #222; transition: 0.3s; }
+        .game-card:hover { border-color: var(--primary); }
+        .game-card img { width: 100%; border-radius: 15px; }
+        .btn-buy { background: var(--primary); color: white; border: none; padding: 10px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <div id="login-page" class="page active">
-        <h1>WD BEIN STORE</h1>
-        <p>يرجى تسجيل الدخول</p>
-        <input type="text" placeholder="اسم المستخدم">
-        <input type="password" placeholder="كلمة المرور">
-        <button class="btn" onclick="showPage('game-selection')">تسجيل الدخول</button>
+    <div class="header">
+        <h1 style="font-size: 2.5rem;">WD BEIN STORE</h1>
+        <p>الوجهة الأولى للمحترفين</p>
     </div>
 
-    <div id="game-selection" class="page">
-        <h1>اختر اللعبة</h1>
-        
-        <div class="game-btn" onclick="openGame('ببجي موبايل')">
-            <img src="https://play-lh.googleusercontent.com/Qo898J3Jk-2T-rL2q9037X1D2ZJ-o6eZ5O8b1T8a5Y3T3I4z6c5z1f7P9u9e1f5i8sA=w240-h480-rw">
-            <span>ببجي موبايل</span>
+    <div class="grid">
+        <div class="game-card">
+            <img src="https://upload.wikimedia.org/wikipedia/en/3/3d/PUBG_Mobile_Logo.jpg">
+            <h3>ببجي</h3>
+            <button class="btn-buy" onclick="alert('جارِ الانتقال للطلب...')">اطلب الآن</button>
         </div>
-
-        <div class="game-btn" onclick="openGame('فري فاير')">
-            <img src="https://play-lh.googleusercontent.com/9n_Wl9Q7k9534O-mQx70VwT3gV291kQ5o3Q3T3I4z6c5z1f7P9u9e1f5i8sA=w240-h480-rw">
-            <span>فري فاير</span>
-        </div>
-
-        <div class="game-btn" onclick="openGame('فيفا (EA FC)')">
-            <img src="https://play-lh.googleusercontent.com/1F-S9-4i79aA-z73K1a3Vv-3I3J4c5z1f7P9u9e1f5i8sA=w240-h480-rw">
-            <span>فيفا (EA FC)</span>
+        <div class="game-card">
+            <img src="https://upload.wikimedia.org/wikipedia/en/f/f6/Free_Fire_Logo.jpg">
+            <h3>فري فاير</h3>
+            <button class="btn-buy">اطلب الآن</button>
         </div>
     </div>
 
-    <div id="game-section" class="page">
-        <h1 id="game-title">قسم اللعبة</h1>
-        <div style="background:#111; padding:20px; border-radius:15px;">
-            <h3>اكتب مواصفات حسابك المطلوب</h3>
-            <textarea id="specs" style="width:90%; height:100px; background:#000; color:#fff; border:1px solid #555; border-radius:8px; padding:10px;" placeholder="مثال: أريد حساب لفل عالي، ربط تويتر..."></textarea>
-            <button class="btn" onclick="sendOrder()">إرسال الطلب عبر تليجرام</button>
-        </div>
-        <button onclick="showPage('game-selection')" style="background:none; border:none; color:#777; margin-top:20px;">رجوع للقائمة</button>
-    </div>
-
-    <script>
-        function showPage(p) {
-            document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
-            document.getElementById(p).classList.add('active');
-        }
-
-        function openGame(gameName) {
-            document.getElementById('game-title').innerText = "قسم " + gameName;
-            showPage('game-section');
-        }
-
-        function sendOrder() {
-            let specs = document.getElementById('specs').value;
-            let game = document.getElementById('game-title').innerText;
-            window.location.href = "https://t.me/A_G_T4?text=" + encodeURIComponent("مرحباً، أريد طلب حساب: " + game + "\nالمواصفات المطلوبة: " + specs);
-        }
-    </script>
 </body>
 </html>
