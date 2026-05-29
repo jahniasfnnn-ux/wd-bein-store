@@ -1,14 +1,12 @@
-<script type="module">
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    const auth = getAuth();
-
-    // هذا هو السحر الذي يبحث عن تسجيل الدخول المحفوظ
-    onAuthStateChanged(auth, (user) => {
-        if (!user) {
-            // إذا لم يجد مستخدماً محفوظاً، يرجعه لصفحة الدخول
-            window.location.href = "login.html";
-        } else {
-            console.log("أهلاً بك يا بطل، أنت مسجل بالفعل!");
-        }
-    });
-</script>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>WD BEIN STORE</title>
+</head>
+<body style="background-color: #000; color: #fff; text-align: center; padding-top: 50px;">
+    <h1>مرحباً بك في WD BEIN STORE</h1>
+    <p>الموقع يعمل الآن بشكل صحيح!</p>
+    <a href="login.html" style="color: #f1c40f;">اضغط هنا للدخول</a>
+</body>
+</html>
