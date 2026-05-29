@@ -2,48 +2,42 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WD BEIN STORE | Pro Gaming</title>
+    <title>WD BEIN STORE - المتجر المتكامل</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
-        
-        body { margin: 0; background: #050505; color: #fff; font-family: 'Cairo', sans-serif; }
-        .page { display: none; min-height: 100vh; padding: 20px; align-items: center; justify-content: center; }
-        .active { display: flex; flex-direction: column; }
-        
-        /* تصميم كروت الألعاب */
-        .game-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; max-width: 400px; }
-        .card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 20px; text-align: center; transition: 0.3s; }
-        .card img { width: 50px; height: 50px; border-radius: 12px; margin-bottom: 10px; }
-        
-        /* الأزرار */
-        .btn-main { background: linear-gradient(45deg, #7b2cbf, #5a189a); color: white; padding: 15px 30px; border: none; border-radius: 15px; font-weight: bold; cursor: pointer; }
-        .btn-small { background: #333; color: white; padding: 8px; border: none; border-radius: 10px; width: 100%; margin-top: 10px; }
+        body { background: #050505; color: #fff; font-family: 'Cairo', sans-serif; margin: 0; }
+        .page { display: none; padding: 20px; text-align: center; }
+        .active { display: block; }
+        .btn { background: #7b2cbf; color: white; padding: 12px 25px; border: none; border-radius: 10px; cursor: pointer; margin: 10px; }
+        .card { background: #111; border: 1px solid #333; padding: 20px; border-radius: 15px; margin: 10px; }
+        #aymn-box { background: #1a1025; padding: 15px; border-radius: 10px; border-right: 5px solid #7b2cbf; margin: 10px; }
     </style>
 </head>
 <body>
 
-    <div id="page1" class="page active">
-        <h1 style="color: #9d4edd; font-size: 2.5rem;">WD BEIN</h1>
-        <p style="opacity: 0.7;">أفخم متجر لشحن الألعاب في السودان</p>
-        <button class="btn-main" onclick="showPage('page2')">استكشاف المتجر</button>
+    <div id="login-page" class="page active">
+        <h1>WD BEIN STORE</h1>
+        <input type="text" placeholder="اسم المستخدم" style="padding:10px; width:80%; border-radius:10px;"><br><br>
+        <input type="password" placeholder="كلمة المرور" style="padding:10px; width:80%; border-radius:10px;"><br><br>
+        <button class="btn" onclick="showPage('dashboard-page')">تسجيل الدخول</button>
     </div>
 
-    <div id="page2" class="page">
-        <h2 style="margin-bottom: 20px;">اختر لعبتك</h2>
-        <div class="game-grid">
-            <div class="card"><img src="https://cdn-icons-png.flaticon.com/128/6062/6062646.png"> <p>ببجي</p> <button class="btn-small" onclick="showPage('page3')">شحن</button></div>
-            <div class="card"><img src="https://cdn-icons-png.flaticon.com/128/9017/9017637.png"> <p>فري فاير</p> <button class="btn-small" onclick="showPage('page3')">شحن</button></div>
-            <div class="card"><img src="https://cdn-icons-png.flaticon.com/128/4676/4676159.png"> <p>بيس</p> <button class="btn-small" onclick="showPage('page3')">شحن</button></div>
-            <div class="card"><img src="https://cdn-icons-png.flaticon.com/128/3558/3558963.png"> <p>كلاش</p> <button class="btn-small" onclick="showPage('page3')">شحن</button></div>
+    <div id="dashboard-page" class="page">
+        <div id="aymn-box">
+            <h3>🤖 المساعد الذكي AYMN</h3>
+            <p>أهلاً بك! أنا AYMN، كيف يمكنني مساعدتك في العثور على أفضل الحسابات اليوم؟</p>
         </div>
+        <button class="btn" onclick="showPage('accounts-page')">استعراض الحسابات المعروضة</button>
     </div>
 
-    <div id="page3" class="page">
-        <h2 style="color: #9d4edd;">إتمام الشحن</h2>
-        <input type="text" placeholder="أدخل ID الحساب" style="background: #111; border: 1px solid #333; color: white; padding: 15px; border-radius: 10px; width: 80%; margin-bottom: 10px;">
-        <button class="btn-main" style="width: 85%;" onclick="window.location.href='https://t.me/A_G_T4'">إرسال الطلب للواتساب</button>
-        <button style="background: none; border: none; color: #666; margin-top: 20px;" onclick="showPage('page2')">رجوع</button>
+    <div id="accounts-page" class="page">
+        <h1>حسابات للبيع</h1>
+        <div class="card">
+            <h3>حساب ببجي "أسطوري"</h3>
+            <p>سكنات نادرة، لفل 70، ربط تويتر</p>
+            <p style="color: #ffd700;">السعر: 50,000 جنيه</p>
+            <button class="btn" onclick="window.location.href='https://t.me/A_G_T4'">شراء الحساب</button>
+        </div>
+        <button onclick="showPage('dashboard-page')">رجوع للوحة التحكم</button>
     </div>
 
     <script>
